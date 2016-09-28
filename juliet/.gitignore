@@ -14,7 +14,7 @@ tmp/
 .settings/
 .loadpath
 .project
-/.idea
+.idea
 .classpath
 
 # GradleRIO
