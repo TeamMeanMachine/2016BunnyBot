@@ -17,8 +17,12 @@ public class Shooter extends Subsystem {
 
   }
 
-  public void shoot() {
+  public void enableShooting() {
     shootMotor.set(0.5);
+  }
+
+  public void stopShooting() {
+    shootMotor.set(0.0);
   }
 
   public void pan(double power) {
@@ -31,7 +35,7 @@ public class Shooter extends Subsystem {
     }
   }
 
-  public void steer(double angle) {
+  public void tilt(double angle) {
     double targetAngle = tiltServo.getAngle() + angle;
     if (tiltServo.getAngle() <= 0) {
       //according to the rule, the angle of the gun cannot be higher than 0 degree
