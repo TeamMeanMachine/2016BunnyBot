@@ -16,12 +16,12 @@ public class ShooterDefaultCommand extends Command {
 
   @Override
   protected void execute() {
-    if(IOMap.gunner.getRawButton(3)) {
+    if(IOMap.gunner.getRawButton(8)) {
       Robot.shooter.enableShooting();
     } else {
       Robot.shooter.stopShooting();
     }
-    Robot.shooter.pan(IOMap.gunner.getRawAxis(3));
+    Robot.shooter.pan(IOMap.gunner.getRawAxis(0) * 0.4);
     // Robot.shooter.tilt(IOMap.gunner.getRawAxis()); //I don't know the ID of the axis we want, so it will be blank for now
   }
 

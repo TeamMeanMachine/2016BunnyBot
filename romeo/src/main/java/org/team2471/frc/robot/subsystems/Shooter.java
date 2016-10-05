@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team2471.frc.robot.HardwareMap;
+import org.team2471.frc.robot.defaultcommands.ShooterDefaultCommand;
 
 public class Shooter extends Subsystem {
   private static final CANTalon panMotor = HardwareMap.Shooter.panMotor;
@@ -14,7 +15,7 @@ public class Shooter extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {
-
+    setDefaultCommand(new ShooterDefaultCommand());
   }
 
   public void enableShooting() {
