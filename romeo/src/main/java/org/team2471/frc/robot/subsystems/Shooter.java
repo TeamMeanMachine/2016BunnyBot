@@ -29,13 +29,7 @@ public class Shooter extends Subsystem {
   }
 
   public void pan(double power) {
-    double axis = power;
-    if (Math.abs(axis) >= 0.2) {
-      panMotor.set(axis);
-    }
-    else {
-      panMotor.set(0);
-    }
+      panMotor.set(power);
   }
 
   public void tilt(double angleChange) {
