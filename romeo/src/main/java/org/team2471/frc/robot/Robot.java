@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.team2471.frc.robot.subsystems.Shooter;
 
+// Robots are cool!
 public class Robot extends IterativeRobot {
   public static Shooter shooter;
 
