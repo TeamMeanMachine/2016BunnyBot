@@ -34,20 +34,19 @@ Committing robot code directly to master should be avoided in general.
 
 * Duy
 * Justine
-* Luke
 * Grace
 
 ### Drive Train
 
 * James
 * Jordan
-* Hailey
+* Kyle
 
 ### Grabber
 
 * Chris
+* Luke
 * Tyler D
-* Kyle
 
 ## Name Test
 
