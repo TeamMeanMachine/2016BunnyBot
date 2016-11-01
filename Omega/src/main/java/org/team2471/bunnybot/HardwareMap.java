@@ -1,11 +1,6 @@
 package org.team2471.bunnybot;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.*;
 
 public class HardwareMap {
   // TODO: Provide proper IDs
@@ -15,6 +10,7 @@ public class HardwareMap {
     public static final AnalogGyro shooterGyro = new AnalogGyro(0);
     public static final Servo tiltMotor = new Servo(0);
     public static final AnalogInput ammoSensor = new AnalogInput(0);
+    public static final Solenoid flashLight = new Solenoid(0);
   }
 
   public static final class DriveTrainMap {
