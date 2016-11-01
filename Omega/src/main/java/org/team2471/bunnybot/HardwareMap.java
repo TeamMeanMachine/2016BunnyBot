@@ -1,11 +1,6 @@
 package org.team2471.bunnybot;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.*;
 
 public class HardwareMap {
   // TODO: Provide proper IDs
@@ -38,6 +33,10 @@ public class HardwareMap {
 
   // TODO: complete this
   public static final class GrabberMap {
-
+    public static final  AnalogInput armEncoder = new AnalogInput(0);
+    public static final DigitalInput bunnySensor = new DigitalInput(0);
+    public static final CANTalon bunnySucker = new CANTalon(0);
+    public  static final CANTalon leftJointMotor = new CANTalon(0);
+    public  static final CANTalon rightJointMotor = new CANTalon(0);
   }
 }
