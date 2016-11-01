@@ -1,59 +1,68 @@
 package org.team2471.bunnybot.subsystems;
 
-import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team2471.bunnybot.HardwareMap;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.command.Subsystem;
+
 public class Shooter extends Subsystem {
-    private final CANTalon panMotor = HardwareMap.ShooterMap.panMotor;
-    private final SpeedController shootMotor = HardwareMap.ShooterMap.shootMotor;
-    private final AnalogGyro shooterGyro =  HardwareMap.ShooterMap.shooterGyro;
-    private final Servo tiltMotor = HardwareMap.ShooterMap.tiltMotor;
-    private final AnalogInput ammoSensor = HardwareMap.ShooterMap.ammoSensor;
-    private final Solenoid flashLight = HardwareMap.ShooterMap.flashLight;
+  private final CANTalon panMotor = HardwareMap.ShooterMap.panMotor;
+  private final SpeedController shootMotor = HardwareMap.ShooterMap.shootMotor;
+  private final AnalogGyro shooterGyro = HardwareMap.ShooterMap.shooterGyro;
+  private final Servo tiltMotor = HardwareMap.ShooterMap.tiltMotor;
+  private final AnalogInput ammoSensor = HardwareMap.ShooterMap.ammoSensor;
+  private final Solenoid flashLight = HardwareMap.ShooterMap.flashLight;
 
-    public final Subsystem trigger = new Subsystem() {
-        @Override
-        protected void initDefaultCommand() {
-        }
-        
-        /**
-         * Runs the shooting motors.
-         *
-         * It is expected that the turret continues firing in full auto until
-         * shooting is disabled.
-         */
-        public void enable() {
-            shootMotor.set(0.5);
-        }
-
-        /**
-         * Disables the shooting motors.
-         */
-        public void disableShooting() {
-            shootMotor.set(-0.5);
-        }
-    };
-
-    private final PIDController panController = new PIDController(0, 0, 0, new PIDSource() {
-        @Override
-        public void setPIDSourceType(PIDSourceType pidSource) {
-        }
-
-        @Override
-        public PIDSourceType getPIDSourceType() {
-            return PIDSourceType.kDisplacement;
-        }
-
-        @Override
-        public double pidGet() {
-            return getAngle();
-        }
-    }, panMotor);
-
-    public Shooter() {
-        panController.enable();
+  public final Subsystem trigger = new Subsystem() {
+    @Override
+    protected void initDefaultCommand() {
     }
+
+    /**
+     * Runs the shooting motors.
+     *
+     * It is expected that the turret continues firing in full auto until
+     * shooting is disabled.
+     */
+    public void enable() {
+      shootMotor.set(0.5);
+    }
+
+    /**
+     * Disables the shooting motors.
+     */
+    public void disableShooting() {
+      shootMotor.set(-0.5);
+    }
+  };
+
+  private final PIDController panController = new PIDController(0, 0, 0, new PIDSource() {
+    @Override
+    public void setPIDSourceType(PIDSourceType pidSource) {
+    }
+
+    @Override
+    public PIDSourceType getPIDSourceType() {
+      return PIDSourceType.kDisplacement;
+    }
+
+    @Override
+    public double pidGet() {
+      return getAngle();
+    }
+  }, panMotor);
+
+  public Shooter() {
+    panController.enable();
+  }
 
   @Override
   protected void initDefaultCommand() {
@@ -65,8 +74,8 @@ public class Shooter extends Subsystem {
    */
   public double getAngle() {
     double shooterGyroAngle = shooterGyro.getAngle();
-    if(shooterGyroAngle > 0 ) {
-       shooterGyroAngle += 360;
+    if (shooterGyroAngle > 0) {
+      shooterGyroAngle += 360;
     }
     return shooterGyroAngle % 360;
   }
@@ -77,7 +86,7 @@ public class Shooter extends Subsystem {
    * @param angle angle to be set
    */
   public void setAngle(double angle) {
-      panController.setSetpoint(angle);
+    panController.setSetpoint(angle);
   }
 
   /**
@@ -91,6 +100,6 @@ public class Shooter extends Subsystem {
    * Turns off the flashlight.
    */
   public void disableFlashlight() {
-      flashLight.set(false);
+    flashLight.set(false);
   }
 }
