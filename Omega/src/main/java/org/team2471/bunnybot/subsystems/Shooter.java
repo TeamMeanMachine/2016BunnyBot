@@ -1,9 +1,10 @@
 package org.team2471.bunnybot.subsystems;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team2471.bunnybot.HardwareMap;
 
-public class Shooter {
+public class Shooter extends Subsystem {
     private final CANTalon panMotor = HardwareMap.ShooterMap.panMotor;
     private final SpeedController shootMotor = HardwareMap.ShooterMap.shootMotor;
     private final AnalogGyro shooterGyro =  HardwareMap.ShooterMap.shooterGyro;
@@ -31,7 +32,12 @@ public class Shooter {
         panController.enable();
     }
 
-    /**
+  @Override
+  protected void initDefaultCommand() {
+
+  }
+
+  /**
    * @return the current angle of the shooter
    */
   public double getAngle() {
