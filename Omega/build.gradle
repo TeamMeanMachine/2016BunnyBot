@@ -19,8 +19,14 @@ apply plugin: 'GradleRIO'                                 //Apply the GradleRIO 
 gradlerio.robotClass = "org.team2471.frc.robot.Robot"
 gradlerio.team = "2471"
 
+repositories {
+  flatDir {
+    dirs 'lib'
+  }
+}
+
 dependencies {
-  compile files('lib/navx_frc.jar')
+  compile name: 'meanlib-0.1.0'
 }
 
 def robotManifest = {
