@@ -12,6 +12,29 @@ public class Shooter extends Subsystem {
     private final AnalogInput ammoSensor = HardwareMap.ShooterMap.ammoSensor;
     private final Solenoid flashLight = HardwareMap.ShooterMap.flashLight;
 
+    public final Subsystem trigger = new Subsystem() {
+        @Override
+        protected void initDefaultCommand() {
+        }
+        
+        /**
+         * Runs the shooting motors.
+         *
+         * It is expected that the turret continues firing in full auto until
+         * shooting is disabled.
+         */
+        public void enable() {
+            shootMotor.set(0.5);
+        }
+
+        /**
+         * Disables the shooting motors.
+         */
+        public void disableShooting() {
+            shootMotor.set(-0.5);
+        }
+    };
+
     private final PIDController panController = new PIDController(0, 0, 0, new PIDSource() {
         @Override
         public void setPIDSourceType(PIDSourceType pidSource) {
@@ -55,23 +78,6 @@ public class Shooter extends Subsystem {
    */
   public void setAngle(double angle) {
       panController.setSetpoint(angle);
-  }
-
-  /**
-   * Runs the shooting motors.
-   *
-   * It is expected that the turret continues firing in full auto until
-   * shooting is disabled.
-   */
-  public void enableShooting() {
-      shootMotor.set(0.5);
-  }
-
-  /**
-   * Disables the shooting motors.
-   */
-  public void disableShooting() {
-    shootMotor.set(-0.5);
   }
 
   /**
