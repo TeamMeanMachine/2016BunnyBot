@@ -35,7 +35,11 @@ public class Shooter {
    * @return the current angle of the shooter
    */
   public double getAngle() {
-    return shooterGyro.getAngle();
+    double shooterGyroAngle = shooterGyro.getAngle();
+    if(shooterGyroAngle > 0 ) {
+       shooterGyroAngle += 360;
+    }
+    return shooterGyroAngle % 360;
   }
 
   /**
