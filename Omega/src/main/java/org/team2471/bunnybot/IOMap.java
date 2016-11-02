@@ -6,4 +6,7 @@ import org.team2471.frc.lib.control.DriveController;
 public class IOMap {
   private static final DriveController mainController = new DriveController(0);
   private static final DriveController coController = new DriveController(1);
+
+  public static final DriveAxis throttleAxis = mainController.getAxis(1);
+  public static final DriveAxis turnAxis = mainController.getAxis(2);
 }
