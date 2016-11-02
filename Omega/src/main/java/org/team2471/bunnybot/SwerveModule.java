@@ -29,7 +29,7 @@ public class SwerveModule {
     }
   };
 
-  public SwerveModule(CANTalon steerMotor, CANTalon driveMotor, AnalogInput steerEncoder) {
+  public SwerveModule(CANTalon driveMotor, CANTalon steerMotor, AnalogInput steerEncoder) {
     this.steerMotor = steerMotor;
     this.driveMotor = driveMotor;
     this.steerEncoder = steerEncoder;
