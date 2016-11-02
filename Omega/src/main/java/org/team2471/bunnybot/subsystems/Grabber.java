@@ -24,6 +24,10 @@ public class Grabber {
     grabController.setSetpoint(angle);
   }
 
+
+  public double getAngle() {
+    return 0;
+  }
   /**
    * Rotates the intake motors inward.
    */
