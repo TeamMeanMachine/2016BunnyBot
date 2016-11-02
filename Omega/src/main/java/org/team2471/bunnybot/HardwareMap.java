@@ -34,6 +34,10 @@ public class HardwareMap {
 
   // TODO: complete this
   public static final class GrabberMap {
-
+    public static final  AnalogInput armEncoder = new AnalogInput(0);
+    public static final DigitalInput bunnySensor = new DigitalInput(0);
+    public static final CANTalon bunnySucker = new CANTalon(0);
+    public  static final CANTalon leftJointMotor = new CANTalon(0);
+    public  static final CANTalon rightJointMotor = new CANTalon(0);
   }
 }
