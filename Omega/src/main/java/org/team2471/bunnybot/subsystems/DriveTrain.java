@@ -21,15 +21,15 @@ public class DriveTrain {
   /**
    * Sets the forward speed and the swerve module target angles.
    *
-   * @param speed speed to be set between -1 and 1 (inclusive)
-   * @param angle target in degrees
+   * @param throttle speed to be set between -1 and 1 (inclusive)
+   * @param steeringRate steering rate between -1 and 1 (inclusive)
    */
-  public void drive(double speed, double angle) {
-    frontLeftMotor.set(speed);
-    frontRightMotor.set(speed);
-    backLeftMotor.set(speed);
-    backRightMotor.set(speed);
-    leftSwerveModule.drive(angle, speed);
-    rightSwerveModule.drive(angle, speed);
+  public void drive(double throttle, double steeringRate) {
+    frontLeftMotor.set(throttle);
+    frontRightMotor.set(throttle);
+    backLeftMotor.set(throttle);
+    backRightMotor.set(throttle);
+    leftSwerveModule.drive(steeringRate, throttle);
+    rightSwerveModule.drive(steeringRate, throttle);
   }
 }
