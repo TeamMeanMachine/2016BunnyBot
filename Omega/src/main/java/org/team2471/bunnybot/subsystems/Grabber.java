@@ -11,7 +11,7 @@ public class Grabber {
   public CANTalon rightJointMotor = HardwareMap.GrabberMap.rightJointMotor;
   public PIDController grabController = new PIDController(0.066667,0,0,armEncoder,leftJointMotor);
 
-  Grabber() {
+  public Grabber() {
     rightJointMotor.changeControlMode(CANTalon.TalonControlMode.Follower);
     rightJointMotor.set(leftJointMotor.getDeviceID());
   }
