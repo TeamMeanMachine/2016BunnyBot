@@ -4,12 +4,12 @@ import edu.wpi.first.wpilibj.*;
 import org.team2471.bunnybot.HardwareMap;
 
 public class Grabber {
-  public AnalogInput armEncoder = HardwareMap.GrabberMap.armEncoder;
-  public DigitalInput bunnySensor = HardwareMap.GrabberMap.bunnySensor;
-  public CANTalon bunnySucker = HardwareMap.GrabberMap.bunnySucker;
-  public CANTalon leftJointMotor = HardwareMap.GrabberMap.leftJointMotor;
-  public CANTalon rightJointMotor = HardwareMap.GrabberMap.rightJointMotor;
-  public PIDController grabController = new PIDController(0.066667,0,0,armEncoder,leftJointMotor);
+  private AnalogInput armEncoder = HardwareMap.GrabberMap.armEncoder;
+  private DigitalInput bunnySensor = HardwareMap.GrabberMap.bunnySensor;
+  private CANTalon bunnySucker = HardwareMap.GrabberMap.bunnySucker;
+  private CANTalon leftJointMotor = HardwareMap.GrabberMap.leftJointMotor;
+  private CANTalon rightJointMotor = HardwareMap.GrabberMap.rightJointMotor;
+  private PIDController grabController = new PIDController(0.066667,0,0,armEncoder,leftJointMotor);
 
   public Grabber() {
     rightJointMotor.changeControlMode(CANTalon.TalonControlMode.Follower);
