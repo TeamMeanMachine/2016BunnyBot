@@ -14,5 +14,8 @@ public class Robot extends IterativeRobot {
   @Override
   public void robotInit() {
     shooter = new Shooter();
+    // Commented for now because our test board only has the connections to a shooter.
+    // driveTrain = new DriveTrain();
+    // grabber = new Grabber();
   }
 }
