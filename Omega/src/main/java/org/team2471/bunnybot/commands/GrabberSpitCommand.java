@@ -8,6 +8,7 @@ public class GrabberSpitCommand extends Command {
   private double endTime;
   private boolean noBunny;
 
+
   public GrabberSpitCommand() {
     requires(Robot.grabber);
   }
