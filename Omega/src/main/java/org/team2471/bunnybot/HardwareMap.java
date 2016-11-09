@@ -1,32 +1,27 @@
 package org.team2471.bunnybot;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.*;
 
 public class HardwareMap {
-  // TODO: Provide proper IDs
   public static final class ShooterMap {
     public static final CANTalon panMotor = new CANTalon(0);
     public static final SpeedController shootMotor = new CANTalon(0);
     public static final AnalogGyro shooterGyro = new AnalogGyro(0);
     public static final Servo tiltMotor = new Servo(0);
     public static final AnalogInput ammoSensor = new AnalogInput(0);
+    public static final Solenoid flashLight = new Solenoid(0);
   }
 
   public static final class DriveTrainMap {
     public static final class LeftModule {
       public static final AnalogInput turnEncoder = new AnalogInput(0);
-      public static final CANTalon turnMotor = new CANTalon(7);
+      public static final SpeedController turnMotor = new CANTalon(7);
       public static final CANTalon forwardMotor = new CANTalon(6);
     }
 
     public static final class RightModule {
       public static final AnalogInput turnEncoder = new AnalogInput(0);
-      public static final CANTalon turnMotor = new CANTalon(5);
+      public static final SpeedController turnMotor = new CANTalon(5);
       public static final CANTalon forwardMotor = new CANTalon(4);
     }
 
@@ -36,8 +31,11 @@ public class HardwareMap {
     public static final SpeedController backRightMotor = new CANTalon(0);
   }
 
-  // TODO: complete this
   public static final class GrabberMap {
-
+    public static final AnalogInput armEncoder = new AnalogInput(0);
+    public static final DigitalInput bunnySensor = new DigitalInput(0);
+    public static final CANTalon bunnySucker = new CANTalon(0);
+    public static final CANTalon leftJointMotor = new CANTalon(0);
+    public static final CANTalon rightJointMotor = new CANTalon(0);
   }
 }

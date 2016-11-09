@@ -10,9 +10,9 @@ import java.beans.Encoder;
 
 public class DriveTrain {
   private final SwerveModule leftSwerveModule = new SwerveModule(HardwareMap.DriveTrainMap.LeftModule.forwardMotor,
-          HardwareMap.DriveTrainMap.LeftModule.turnMotor, HardwareMap.DriveTrainMap.LeftModule.turnEncoder);
+      HardwareMap.DriveTrainMap.LeftModule.turnMotor, HardwareMap.DriveTrainMap.LeftModule.turnEncoder);
   private final SwerveModule rightSwerveModule = new SwerveModule(HardwareMap.DriveTrainMap.RightModule.forwardMotor,
-          HardwareMap.DriveTrainMap.RightModule.turnMotor, HardwareMap.DriveTrainMap.RightModule.turnEncoder);
+      HardwareMap.DriveTrainMap.RightModule.turnMotor, HardwareMap.DriveTrainMap.RightModule.turnEncoder);
 
   private final SpeedController frontLeftMotor = HardwareMap.DriveTrainMap.frontLeftMotor;
   private final SpeedController frontRightMotor = HardwareMap.DriveTrainMap.frontRightMotor;

@@ -1,13 +1,9 @@
 package org.team2471.bunnybot;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class SwerveModule {
-  private final CANTalon steerMotor;
+  private final SpeedController steerMotor;
   private final CANTalon driveMotor;
   private final AnalogInput steerEncoder;
   private final PIDController steerController;
@@ -29,7 +25,7 @@ public class SwerveModule {
     }
   };
 
-  public SwerveModule(CANTalon driveMotor, CANTalon steerMotor, AnalogInput steerEncoder) {
+  public SwerveModule(CANTalon driveMotor, SpeedController steerMotor, AnalogInput steerEncoder) {
     this.steerMotor = steerMotor;
     this.driveMotor = driveMotor;
     this.steerEncoder = steerEncoder;
