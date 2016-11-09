@@ -20,7 +20,7 @@ public class HardwareMap {
     }
 
     public static final class RightModule {
-      public static final AnalogInput turnEncoder = new AnalogInput(0);
+      public static final AnalogInput turnEncoder = new AnalogInput(1);
       public static final SpeedController turnMotor = new CANTalon(5);
       public static final CANTalon forwardMotor = new CANTalon(4);
     }

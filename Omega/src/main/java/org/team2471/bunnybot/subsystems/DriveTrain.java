@@ -3,12 +3,14 @@ package org.team2471.bunnybot.subsystems;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team2471.bunnybot.HardwareMap;
 import org.team2471.bunnybot.SwerveModule;
+import org.team2471.bunnybot.defaultcommands.DriveTrainDefaultCommand;
 
 import java.beans.Encoder;
 
-public class DriveTrain {
+public class DriveTrain extends Subsystem {
   private final SwerveModule leftSwerveModule = new SwerveModule(HardwareMap.DriveTrainMap.LeftModule.forwardMotor,
       HardwareMap.DriveTrainMap.LeftModule.turnMotor, HardwareMap.DriveTrainMap.LeftModule.turnEncoder);
   private final SwerveModule rightSwerveModule = new SwerveModule(HardwareMap.DriveTrainMap.RightModule.forwardMotor,
@@ -31,5 +33,10 @@ public class DriveTrain {
     backRightMotor.set(throttle);
     leftSwerveModule.drive(steeringRate, throttle);
     rightSwerveModule.drive(steeringRate, throttle);
+  }
+
+  @Override
+  protected void initDefaultCommand() {
+    setDefaultCommand(new DriveTrainDefaultCommand());
   }
 }
