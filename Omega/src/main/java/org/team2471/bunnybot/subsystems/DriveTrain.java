@@ -25,8 +25,8 @@ public class DriveTrain {
    * @param steeringRate steering rate between -1 and 1 (inclusive)
    */
   public void drive(double throttle, double steeringRate) {
-    frontLeftMotor.set(throttle);
-    frontRightMotor.set(throttle);
+    //frontLeftMotor.set(throttle);
+    //frontRightMotor.set(throttle);
     backLeftMotor.set(throttle);
     backRightMotor.set(throttle);
     leftSwerveModule.drive(steeringRate, throttle);
