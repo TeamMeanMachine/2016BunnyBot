@@ -89,6 +89,9 @@ public class Shooter extends Subsystem {
     panController.setSetpoint(angle);
   }
 
+  public void zeroAngle() {
+    shooterGyro.reset();
+  }
   /**
    * Turns on the flashlight.
    */

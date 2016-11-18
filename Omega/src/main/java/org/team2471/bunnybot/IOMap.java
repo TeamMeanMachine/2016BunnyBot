@@ -1,5 +1,8 @@
 package org.team2471.bunnybot;
 
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.team2471.bunnybot.commands.ShooterZeroCommand;
 import org.team2471.frc.lib.control.DriveAxis;
 import org.team2471.frc.lib.control.DriveButton;
 import org.team2471.frc.lib.control.DriveController;
@@ -16,4 +19,10 @@ public class IOMap {
   public static final DriveAxis throttleAxis = mainController.getAxis(1);
   public static final DriveAxis turnAxis = mainController.getAxis(2);
 
+  public static  Button zeroGyro;
+
+  public IOMap() {
+    zeroGyro = new JoystickButton();
+    zeroGyro.whenPressed(ShooterZeroCommand);
+  }
 }
