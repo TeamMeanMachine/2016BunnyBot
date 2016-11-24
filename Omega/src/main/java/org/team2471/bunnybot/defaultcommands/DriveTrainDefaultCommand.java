@@ -5,13 +5,12 @@ import org.team2471.bunnybot.IOMap;
 import org.team2471.bunnybot.Robot;
 import org.team2471.bunnybot.subsystems.DriveTrain;
 
+import static org.team2471.bunnybot.Robot.driveTrain;
+
 public class DriveTrainDefaultCommand extends Command {
     public DriveTrainDefaultCommand() {
-        requires(Robot.driveTrain);
-        System.out.println(doesRequire(Robot.driveTrain));
+        requires(driveTrain);
     }
-
-    private DriveTrain driveTrain = new DriveTrain();
 
     @Override
     protected void initialize() {
@@ -20,7 +19,7 @@ public class DriveTrainDefaultCommand extends Command {
 
     @Override
     protected void execute() {
-        driveTrain.drive(IOMap.throttleAxis.get(), IOMap.turnAxis.get()*70.0);
+        driveTrain.drive(IOMap.throttleAxis.get(), IOMap.turnAxis.get());
     }
 
     @Override
