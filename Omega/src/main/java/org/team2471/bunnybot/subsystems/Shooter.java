@@ -27,13 +27,24 @@ public class Shooter extends Subsystem {
     }
 
     /**
+     * use boolean to make sure that the shooter motor has finished its shooting
+     * iteration and has completely returned to standby position ready for next shot
+     *
+     * @return a boolean that check the completion as stated above
+     */
+    public boolean shooterMotorReady() {
+      return ammoSensor.isAccumulatorChannel();
+    }
+
+    /**
      * Runs the shooting motors.
      *
      * It is expected that the turret continues firing in full auto until
      * shooting is disabled.
      */
     public void enable() {
-      shootMotor.set(0.5);
+      double shooterPower = shooterMotorReady() ? 0.5 : 0;
+      shootMotor.set(shooterPower);
     }
 
     /**
