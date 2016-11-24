@@ -9,29 +9,23 @@ import org.team2471.bunnybot.IOMap;
 import org.team2471.bunnybot.Robot;
 import org.team2471.bunnybot.subsystems.Shooter;
 
-/**
- * Created by GuGU on 11/16/2016.
+/*
+ * this commands zero the gyro on the shooter(s)
  */
+
 public class ShooterZeroCommand extends Command {
-    private Shooter shooter = new Shooter();
-
-    public ShooterZeroCommand() {
-        requires(Robot.shooter);
-    }
-
     @Override
     protected void initialize() {
-
+        Robot.shooter.zeroAngle();
     }
 
     @Override
     protected void execute() {
-       shooter.zeroAngle();
     }
 
     @Override
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     @Override

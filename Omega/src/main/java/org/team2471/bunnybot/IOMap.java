@@ -22,7 +22,5 @@ public class IOMap {
   public static  Button zeroGyro;
 
   public IOMap() {
-    zeroGyro = new JoystickButton();
-    zeroGyro.whenPressed(ShooterZeroCommand);
   }
 }
