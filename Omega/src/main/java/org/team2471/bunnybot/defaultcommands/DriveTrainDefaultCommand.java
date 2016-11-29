@@ -2,10 +2,15 @@ package org.team2471.bunnybot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.team2471.bunnybot.IOMap;
+import org.team2471.bunnybot.Robot;
 import org.team2471.bunnybot.subsystems.DriveTrain;
 
+import static org.team2471.bunnybot.Robot.driveTrain;
+
 public class DriveTrainDefaultCommand extends Command {
-    private DriveTrain driveTrain = new DriveTrain();
+    public DriveTrainDefaultCommand() {
+        requires(driveTrain);
+    }
 
     @Override
     protected void initialize() {
@@ -14,7 +19,7 @@ public class DriveTrainDefaultCommand extends Command {
 
     @Override
     protected void execute() {
-        driveTrain.drive(IOMap.throttleAxis.get(), IOMap.turnAxis.get()*70.0);
+        driveTrain.drive(IOMap.throttleAxis.get(), IOMap.turnAxis.get());
     }
 
     @Override
