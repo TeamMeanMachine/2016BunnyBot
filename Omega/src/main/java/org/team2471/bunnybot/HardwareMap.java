@@ -11,6 +11,7 @@ public class HardwareMap {
     public static final AnalogGyro shooterGyro = new AnalogGyro(0);
     public static final Servo tiltMotor = new Servo(0);
     public static final AnalogInput ammoSensor = new AnalogInput(0);
+    public static final Solenoid flashLight = new Solenoid(0);
   }
 
   public static final class DriveTrainMap {
@@ -33,7 +34,7 @@ public class HardwareMap {
   }
 
   public static final class GrabberMap {
-    public static final  AnalogInput armEncoder = new AnalogInput(0);
+    public static final AnalogInput armEncoder = new AnalogInput(0);
     public static final DigitalInput bunnySensor = new DigitalInput(0);
     public static final CANTalon bunnySucker = new CANTalon(0);
     public static final CANTalon armMotor = new CANTalon(0);
