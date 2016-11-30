@@ -1,41 +1,58 @@
 package org.team2471.bunnybot.subsystems;
 
-public class Grabber {
+import edu.wpi.first.wpilibj.*;
+import org.team2471.bunnybot.HardwareMap;
 
+public class Grabber {
+  public AnalogInput armEncoder = HardwareMap.GrabberMap.armEncoder;
+  public DigitalInput bunnySensor = HardwareMap.GrabberMap.bunnySensor;
+  public CANTalon bunnySucker = HardwareMap.GrabberMap.bunnySucker;
+  public CANTalon leftJointMotor = HardwareMap.GrabberMap.leftJointMotor;
+  public CANTalon rightJointMotor = HardwareMap.GrabberMap.rightJointMotor;
+  public PIDController grabController = new PIDController(0.066667,0,0,armEncoder,leftJointMotor);
+
+  Grabber() {
+    rightJointMotor.changeControlMode(CANTalon.TalonControlMode.Follower);
+    rightJointMotor.set(leftJointMotor.getDeviceID());
+  }
   /**
    * Set the arm angle to the desired position.
    *
    * @param angle target angle
    */
   public void setAngle(double angle) {
-
+    grabController.setSetpoint(angle);
   }
 
+
+  public double getAngle() {
+    return 0;
+  }
   /**
    * Rotates the intake motors inward.
    */
   public void suckIn() {
-
+    bunnySucker.set(1);
   }
 
   /**
    * Rotates the intake moters outward.
    */
   public void spitOut() {
-
+    bunnySucker.set(-1);
   }
 
   /**
    * Stops the intake motors.
    */
   public void stopIntake() {
-
+    bunnySucker.set(0);
   }
 
   /**
    * @return whether or not bunny is present in intake
    */
   public boolean hasBunny() {
-    return false;
+    return bunnySensor.get();
   }
 }
