@@ -34,10 +34,10 @@ public class HardwareMap {
   }
 
   public static final class GrabberMap {
-    public static final AnalogInput armEncoder = new AnalogInput(0);
+    public static final AnalogInput armEncoder = new AnalogInput(3);
     public static final DigitalInput bunnySensor = new DigitalInput(0);
-    public static final CANTalon bunnySucker = new CANTalon(0);
-    public static final CANTalon armMotor = new CANTalon(0);
-    public static final int ARM_MOTOR_PDPSLOT = 6;
+    public static final CANTalon bunnySucker = new CANTalon(8);
+    public static final SpeedController armMotor = new Talon(4);
+    public static final int ARM_MOTOR_PDPSLOT = 7;
   }
 }

@@ -1,12 +1,15 @@
 package org.team2471.bunnybot.subsystems;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.command.Subsystem;
+
 import org.team2471.bunnybot.HardwareMap;
+import org.team2471.bunnybot.defaultcommands.GrabberDefaultCommand;
 
 import static org.team2471.bunnybot.HardwareMap.GrabberMap.*;
 import static org.team2471.bunnybot.HardwareMap.pdp;
 
-public class Grabber {
+public class Grabber extends Subsystem {
   private double armOffset = 0;
   private static final double ARM_MAX_CURRENT = 30;
   private PIDController grabController = new PIDController(0.066667,0,0,armEncoder, this::set);
@@ -14,6 +17,12 @@ public class Grabber {
   public Grabber() {
     armOffset = getAngle();
   }
+
+  @Override
+  protected void initDefaultCommand() {
+    setDefaultCommand(new GrabberDefaultCommand());
+  }
+
   /**
    * Set the arm angle to the desired position.
    *

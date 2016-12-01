@@ -5,10 +5,14 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.team2471.bunnybot.Robot;
 import org.team2471.bunnybot.subsystems.Grabber;
 
+import static org.team2471.bunnybot.IOMap.grabberArmAxis;
+import static org.team2471.bunnybot.Robot.grabber;
+
 
 public class GrabberDefaultCommand extends Command {
-    private Joystick joystick1 = new Joystick(1);
-    private Grabber grabber = Robot.grabber;
+    public GrabberDefaultCommand() {
+        requires(grabber);
+    }
 
     @Override
     protected void initialize() {
@@ -17,8 +21,7 @@ public class GrabberDefaultCommand extends Command {
 
     @Override
     protected void execute() {
-        grabber.setAngle(grabber.getAngle() + joystick1.getRawAxis(1) * 1.0);
-
+//        grabber.setAngle(grabber.getAngle() + grabberArmAxis.get() * 1.0);
     }
     @Override
     protected boolean isFinished() {
