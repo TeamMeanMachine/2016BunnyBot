@@ -1,40 +1,50 @@
 package org.team2471.bunnybot.defaultcommands;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-import org.team2471.bunnybot.subsystems.Shooter;
+
+import static org.team2471.bunnybot.IOMap.tiltAxis;
+import static org.team2471.bunnybot.IOMap.turretXAxis;
+import static org.team2471.bunnybot.IOMap.turretYAxis;
+import static org.team2471.bunnybot.Robot.shooter;
+import static org.team2471.bunnybot.IOMap.shootButton;
 
 public class ShooterDefaultCommand extends Command {
-    private Joystick coStick = new Joystick(1); // temporary
-    private Shooter shooter = new Shooter(); // temporary
 
-    public ShooterDefaultCommand(){
-        requires(shooter);
+  public ShooterDefaultCommand() {
+    requires(shooter);
+  }
+
+  @Override
+  protected void initialize() {
+
+  }
+
+  @Override
+  protected void execute() {
+    double angle = Math.toDegrees(Math.atan2(turretXAxis.get(), turretYAxis.get()));
+    shooter.setAngle(angle);
+
+    shooter.setTilt(tiltAxis.get() * 50);
+
+    if (shootButton.get()){
+      shooter.enableShooting();
+    } else {
+      shooter.disableShooting();
     }
+  }
 
-    @Override
-    protected void initialize() {
+  @Override
+  protected boolean isFinished() {
+    return false;
+  }
 
-    }
+  @Override
+  protected void end() {
 
-    @Override
-    protected void execute() {
-        double angle = Math.atan2(coStick.getRawAxis(0), coStick.getRawAxis(1));
-        shooter.setAngle(angle);
-    }
+  }
 
-    @Override
-    protected boolean isFinished() {
-        return false;
-    }
+  @Override
+  protected void interrupted() {
 
-    @Override
-    protected void end() {
-
-    }
-
-    @Override
-    protected void interrupted() {
-
-    }
+  }
 }

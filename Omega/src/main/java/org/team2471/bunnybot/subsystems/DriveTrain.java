@@ -47,7 +47,7 @@ public class DriveTrain extends Subsystem {
 //    else {
 //      steeringRate = -steeringRate * Math.abs(throttle);
 //    }
-    System.out.println(throttle);
+//    System.out.println(throttle);
     if(!IOMap.noCheesyDriveButton.get()) {
       // cheezy drive
       steeringRate = steeringRate * throttle;
