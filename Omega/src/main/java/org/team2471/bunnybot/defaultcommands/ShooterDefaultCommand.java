@@ -2,7 +2,7 @@ package org.team2471.bunnybot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import static org.team2471.bunnybot.IOMap.tiltAxis;
+//import static org.team2471.bunnybot.IOMap.tiltAxis;
 import static org.team2471.bunnybot.IOMap.turretXAxis;
 import static org.team2471.bunnybot.IOMap.turretYAxis;
 import static org.team2471.bunnybot.Robot.shooter;
@@ -24,7 +24,7 @@ public class ShooterDefaultCommand extends Command {
     double angle = Math.toDegrees(Math.atan2(turretXAxis.get(), turretYAxis.get()));
     shooter.setAngle(angle);
 
-    shooter.setTilt(tiltAxis.get() * 50);
+//    shooter.setTilt(tiltAxis.get() * 50);
 
     if (shootButton.get()){
       shooter.enableShooting();

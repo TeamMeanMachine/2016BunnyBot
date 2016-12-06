@@ -14,9 +14,9 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void robotInit() {
-    shooter = new Shooter();
+//    shooter = new Shooter();
     driveTrain = new DriveTrain();
-    // grabber = new Grabber();
+     grabber = new Grabber();
   }
 
   @Override

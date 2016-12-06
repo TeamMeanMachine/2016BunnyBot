@@ -7,7 +7,6 @@ import org.team2471.frc.lib.control.DriveController;
 public class IOMap {
   private static final DriveController mainController = new DriveController(0);
   public static final boolean isSteeringWheel = mainController.getName().equals("LUFA Wheel wFFB");
-  public static final DriveAxis grabberAxis = mainController.getAxis(1);
   public static final DriveButton suckinButton = mainController.getButton(4);
   public static final DriveButton spitoutButton = mainController.getButton(2);
   public static final DriveButton backupButton = mainController.getButton(8);
@@ -56,6 +55,10 @@ public class IOMap {
       .withDeadband(0.1)
       .withInvert();
 
-  public static final DriveAxis tiltAxis = coController.getAxis(3);
+  public static final DriveAxis grabberAxis = coController.getAxis(3);
+//      .withInvert();
+
+  public static final DriveButton grabberIntakeButton = coController.getButton(3);
+  public static final DriveButton grabberSpitButton = coController.getButton(4);
 
 }

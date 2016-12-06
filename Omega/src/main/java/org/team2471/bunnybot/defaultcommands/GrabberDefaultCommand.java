@@ -5,7 +5,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.team2471.bunnybot.Robot;
 import org.team2471.bunnybot.subsystems.Grabber;
 
-import static org.team2471.bunnybot.IOMap.grabberArmAxis;
+import static org.team2471.bunnybot.IOMap.grabberAxis;
+import static org.team2471.bunnybot.IOMap.grabberIntakeButton;
+import static org.team2471.bunnybot.IOMap.grabberSpitButton;
 import static org.team2471.bunnybot.Robot.grabber;
 
 
@@ -21,7 +23,15 @@ public class GrabberDefaultCommand extends Command {
 
     @Override
     protected void execute() {
-//        grabber.setAngle(grabber.getAngle() + grabberArmAxis.get() * 1.0);
+        grabber.setAngle(grabberAxis.get() * 45);
+
+        if(grabberIntakeButton.get()) {
+            grabber.suckIn();
+        } else if(grabberSpitButton.get()) {
+            grabber.spitOut();
+        } else {
+            grabber.stopIntake();
+        }
     }
     @Override
     protected boolean isFinished() {

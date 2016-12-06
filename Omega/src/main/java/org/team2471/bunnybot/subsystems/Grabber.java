@@ -2,6 +2,7 @@ package org.team2471.bunnybot.subsystems;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.team2471.bunnybot.HardwareMap;
 import org.team2471.bunnybot.defaultcommands.GrabberDefaultCommand;
@@ -12,10 +13,15 @@ import static org.team2471.bunnybot.HardwareMap.pdp;
 public class Grabber extends Subsystem {
   private double armOffset = 0;
   private static final double ARM_MAX_CURRENT = 30;
-  private PIDController grabController = new PIDController(0.066667,0,0,armEncoder, this::set);
+  private PIDController grabController = new PIDController(0.066667,0,0,armEncoder, value -> {
+    System.out.println(value);
+    set(value);
+  });
 
   public Grabber() {
     armOffset = getAngle();
+    grabController.enable();
+    SmartDashboard.putData("GrabController", grabController);
   }
 
   @Override
@@ -29,6 +35,7 @@ public class Grabber extends Subsystem {
    * @param angle target angle
    */
   public void setAngle(double angle) {
+//    System.out.println("Angle: " + getAngle());
     grabController.setSetpoint(angle);
   }
 
