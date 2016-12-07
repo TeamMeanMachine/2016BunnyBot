@@ -5,12 +5,12 @@ import edu.wpi.first.wpilibj.CANTalon;
 public class HardwareMap {
 
   public static final class Drivetrain {
-    public static final CANTalon rightmotor1 = new CANTalon(0);
-    public static final CANTalon rightmotor2 = new CANTalon(0);
-    public static final CANTalon rightmotor3 = new CANTalon(0);
-    public static final CANTalon leftmotor1 = new CANTalon(0);
-    public static final CANTalon leftmotor2 = new CANTalon(0);
-    public static final CANTalon leftmotor3 = new CANTalon(0);
+    public static final CANTalon rightMotor1 = new CANTalon(0);
+    public static final CANTalon rightMotor2 = new CANTalon(0);
+    public static final CANTalon rightMotor3 = new CANTalon(0);
+    public static final CANTalon leftMotor1 = new CANTalon(0);
+    public static final CANTalon leftMotor2 = new CANTalon(0);
+    public static final CANTalon leftMotor3 = new CANTalon(0);
 
   }
 }

@@ -5,7 +5,11 @@ import org.team2471.bunnybot.IOMap;
 
 import static org.team2471.bunnybot.Robot.driveTrain;
 
-public class DriveTrainDefaultCommand extends Command{
+public class DriveTrainDefaultCommand extends Command {
+
+  public DriveTrainDefaultCommand() {
+    requires(driveTrain);
+  }
 
   @Override
   protected void initialize() {

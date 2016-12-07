@@ -1,8 +1,7 @@
 package org.team2471.bunnybot;
 
-import edu.wpi.first.wpilibj.command.Scheduler;
-
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import org.team2471.bunnybot.subsystem.DriveTrain;
 
 public class Robot extends IterativeRobot {
