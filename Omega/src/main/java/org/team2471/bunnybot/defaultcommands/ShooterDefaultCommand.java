@@ -21,10 +21,11 @@ public class ShooterDefaultCommand extends Command {
 
   @Override
   protected void execute() {
-    double angle = Math.toDegrees(Math.atan2(turretXAxis.get(), turretYAxis.get()));
-    shooter.setAngle(angle);
+    shooter.setPan(turretXAxis.get());
 
-    shooter.setTilt(tiltAxis.get() * 50);
+    double tiltAngle = -tiltAxis.get() * 180 + 180;
+    shooter.setTilt(tiltAngle);
+    System.out.println(tiltAngle);
 
     if (shootButton.get()){
       shooter.enableShooting();

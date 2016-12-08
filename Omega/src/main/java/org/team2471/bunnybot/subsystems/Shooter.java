@@ -35,49 +35,16 @@ public class Shooter extends Subsystem {
 
   public final Subsystem trigger = new DummySubsystem();
 
-  private final PIDController panController = new PIDController(0.01, 0, 0, new PIDSource() {
-    @Override
-    public void setPIDSourceType(PIDSourceType pidSource) {
-    }
 
-    @Override
-    public PIDSourceType getPIDSourceType() {
-      return PIDSourceType.kDisplacement;
-    }
 
-    @Override
-    public double pidGet() {
-      return getAngle();
-    }
-  }, panMotor );
-
-  public Shooter() {
-    panController.setInputRange(-180, 180);
-    panController.setOutputRange(-1, 1);
-    panController.setContinuous(true);
-    panController.enable();
-    SmartDashboard.putData("PanController", panController);
-  }
 
   @Override
   protected void initDefaultCommand() {
     setDefaultCommand(new ShooterDefaultCommand());
   }
 
-  /**
-   * @return the current angle of the shooter
-   */
-  public double getAngle() {
-    double shooterGyroAngle = shooterGyro.getAngle();
-    System.out.println("Angle: " + shooterGyroAngle + " (" + shooterGyroAngle % 360 + ")");
-//    if (shooterGyroAngle > 0) {
-//      shooterGyroAngle += 360;
-//    }
-    return shooterGyroAngle % 360;
-  }
 
-
-  /**
+   /**
    * use boolean to make sure that the shooter motor has finished its shooting
    * iteration and has completely returned to standby position ready for next shot
    *
@@ -107,12 +74,12 @@ public class Shooter extends Subsystem {
   }
 
   /**
-   * Sets the target angle of the shooter
+   * Sets the power of the shooter
    *
-   * @param angle angle to be set
+   * @param power power to be set
    */
-  public void setAngle(double angle) {
-    panController.setSetpoint(angle);
+  public void setPan(double power) {
+    panMotor.set(power);
   }
 
 
