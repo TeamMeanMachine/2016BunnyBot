@@ -23,7 +23,7 @@ public class ShooterDefaultCommand extends Command {
   protected void execute() {
     shooter.setPan(turretXAxis.get());
 
-    double tiltAngle = -tiltAxis.get() * 180 + 180;
+    double tiltAngle = tiltAxis.get() * 90 + 100;
     shooter.setTilt(tiltAngle);
     System.out.println(tiltAngle);
 
