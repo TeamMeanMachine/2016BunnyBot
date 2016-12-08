@@ -23,7 +23,9 @@ public class GrabberDefaultCommand extends Command {
 
     @Override
     protected void execute() {
-        grabber.setAngle(grabberAxis.get() * 45);
+        double target = (-grabberAxis.get() + 1) / 2 * 90;
+        grabber.setAngle(target);
+        System.out.println(target + ", " + grabber.getAngle());
 
         if(grabberIntakeButton.get()) {
             grabber.suckIn();

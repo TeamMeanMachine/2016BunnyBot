@@ -23,4 +23,9 @@ public class Robot extends IterativeRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
   }
+
+  @Override
+  public void disabledPeriodic() {
+    System.out.println(grabber.getAngle());
+  }
 }
