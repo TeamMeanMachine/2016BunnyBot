@@ -2,10 +2,9 @@ package org.team2471.bunnybot.subsystem;
 
 //import com.team254.frc2016.CheesyDriveHelper;
 //import com.team254.lib.util.DriveSignal;
-import defaultcommands.DriveTrainDefaultCommand;
+import org.team2471.bunnybot.defaultcommands.DriveTrainDefaultCommand;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static org.team2471.bunnybot.HardwareMap.Drivetrain.*;
 
