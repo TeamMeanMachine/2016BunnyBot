@@ -6,6 +6,7 @@ import defaultcommands.DriveTrainDefaultCommand;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.team2471.bunnybot.IOMap;
 
 import static org.team2471.bunnybot.HardwareMap.Drivetrain.*;
 
@@ -31,10 +32,10 @@ public class DriveTrain extends Subsystem {
   }
 
   public void drive(double throttle, double turn) {
-   if (SmartDashboard.getBoolean("CheesyDrive", false)) {
-     DriveSignal driveSignal = cheesyDriveHelper.cheesyDrive(throttle, turn, false);
+   if (true) { //SmartDashboard.getBoolean("CheesyDrive", true)) {              // left bumper permits quick turn (in place)
+     DriveSignal driveSignal = cheesyDriveHelper.cheesyDrive(throttle, turn, IOMap.mainController.getButton(4).get() );
 
-     rightMotor1.set(driveSignal.rightMotor);
+     rightMotor1.set(-driveSignal.rightMotor);
      leftMotor1.set(driveSignal.leftMotor);
    }
    else {
@@ -44,14 +45,18 @@ public class DriveTrain extends Subsystem {
      rightMotor1.set(-right);
      leftMotor1.set(left);
    }
-    if (leftMotor1.getSpeed() > HIGHSHIFTPOINT) {
+    if (getSpeed() > HIGHSHIFTPOINT) {
       shiftSolenoid.set(true);
     }
-    else if(leftMotor1.getSpeed() < LOWSHIFTPOINT) {
+    else if(getSpeed() < LOWSHIFTPOINT) {
       shiftSolenoid.set(false);
     }
   }
 
+  private double getSpeed() {
+    return ( leftMotor1.getSpeed() + rightMotor1.getSpeed() ) / 2.0;
+  }
+  
   @Override
   protected void initDefaultCommand() {
     setDefaultCommand(new DriveTrainDefaultCommand());
