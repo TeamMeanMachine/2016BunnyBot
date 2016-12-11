@@ -1,8 +1,6 @@
 package org.team2471.bunnybot.subsystems;
 
-import org.team2471.bunnybot.defaultcommands.GrabberDefaultCommand;
-import org.team2471.frc.lib.control.RateLimitedPIDOutput;
-
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class IntakeCommandGroup extends CommandGroup {
   public IntakeCommandGroup() {
     addParallel(new GrabberToAngleCommand(SmartDashboard.getNumber("Arm Intake Angle")));
-    addSequential(new WaitCommand(0.4));
+    addSequential(new WaitCommand(0.8));
     addSequential(new GrabberIntakeCommand());
   }
 
