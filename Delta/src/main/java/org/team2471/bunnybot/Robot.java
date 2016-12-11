@@ -8,11 +8,13 @@ import org.team2471.bunnybot.subsystems.Shooter;
 public class Robot extends IterativeRobot {
   public static DriveTrain driveTrain;
   public static Shooter shooter;
+  public static IOMap ioMap;
 
   @Override
   public void robotInit() {
     driveTrain = new DriveTrain();
     shooter = new Shooter();
+    ioMap = new IOMap();
   }
 
   @Override
