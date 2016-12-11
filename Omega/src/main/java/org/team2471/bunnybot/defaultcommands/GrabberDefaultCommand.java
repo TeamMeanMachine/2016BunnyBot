@@ -1,9 +1,6 @@
 package org.team2471.bunnybot.defaultcommands;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
-import org.team2471.bunnybot.Robot;
-import org.team2471.bunnybot.subsystems.Grabber;
 
 import static org.team2471.bunnybot.IOMap.grabberAxis;
 import static org.team2471.bunnybot.IOMap.grabberIntakeButton;
@@ -24,7 +21,7 @@ public class GrabberDefaultCommand extends Command {
     @Override
     protected void execute() {
         double target = (-grabberAxis.get() + 1) / 2 * 90;
-        grabber.setAngle(target);
+        grabber.setSetpoint(target);
         System.out.println(target + ", " + grabber.getAngle());
 
         if(grabberIntakeButton.get()) {

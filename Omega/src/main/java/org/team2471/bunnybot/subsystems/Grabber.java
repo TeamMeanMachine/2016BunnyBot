@@ -15,20 +15,23 @@ import static org.team2471.bunnybot.HardwareMap.GrabberMap.bunnySucker;
 import static org.team2471.bunnybot.HardwareMap.pdp;
 
 public class Grabber extends Subsystem {
-  private double armOffset = 0;
+  private static final double armOffset = 0.61;
   private static final double ARM_MAX_CURRENT = 30;
-  private PIDController grabController = new PIDController(0.066667, 0, 0, armEncoder, new RateLimitedPIDOutput(0.5,
-      value -> armMotor.set(-value)));
+  private PIDController grabController = new PIDController(0.8, 0, 0, armEncoder,
+//      new RateLimitedPIDOutput(0.5,
+      value -> {
+        SmartDashboard.putNumber("Grabber Voltage", -value);
+        armMotor.set(-value);
+      });
 
   public Grabber() {
-    armOffset = getAngle();
     grabController.enable();
     SmartDashboard.putData("GrabController", grabController);
   }
 
   @Override
   protected void initDefaultCommand() {
-    setDefaultCommand(new GrabberDefaultCommand());
+//    setDefaultCommand(new GrabberDefaultCommand());
   }
 
   /**
@@ -36,9 +39,17 @@ public class Grabber extends Subsystem {
    *
    * @param angle target angle
    */
-  public void setAngle(double angle) {
+  public void setSetpoint(double angle) {
 //    System.out.println("Angle: " + getAngle());
+    System.out.println("angle: " + angle);
     grabController.setSetpoint(angle);
+  }
+
+  /**
+   * @return the target angle in degrees
+   */
+  public double getSetpoint() {
+    return grabController.getSetpoint();
   }
 
 
@@ -46,7 +57,7 @@ public class Grabber extends Subsystem {
    * @return the current angle of the grabber in degrees.
    */
   public double getAngle() {
-    return ((armEncoder.getVoltage() - 0.2) / 4.6) * 360 - armOffset; // inverted because mechanical
+    return (armEncoder.getVoltage() - 0.2) / 4.6 * 360 - (armOffset - 0.2) / 4.6 * 360; // inverted because mechanical
   }
 
   /**
