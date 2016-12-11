@@ -1,6 +1,10 @@
 package org.team2471.bunnybot;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -27,7 +31,6 @@ public class Robot extends IterativeRobot {
 
     new JoystickButton(new Joystick(0), 6).whileHeld(new IntakeCommandGroup());
 
-
     SmartDashboard.putNumber("Arm Resting Angle", 0);
     SmartDashboard.putNumber("Arm Burrow Angle", 100);
     SmartDashboard.putNumber("Arm Intake Angle", 205);
@@ -44,7 +47,5 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void disabledPeriodic() {
-    System.out.println(HardwareMap.GrabberMap.armEncoder.getVoltage());
-    System.out.println(grabber.getAngle());
   }
 }
