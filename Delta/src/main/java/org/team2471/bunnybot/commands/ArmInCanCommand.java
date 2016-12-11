@@ -18,7 +18,8 @@ public class ArmInCanCommand extends PlayAnimationCommand {
   public ArmInCanCommand() {
     requires( ArmSubsystem );
 
-    m_animation = new Animation();
+    animation = new Animation();
+    SetAnimation( animation );
 
     shoulderController = new PIDController( 1.0, 0.0, 0.0, shoulderEncoder, shoulderMotor );
     elbowController = new PIDController( 1.0, 0.0, 0.0, elbowEncoder, elbowMotor );
