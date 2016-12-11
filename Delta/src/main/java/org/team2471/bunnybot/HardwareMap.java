@@ -14,4 +14,8 @@ public class HardwareMap {
     public static final CANTalon leftMotor3 = new CANTalon(2);
     public static final Solenoid shiftSolenoid = new Solenoid(0);
   }
+
+  public static final class Shooter {
+    public static final CANTalon shooterMotor = new CANTalon(8);
+  }
 }
