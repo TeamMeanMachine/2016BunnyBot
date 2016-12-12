@@ -3,15 +3,13 @@ package org.team2471.bunnybot.commands;
 import edu.wpi.first.wpilibj.PIDController;
 import javafx.animation.Animation;
 import javafx.stage.Modality;
+import org.team2471.frc.lib.motion_profiling.*;
 
-/**
- * Created by Bob on 12/10/2016.
- */
 public class ArmInCanCommand extends PlayAnimationCommand {
 
   Animation animation;
-  MotionProfileCurve shoulderCurve;
-  MotionProfileCurve elbowCurve;
+  MotionProfilingCurve shoulderCurve;
+  MotionProfilingCurve elbowCurve;
   PIDController shoulderController;
   PIDController elbowController;
 
@@ -19,16 +17,16 @@ public class ArmInCanCommand extends PlayAnimationCommand {
     requires( ArmSubsystem );
 
     animation = new Animation();
-    SetAnimation( animation );
+    setAnimation( animation );
 
     shoulderController = new PIDController( 1.0, 0.0, 0.0, shoulderEncoder, shoulderMotor );
     elbowController = new PIDController( 1.0, 0.0, 0.0, elbowEncoder, elbowMotor );
 
-    shoulderCurve = new MotionProfileCurve( shoulderController );
-    elbowCurve = new MotionProfileCurve( elbowController );
+    shoulderCurve = new MotionProfilingCurve( shoulderController );
+    elbowCurve = new MotionProfilingCurve( elbowController );
 
-    animation.addMotionProfileCurve( shoulderCurve );
-    animation.addMotionProfileCurve( elbowCurve );
+    animation.addMotionProfilingCurve( shoulderCurve );
+    animation.addMotionProfilingCurve( elbowCurve );
 
     shoulderCurve.storeValue( 0.0, 0.0 );
     shoulderCurve.storeValue( 1.5, 100.0 );
