@@ -2,11 +2,12 @@ package org.team2471.bunnybot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-//import static org.team2471.bunnybot.IOMap.tiltAxis;
+import static org.team2471.bunnybot.IOMap.shootButton;
 import static org.team2471.bunnybot.IOMap.turretXAxis;
 import static org.team2471.bunnybot.IOMap.turretYAxis;
 import static org.team2471.bunnybot.Robot.shooter;
-import static org.team2471.bunnybot.IOMap.shootButton;
+
+//import static org.team2471.bunnybot.IOMap.tiltAxis;
 
 public class ShooterDefaultCommand extends Command {
 
@@ -26,7 +27,7 @@ public class ShooterDefaultCommand extends Command {
 
 //    shooter.setTilt(tiltAxis.get() * 50);
 
-    if (shootButton.get()){
+    if (shootButton.get()) {
       shooter.enableShooting();
     } else {
       shooter.disableShooting();

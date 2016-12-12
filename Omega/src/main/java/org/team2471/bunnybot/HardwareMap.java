@@ -1,6 +1,14 @@
 package org.team2471.bunnybot;
 
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Talon;
 
 public class HardwareMap {
   public static PowerDistributionPanel pdp = new PowerDistributionPanel();
@@ -15,6 +23,11 @@ public class HardwareMap {
   }
 
   public static final class DriveTrainMap {
+    public static final SpeedController frontLeftMotor = new Talon(6);
+    public static final SpeedController frontRightMotor = new Talon(2);
+    public static final SpeedController backLeftMotor = new Talon(7);
+    public static final SpeedController backRightMotor = new Talon(1);
+
     public static final class LeftModule {
       public static final AnalogInput turnEncoder = new AnalogInput(1);
       public static final CANTalon turnMotor = new CANTalon(15);
@@ -26,11 +39,6 @@ public class HardwareMap {
       public static final CANTalon turnMotor = new CANTalon(0);
       public static final SpeedController forwardMotor = new Talon(0);
     }
-
-    public static final SpeedController frontLeftMotor = new Talon(6);
-    public static final SpeedController frontRightMotor = new Talon(2);
-    public static final SpeedController backLeftMotor = new Talon(7);
-    public static final SpeedController backRightMotor = new Talon(1);
   }
 
   public static final class GrabberMap {

@@ -1,12 +1,9 @@
 package org.team2471.bunnybot.subsystems;
 
-import org.team2471.bunnybot.HardwareMap;
 import org.team2471.bunnybot.defaultcommands.ShooterDefaultCommand;
 import org.team2471.util.DummySubsystem;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -26,30 +23,28 @@ public class Shooter extends Subsystem {
 //  private final DigitalInput ammoSensor = HardwareMap.ShooterMap.ammoSensor;
 //  private final Solenoid flashLight = HardwareMap.ShooterMap.flashLight;
 
+  public final Subsystem trigger = new DummySubsystem();
   private final Talon panMotor = new Talon(3);
   private final SpeedController shootMotor = new Talon(5);
   private final AnalogGyro shooterGyro = new AnalogGyro(0);
   private final Servo tiltMotor = new Servo(9);
   private final DigitalInput ammoSensor = new DigitalInput(9);
   private final Solenoid flashLight = new Solenoid(0);
-
-  public final Subsystem trigger = new DummySubsystem();
-
   private final PIDController panController = new PIDController(0.01, 0, 0, new PIDSource() {
-    @Override
-    public void setPIDSourceType(PIDSourceType pidSource) {
-    }
-
     @Override
     public PIDSourceType getPIDSourceType() {
       return PIDSourceType.kDisplacement;
     }
 
     @Override
+    public void setPIDSourceType(PIDSourceType pidSource) {
+    }
+
+    @Override
     public double pidGet() {
       return getAngle();
     }
-  }, panMotor );
+  }, panMotor);
 
   public Shooter() {
     panController.setInputRange(-180, 180);
@@ -76,6 +71,14 @@ public class Shooter extends Subsystem {
     return shooterGyroAngle % 360;
   }
 
+  /**
+   * Sets the target angle of the shooter
+   *
+   * @param angle angle to be set
+   */
+  public void setAngle(double angle) {
+    panController.setSetpoint(angle);
+  }
 
   /**
    * use boolean to make sure that the shooter motor has finished its shooting
@@ -106,17 +109,7 @@ public class Shooter extends Subsystem {
     shootMotor.set(0);
   }
 
-  /**
-   * Sets the target angle of the shooter
-   *
-   * @param angle angle to be set
-   */
-  public void setAngle(double angle) {
-    panController.setSetpoint(angle);
-  }
-
-
-  public void setTilt(double angle){
+  public void setTilt(double angle) {
     tiltMotor.setAngle(angle);
   }
 

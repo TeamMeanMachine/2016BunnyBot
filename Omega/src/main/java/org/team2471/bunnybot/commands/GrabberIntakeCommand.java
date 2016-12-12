@@ -5,9 +5,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import static org.team2471.bunnybot.Robot.grabber;
 
 public class GrabberIntakeCommand extends Command {
-  public GrabberIntakeCommand(){
+  public GrabberIntakeCommand() {
     requires(grabber);
   }
+
   @Override
   protected void initialize() {
     grabber.suckIn();

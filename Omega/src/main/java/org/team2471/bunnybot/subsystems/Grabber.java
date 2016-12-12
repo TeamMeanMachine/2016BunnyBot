@@ -1,6 +1,5 @@
 package org.team2471.bunnybot.subsystems;
 
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -33,6 +32,13 @@ public class Grabber extends Subsystem {
   }
 
   /**
+   * @return the target angle in degrees
+   */
+  public double getSetpoint() {
+    return grabController.getSetpoint();
+  }
+
+  /**
    * Set the arm angle to the desired position.
    *
    * @param angle target angle
@@ -42,14 +48,6 @@ public class Grabber extends Subsystem {
     System.out.println("angle: " + angle);
     grabController.setSetpoint(angle);
   }
-
-  /**
-   * @return the target angle in degrees
-   */
-  public double getSetpoint() {
-    return grabController.getSetpoint();
-  }
-
 
   /**
    * @return the current angle of the grabber in degrees.

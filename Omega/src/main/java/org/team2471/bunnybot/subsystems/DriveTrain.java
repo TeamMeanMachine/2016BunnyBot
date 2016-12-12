@@ -1,13 +1,14 @@
 package org.team2471.bunnybot.subsystems;
 
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team2471.bunnybot.HardwareMap;
 import org.team2471.bunnybot.IOMap;
 import org.team2471.bunnybot.SwerveModule;
 import org.team2471.bunnybot.defaultcommands.DriveTrainDefaultCommand;
 import org.team2471.frc.lib.vector.Vector2;
 import org.team2471.util.BetterMath;
+
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 
 public class DriveTrain extends Subsystem {
@@ -37,7 +38,7 @@ public class DriveTrain extends Subsystem {
   /**
    * Sets the forward speed and the swerve module target angles.
    *
-   * @param throttle speed to be set between -1 and 1 (inclusive)
+   * @param throttle     speed to be set between -1 and 1 (inclusive)
    * @param steeringRate steering rate between -1 and 1 (inclusive)
    */
   public void drive(double throttle, double steeringRate) {
@@ -48,7 +49,7 @@ public class DriveTrain extends Subsystem {
 //      steeringRate = -steeringRate * Math.abs(throttle);
 //    }
 //    System.out.println(throttle);
-    if(!IOMap.noCheesyDriveButton.get()) {
+    if (!IOMap.noCheesyDriveButton.get()) {
       // cheezy drive
       steeringRate = steeringRate * throttle;
     }
@@ -57,7 +58,7 @@ public class DriveTrain extends Subsystem {
     double maxPower = BetterMath.max(leftSwerveModule.getPower(throttle, steeringRate),
         rightSwerveModule.getPower(throttle, steeringRate), leftPower, rightPower);
     double factor = 1;
-    if(maxPower > 1) {
+    if (maxPower > 1) {
       factor = 1.0 / maxPower;
     }
 
