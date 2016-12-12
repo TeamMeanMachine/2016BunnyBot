@@ -2,9 +2,8 @@ package org.team2471.bunnybot.defaultcommands;
 
 import org.team2471.bunnybot.IOMap;
 import org.team2471.bunnybot.Robot;
-import org.team2471.bunnybot.subsystem.Arm;
+import org.team2471.bunnybot.subsystems.Arm;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ArmDefaultCommand extends Command{

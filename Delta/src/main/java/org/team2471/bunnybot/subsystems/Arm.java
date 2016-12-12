@@ -1,4 +1,4 @@
-package org.team2471.bunnybot.subsystem;
+package org.team2471.bunnybot.subsystems;
 
 import org.team2471.bunnybot.HardwareMap;
 import org.team2471.bunnybot.util.MagnepotPIDSource;

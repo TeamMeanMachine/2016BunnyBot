@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import org.team2471.bunnybot.subsystems.DriveTrain;
 import org.team2471.bunnybot.subsystems.Shooter;
-import org.team2471.bunnybot.subsystem.Arm;
+import org.team2471.bunnybot.subsystems.Arm;
 
 public class Robot extends IterativeRobot {
 
