@@ -25,8 +25,7 @@ public class Grabber {
   }
 
 
-  public double getAngle() {
-    return 0;
+  public double getAngle() {return 0;
   }
   /**
    * Rotates the intake motors inward.
