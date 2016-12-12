@@ -5,7 +5,6 @@ package org.team2471.bunnybot.subsystems;
 import org.team2471.bunnybot.defaultcommands.DriveTrainDefaultCommand;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-
 import static org.team2471.bunnybot.HardwareMap.Drivetrain.*;
 
 public class DriveTrain extends Subsystem {
