@@ -15,12 +15,6 @@ public class IntakeCommandGroup extends CommandGroup {
   }
 
   @Override
-  protected void end() {
-    // Move back to resting position
-    new GrabberToAngleCommand(SmartDashboard.getNumber("Arm Resting Angle")).start();
-  }
-
-  @Override
   protected void interrupted() {
     end();
   }

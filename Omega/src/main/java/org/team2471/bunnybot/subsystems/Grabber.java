@@ -1,5 +1,7 @@
 package org.team2471.bunnybot.subsystems;
 
+import org.team2471.frc.lib.control.RateLimitedPIDOutput;
+
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -12,14 +14,15 @@ import static org.team2471.bunnybot.HardwareMap.GrabberMap.bunnySucker;
 import static org.team2471.bunnybot.HardwareMap.pdp;
 
 public class Grabber extends Subsystem {
-  private static final double armOffset = 0.61;
   private static final double ARM_MAX_CURRENT = 30;
-  private PIDController grabController = new PIDController(0.8, 0, 0, armEncoder,
-//      new RateLimitedPIDOutput(0.5,
+  private PIDController grabController = new PIDController(0.02, 0, 0, armEncoder,
+      new RateLimitedPIDOutput(1.5,
       value -> {
         SmartDashboard.putNumber("Grabber Voltage", -value);
         armMotor.set(-value);
-      });
+      }));
+
+  private static double armOffset = 0.61;
 
   public Grabber() {
     grabController.enable();
@@ -89,5 +92,12 @@ public class Grabber extends Subsystem {
       armMotor.set(0);
     }
     armMotor.set(power);
+  }
+
+  /**
+   * Zeroes the arm encoder.
+   */
+  public void zero() {
+    armOffset = armEncoder.getVoltage();
   }
 }
