@@ -18,20 +18,9 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Shooter extends Subsystem {
-//  private final CANTalon panMotor = HardwareMap.ShooterMap.panMotor;
-//  private final SpeedController shootMotor = HardwareMap.ShooterMap.shootMotor;
-//  private final AnalogGyro shooterGyro = HardwareMap.ShooterMap.shooterGyro;
-//  private final Servo tiltMotor = HardwareMap.ShooterMap.tiltMotor;
-//  private final DigitalInput ammoSensor = HardwareMap.ShooterMap.ammoSensor;
-//  private final Solenoid flashLight = HardwareMap.ShooterMap.flashLight;
+import static org.team2471.bunnybot.HardwareMap.ShooterMap.*;
 
-  private final Talon panMotor = new Talon(3);
-  private final SpeedController shootMotor = new Talon(5);
-  private final AnalogGyro shooterGyro = new AnalogGyro(0);
-  private final Servo tiltMotor = new Servo(9);
-  private final DigitalInput ammoSensor = new DigitalInput(9);
-  private final Solenoid flashLight = new Solenoid(0);
+public class Shooter extends Subsystem {
 
   public final Subsystem trigger = new DummySubsystem();
 
@@ -79,6 +68,9 @@ public class Shooter extends Subsystem {
    * @param power power to be set
    */
   public void setPan(double power) {
+    if ((leftTurnSensor.get() && power<0) || (rightTurnSensor.get() && power>0)){
+      power = 0;
+    }
     panMotor.set(power);
   }
 
