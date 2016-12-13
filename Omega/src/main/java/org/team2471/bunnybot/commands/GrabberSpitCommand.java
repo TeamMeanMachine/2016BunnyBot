@@ -3,8 +3,6 @@ package org.team2471.bunnybot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class GrabberSpitCommand extends Command {
-
-
   @Override
   protected void initialize() {
   }

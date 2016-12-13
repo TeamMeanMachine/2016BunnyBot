@@ -1,13 +1,14 @@
 package org.team2471.bunnybot;
 
+import org.team2471.bunnybot.commandgroups.IntakeCommandGroup;
 import org.team2471.frc.lib.control.DriveAxis;
 import org.team2471.frc.lib.control.DriveButton;
 import org.team2471.frc.lib.control.DriveController;
 
 public class IOMap {
-  private static final DriveController mainController = new DriveController(0);
+  private static final DriveController mainController = new DriveController(0)
+      .withRunCommandWhileButtonHoldEvent(6, new IntakeCommandGroup());
 
-  public static final DriveButton suckinButton = mainController.getButton(4);
   public static final DriveButton spitoutButton = mainController.getButton(2);
   public static final DriveButton backupButton = mainController.getButton(8);
   public static final DriveButton noCheesyDriveButton = mainController.getButton(10);

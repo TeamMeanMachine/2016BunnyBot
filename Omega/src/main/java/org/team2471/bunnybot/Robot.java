@@ -22,11 +22,13 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putNumber("Arm Burrow Angle", 100);
     SmartDashboard.putNumber("Arm Intake Angle", 205);
 
+    System.out.println(new Joystick(0).getButtonCount());
 //    shooter = new Shooter();
     driveTrain = new DriveTrain();
     grabber = new Grabber();
 
-    new JoystickButton(new Joystick(0), 6).whileHeld(new IntakeCommandGroup());
+    // temporary hack must die
+//    new JoystickButton(new Joystick(0), 6).whileHeld(new IntakeCommandGroup());
   }
 
   @Override
