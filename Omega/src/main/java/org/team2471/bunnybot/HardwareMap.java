@@ -4,11 +4,10 @@ import edu.wpi.first.wpilibj.*;
 
 public class HardwareMap {
   public static final class ShooterMap {
-    public static final CANTalon panMotor = new CANTalon(3);
-    public static final SpeedController shootMotor = new CANTalon(5);
+    public static final SpeedController panMotor = new Talon(3);
+    public static final SpeedController shootMotor = new Talon(5);
     public static final AnalogGyro shooterGyro = new AnalogGyro(0);
     public static final Servo tiltMotor = new Servo(9);
-    public static final DigitalInput ammoSensor = new DigitalInput(9);
     public static final Solenoid flashLight = new Solenoid(0);
     public static final DigitalInput leftTurnSensor = new DigitalInput(8);
     public static final DigitalInput rightTurnSensor = new DigitalInput(9);

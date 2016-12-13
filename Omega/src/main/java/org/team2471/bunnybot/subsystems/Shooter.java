@@ -1,31 +1,17 @@
 package org.team2471.bunnybot.subsystems;
 
-import org.team2471.bunnybot.HardwareMap;
 import org.team2471.bunnybot.defaultcommands.ShooterDefaultCommand;
 import org.team2471.util.DummySubsystem;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSourceType;
-import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static org.team2471.bunnybot.HardwareMap.ShooterMap.*;
 
 public class Shooter extends Subsystem {
+  public static final double UPPER_TILT_LIMIT = 115;
+  public static final double LOWER_TILT_LIMIT = 70;
 
   public final Subsystem trigger = new DummySubsystem();
-
-
-
 
   @Override
   protected void initDefaultCommand() {
@@ -40,7 +26,7 @@ public class Shooter extends Subsystem {
    * @return a boolean that check the completion as stated above
    */
   public boolean isReady() {
-    return ammoSensor.get();
+    return true;
   }
 
   /**
@@ -68,7 +54,9 @@ public class Shooter extends Subsystem {
    * @param power power to be set
    */
   public void setPan(double power) {
-    if ((leftTurnSensor.get() && power<0) || (rightTurnSensor.get() && power>0)){
+    boolean atLeftLimit = !leftTurnSensor.get() && power > 0;
+    boolean atRightLimit = !rightTurnSensor.get() && power < 0;
+    if (atLeftLimit || atRightLimit) {
       power = 0;
     }
     panMotor.set(power);
@@ -77,6 +65,7 @@ public class Shooter extends Subsystem {
 
   public void setTilt(double angle){
     tiltMotor.setAngle(angle);
+    System.out.println(tiltMotor.getAngle());
   }
 
   /**
