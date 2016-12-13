@@ -10,6 +10,8 @@ public class HardwareMap {
     public static final Servo tiltMotor = new Servo(9);
     public static final DigitalInput ammoSensor = new DigitalInput(9);
     public static final Solenoid flashLight = new Solenoid(0);
+    public static final DigitalInput leftTurnSensor = new DigitalInput(8);
+    public static final DigitalInput rightTurnSensor = new DigitalInput(9);
   }
 
   public static final class DriveTrainMap {
