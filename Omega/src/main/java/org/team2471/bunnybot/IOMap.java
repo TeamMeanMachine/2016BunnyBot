@@ -13,6 +13,10 @@ public class IOMap {
   public static final DriveButton backupButton = mainController.getButton(8);
   public static final DriveButton noCheesyDriveButton = mainController.getButton(isSteeringWheel ? 9 : 8);
 
+  public static final DriveAxis callibrationAxis = mainController.getAxis(3);
+  public static final DriveButton callibrationButton = mainController.getButton(1);
+
+
 
   public static final DriveAxis throttleAxis = isSteeringWheel ?
       () -> {

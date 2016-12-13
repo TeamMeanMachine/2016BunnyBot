@@ -23,4 +23,14 @@ public class Robot extends IterativeRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
   }
+
+  @Override
+  public void testInit() {
+    new CallibrationCommand().start();
+  }
+
+  @Override
+  public void testPeriodic() {
+    Scheduler.getInstance().run();
+  }
 }

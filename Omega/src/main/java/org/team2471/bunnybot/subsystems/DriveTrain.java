@@ -79,4 +79,14 @@ public class DriveTrain extends Subsystem {
   protected void initDefaultCommand() {
     setDefaultCommand(new DriveTrainDefaultCommand());
   }
+
+  // VV should only be used for callibration
+
+  public SwerveModule getLeftSwerveModule() {
+    return leftSwerveModule;
+  }
+
+  public SwerveModule getRightSwerveModule() {
+    return rightSwerveModule;
+  }
 }
