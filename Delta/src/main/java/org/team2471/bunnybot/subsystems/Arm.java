@@ -1,7 +1,7 @@
 package org.team2471.bunnybot.subsystems;
 
 import org.team2471.bunnybot.HardwareMap;
-import org.team2471.bunnybot.util.MagnepotPIDSource;
+import org.team2471.bunnybot.util.Magnepot;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
@@ -15,8 +15,8 @@ public class Arm {
   private CANTalon shoulderMotor = HardwareMap.Arm.shoulderMotor;
   private CANTalon elbowMotor = HardwareMap.Arm.elbowMotor;
   private CANTalon bunnySucker = HardwareMap.Arm.bunnySucker;
-  private PIDController shoulderPID = new PIDController(0,0,0, new MagnepotPIDSource(shoulderEncoder),shoulderMotor);
-  private PIDController elbowPID = new PIDController(0,0,0, new MagnepotPIDSource(elbowEncoder),elbowMotor);
+  private PIDController shoulderPID = new PIDController(0, 0, 0, shoulderEncoder, shoulderMotor);
+  private PIDController elbowPID = new PIDController(0, 0, 0, elbowEncoder, elbowMotor);
 
   public Arm() {
     SmartDashboard.putData("Shoulder PID", shoulderPID);
