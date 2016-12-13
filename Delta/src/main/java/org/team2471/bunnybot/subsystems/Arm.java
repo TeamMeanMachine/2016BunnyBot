@@ -10,11 +10,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Arm {
 
-  private AnalogInput shoulderEncoder = HardwareMap.ArmMap.shoulderEncoder;
-  private AnalogInput elbowEncoder = HardwareMap.ArmMap.elbowEncoder;
-  private CANTalon shoulderMotor = HardwareMap.ArmMap.shoulderMotor;
-  private CANTalon elbowMotor = HardwareMap.ArmMap.elbowMotor;
-  private CANTalon bunnySucker = HardwareMap.ArmMap.bunnySucker;
+  private AnalogInput shoulderEncoder = HardwareMap.Arm.shoulderEncoder;
+  private AnalogInput elbowEncoder = HardwareMap.Arm.elbowEncoder;
+  private CANTalon shoulderMotor = HardwareMap.Arm.shoulderMotor;
+  private CANTalon elbowMotor = HardwareMap.Arm.elbowMotor;
+  private CANTalon bunnySucker = HardwareMap.Arm.bunnySucker;
   private PIDController shoulderPID = new PIDController(0,0,0, new MagnepotPIDSource(shoulderEncoder),shoulderMotor);
   private PIDController elbowPID = new PIDController(0,0,0, new MagnepotPIDSource(elbowEncoder),elbowMotor);
 
