@@ -11,7 +11,7 @@ public class IOMap {
   public static final DriveButton suckinButton = mainController.getButton(4);
   public static final DriveButton spitoutButton = mainController.getButton(2);
   public static final DriveButton backupButton = mainController.getButton(8);
-  public static final DriveButton noCheesyDriveButton = mainController.getButton(isSteeringWheel ? 9 : 8);
+  public static final DriveButton noCheesyDriveButton = mainController.getButton(isSteeringWheel ? 9 : 5);
 
 
   public static final DriveAxis throttleAxis = isSteeringWheel ?
@@ -34,14 +34,14 @@ public class IOMap {
 //          - (mainController.getAxis(7).get() / -2 + 0.5)
       :
       mainController.getAxis(1)
-          .withDeadband(0.05, false)
+          .withDeadband(0.15, false)
           .withExponentialScaling(2)
           .withInvert();
 
   public static final DriveAxis turnAxis = isSteeringWheel ?
       mainController.getAxis(2) :
-      mainController.getAxis(2)
-          .withDeadband(0.05, false)
+      mainController.getAxis(4)
+          .withDeadband(0.15, false)
           .withExponentialScaling(2); // scale down
 
 
