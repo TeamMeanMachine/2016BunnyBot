@@ -1,16 +1,17 @@
-package defaultcommands;
+package org.team2471.bunnybot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.team2471.bunnybot.IOMap;
 
-import static org.team2471.bunnybot.Robot.driveTrain;
+import static org.team2471.bunnybot.Robot.arm;
 
-public class DriveTrainDefaultCommand extends Command {
+/**
+ * Created by Bob on 12/13/2016.
+ */
+public class SpitCommand extends Command{
 
-  public DriveTrainDefaultCommand() {
-    requires(driveTrain);
+  public SpitCommand() {
+    requires(arm);
   }
-
   @Override
   protected void initialize() {
 
@@ -18,7 +19,7 @@ public class DriveTrainDefaultCommand extends Command {
 
   @Override
   protected void execute() {
-    driveTrain.drive(IOMap.throttleAxis.get(), IOMap.turnAxis.get());
+    arm.spitOut();
   }
 
   @Override
@@ -28,7 +29,7 @@ public class DriveTrainDefaultCommand extends Command {
 
   @Override
   protected void end() {
-    //explode
+    arm.stopIntake();
   }
 
   @Override
