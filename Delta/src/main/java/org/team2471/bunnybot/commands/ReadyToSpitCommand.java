@@ -20,8 +20,8 @@ public class ReadyToSpitCommand extends PlayAnimationCommand{
     animation = new MotionProfileAnimation();
     setAnimation(animation);
 
-    shoulderController = new PIDController( 1.0, 0.0, 0.0, shoulderEncoder, shoulderMotor );
-    elbowController = new PIDController( 1.0, 0.0, 0.0, elbowEncoder, elbowMotor );
+    shoulderController = new PIDController( -0.04, -0.0, -0.01, shoulderEncoder, shoulderMotor );
+    elbowController = new PIDController( -0.04, -0.0, -0.01, elbowEncoder, elbowMotor );
 
     shoulderCurve = new MotionProfileCurve( shoulderController );
     elbowCurve = new MotionProfileCurve( elbowController );
@@ -29,12 +29,10 @@ public class ReadyToSpitCommand extends PlayAnimationCommand{
     animation.addMotionProfileCurve( shoulderCurve );
     animation.addMotionProfileCurve( elbowCurve );
 
-    shoulderCurve.storeValue( 0.0, 0.0 );
-    shoulderCurve.storeValue( 1.5, 100.0 );
+    shoulderCurve.storeValue( 0.0, 51 );
+    shoulderCurve.storeValue( 1.0, 36.0 );
 
-
-    elbowCurve.storeValue( 0.0, 0.0 );
-    elbowCurve.storeValue( 1.5, 60.0 );
+    elbowCurve.storeValue( 0.0, -113.0 );
+    elbowCurve.storeValue( 1.5, -64.0 );
   }
-
 }
