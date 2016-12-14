@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team2471.bunnybot.IOMap;
 
 import static org.team2471.bunnybot.HardwareMap.Drivetrain.*;
+import static org.team2471.bunnybot.IOMap.*;
 
 public class DriveTrain extends Subsystem {
   private CheesyDriveHelper cheesyDriveHelper;
@@ -17,7 +18,6 @@ public class DriveTrain extends Subsystem {
 
   public DriveTrain() {
 
-    //rightMotor1.reverseOutput(true);
     rightMotor2.changeControlMode(CANTalon.TalonControlMode.Follower);
     rightMotor3.changeControlMode(CANTalon.TalonControlMode.Follower);
     rightMotor2.set(rightMotor1.getDeviceID());
@@ -32,8 +32,8 @@ public class DriveTrain extends Subsystem {
   }
 
   public void drive(double throttle, double turn) {
-    if (true) { //SmartDashboard.getBoolean("CheesyDrive", true)) {              // left bumper permits quick turn (in place)
-      DriveSignal driveSignal = cheesyDriveHelper.cheesyDrive(throttle, turn, IOMap.mainController.getButton(4).get());
+    if (SmartDashboard.getBoolean("CheesyDrive", true)) {              // left bumper permits quick turn (in place)
+      DriveSignal driveSignal = cheesyDriveHelper.cheesyDrive(throttle, turn, driveController.getButton(4).get());
 
       rightMotor1.set(-driveSignal.rightMotor);
       leftMotor1.set(driveSignal.leftMotor);
