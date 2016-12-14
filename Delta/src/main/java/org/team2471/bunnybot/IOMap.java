@@ -9,7 +9,8 @@ public class IOMap {
   public IOMap() {
   }
 
-  public static final DriveController driveController = new DriveController(0);
+  public static final DriveController driveController = new DriveController(0)
+          .withRunCommandOnButtonPressEvent( 5, new ShooterCommand());
 
   private static final DriveController coPilotController = new DriveController(1)
           .withRunCommandOnButtonPressEvent(3, new ReadyToSpitCommand())
