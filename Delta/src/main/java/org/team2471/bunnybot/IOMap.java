@@ -14,6 +14,7 @@ public class IOMap {
   private static final DriveController coPilotController = new DriveController(1)
           .withRunCommandOnButtonPressEvent(3, new ReadyToSpitCommand())
           .withRunCommandOnButtonPressEvent(0, new ArmInCanCommand())
+          .withRunCommandOnButtonPressEvent(2, new IntakePositionCommand())
           .withRunCommandWhileButtonHoldEvent(5, new SuckCommand())
           .withRunCommandWhileButtonHoldEvent(4, new SpitCommand());
 

@@ -13,10 +13,15 @@ public class IntakePositionCommand extends PlayAnimationCommand{
   MotionProfileCurve shoulderCurve;
   MotionProfileCurve elbowCurve;
 
-  public IntakePositionCommand(double speed ) {
+  public IntakePositionCommand() {
     requires(arm);
 
-    setSpeed( speed );
+    if (arm.shoulderController.getSetpoint() > 40) {
+      setSpeed(1.0);
+    }
+    else {
+      setSpeed(-1.0);
+    }
     animation = new MotionProfileAnimation();
     setAnimation(animation);
 
