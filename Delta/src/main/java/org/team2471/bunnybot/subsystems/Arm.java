@@ -7,20 +7,24 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.team2471.bunnybot.util.Magnepot;
 
 public class Arm extends Subsystem {
 
-  private AnalogInput shoulderEncoder = HardwareMap.Arm.shoulderEncoder;
-  private AnalogInput elbowEncoder = HardwareMap.Arm.elbowEncoder;
+  private Magnepot shoulderEncoder = HardwareMap.Arm.shoulderEncoder;
+  private Magnepot elbowEncoder = HardwareMap.Arm.elbowEncoder;
   private CANTalon shoulderMotor = HardwareMap.Arm.shoulderMotor;
   private CANTalon elbowMotor = HardwareMap.Arm.elbowMotor;
   private CANTalon bunnySucker = HardwareMap.Arm.bunnySucker;
-  private PIDController shoulderPID = new PIDController(0, 0, 0, shoulderEncoder, shoulderMotor);
-  private PIDController elbowPID = new PIDController(0, 0, 0, elbowEncoder, elbowMotor);
+
+  public PIDController shoulderController = new PIDController( -0.04, -0.0, -0.01, shoulderEncoder, shoulderMotor );
+  public PIDController elbowController = new PIDController( -0.04, -0.0, -0.01, elbowEncoder, elbowMotor );
 
   public Arm() {
-    SmartDashboard.putData("Shoulder PID", shoulderPID);
-    SmartDashboard.putData("Elbow PID", elbowPID);
+    SmartDashboard.putData("Shoulder PID", shoulderController);
+    SmartDashboard.putData("Elbow PID", elbowController);
+    shoulderController.setAbsoluteTolerance(2.0);
+    elbowController.setAbsoluteTolerance(2.0);
   }
 
   @Override
@@ -32,28 +36,28 @@ public class Arm extends Subsystem {
    * Sets the shoulder to a specific angle
    */
   public void setShoulderAngle(double angle) {
-    shoulderPID.setSetpoint(angle);
+    shoulderController.setSetpoint(angle);
   }
 
   /**
    * Sets the elbow to a specific angle
    */
   public void setElbowAngle(double angle) {
-    elbowPID.setSetpoint(angle);
+    elbowController.setSetpoint(angle);
   }
 
   /**
    * Gets the shoulder angle
    */
   public double getShoulderAngle() {
-    return (shoulderEncoder.getVoltage() - 2.5) / 2.3 * 180;
+    return shoulderEncoder.pidGet();
   }
 
   /**
    * Gets the elbow angle
    */
   public double getElbowAngle() {
-    return (elbowEncoder.getVoltage() - 2.5) / 2.3 * 180;
+    return elbowEncoder.pidGet();
   }
 
   /**
