@@ -32,16 +32,14 @@ public class GrabberToAngleCommand extends Command {
     SmartDashboard.putNumber("Grabber Delta", delta);
     SmartDashboard.putNumber("Grabber Angle", grabber.getAngle());
     SmartDashboard.putNumber("Grabber Setpoint", grabber.getSetpoint());
-    return delta < 10;
+    return delta < 1;
   }
 
   @Override
   protected void end() {
-
   }
 
   @Override
   protected void interrupted() {
-
   }
 }

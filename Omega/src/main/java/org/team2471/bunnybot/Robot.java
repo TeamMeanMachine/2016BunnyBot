@@ -5,9 +5,9 @@ import org.team2471.bunnybot.subsystems.Grabber;
 import org.team2471.bunnybot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 public class Robot extends IterativeRobot {
   public static Shooter shooter;
@@ -18,12 +18,14 @@ public class Robot extends IterativeRobot {
   public void robotInit() {
     SmartDashboard.putNumber("Arm Resting Angle", 0);
     SmartDashboard.putNumber("Arm Burrow Angle", 100);
-    SmartDashboard.putNumber("Arm Intake Angle", 205);
+    SmartDashboard.putNumber("Arm Intake Angle", 212);
 
-    System.out.println(new Joystick(0).getButtonCount());
     shooter = new Shooter();
     driveTrain = new DriveTrain();
     grabber = new Grabber();
+
+    IOMap.init();
+    HardwareMap.init();
   }
 
   @Override

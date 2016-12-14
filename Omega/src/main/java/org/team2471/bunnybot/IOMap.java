@@ -1,8 +1,8 @@
 package org.team2471.bunnybot;
 
 import org.team2471.bunnybot.commandgroups.IntakeCommandGroup;
+import org.team2471.bunnybot.commands.GrabberSpitCommand;
 import org.team2471.bunnybot.commands.GrabberToAngleCommand;
-import org.team2471.bunnybot.commands.GrabberZeroArmCommand;
 import org.team2471.frc.lib.control.DriveAxis;
 import org.team2471.frc.lib.control.DriveButton;
 import org.team2471.frc.lib.control.DriveController;
@@ -12,7 +12,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class IOMap {
   private static final DriveController mainController = new DriveController(0)
       .withRunCommandWhileButtonHoldEvent(6, new IntakeCommandGroup())
-      .withRunCommandOnButtonReleaseEvent(6, new GrabberToAngleCommand(SmartDashboard.getNumber("Arm Resting Angle", 0)));
+      .withRunCommandOnButtonReleaseEvent(6, new GrabberToAngleCommand(SmartDashboard.getNumber("Arm Resting Angle", 0)))
+
+      .withRunCommandOnButtonPressEvent(5, new GrabberToAngleCommand(SmartDashboard.getNumber("Arm Burrow Angle")))
+      .withRunCommandWhileButtonHoldEvent(7, new GrabberSpitCommand())
+      .withRunCommandOnButtonReleaseEvent(5, new GrabberToAngleCommand(SmartDashboard.getNumber("Arm Resting Angle")));
 
   public static final DriveButton spitoutButton = mainController.getButton(2);
   public static final DriveButton backupButton = mainController.getButton(8);
@@ -31,8 +35,7 @@ public class IOMap {
 
   /* Co Pilot */
 
-  private static final DriveController coController = new DriveController(1)
-      .withRunCommandWhileButtonHoldEvent(8, new GrabberZeroArmCommand());
+  private static final DriveController coController = new DriveController(1);
 
   public static final DriveButton shootButton = coController.getButton(1);
 
@@ -43,4 +46,11 @@ public class IOMap {
       .withInvert();
 
   public static final DriveAxis tiltAxis = coController.getAxis(3);
+
+  /**
+   * Make sure static members are loaded.
+   */
+  public static void init() {
+
+  }
 }

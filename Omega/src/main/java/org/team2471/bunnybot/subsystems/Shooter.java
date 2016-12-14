@@ -1,22 +1,21 @@
 package org.team2471.bunnybot.subsystems;
 
+import org.team2471.bunnybot.HardwareMap;
 import org.team2471.bunnybot.defaultcommands.ShooterDefaultCommand;
 import org.team2471.util.DummySubsystem;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-import static org.team2471.bunnybot.HardwareMap.ShooterMap.flashLight;
-import static org.team2471.bunnybot.HardwareMap.ShooterMap.leftTurnSensor;
-import static org.team2471.bunnybot.HardwareMap.ShooterMap.panMotor;
-import static org.team2471.bunnybot.HardwareMap.ShooterMap.rightTurnSensor;
-import static org.team2471.bunnybot.HardwareMap.ShooterMap.shootMotor;
-import static org.team2471.bunnybot.HardwareMap.ShooterMap.tiltMotor;
+import static org.team2471.bunnybot.HardwareMap.ShooterMap.*;
 
 public class Shooter extends Subsystem {
   public static final double UPPER_TILT_LIMIT = 115;
   public static final double LOWER_TILT_LIMIT = 70;
 
   public final Subsystem trigger = new DummySubsystem();
+
+  public Shooter() {
+  }
 
   @Override
   protected void initDefaultCommand() {
@@ -59,12 +58,17 @@ public class Shooter extends Subsystem {
    * @param power power to be set
    */
   public void setPan(double power) {
+
     boolean atLeftLimit = !leftTurnSensor.get() && power > 0;
+    System.out.println("Left turn sensor");
+
     boolean atRightLimit = !rightTurnSensor.get() && power < 0;
     if (atLeftLimit || atRightLimit) {
       power = 0;
     }
+
     panMotor.set(power);
+    System.out.println("Pan Motor");
   }
 
 

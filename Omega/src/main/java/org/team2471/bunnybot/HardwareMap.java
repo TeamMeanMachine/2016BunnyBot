@@ -49,4 +49,17 @@ public class HardwareMap {
     public static final SpeedController armMotor = new Talon(4);
     public static final int ARM_MOTOR_PDPSLOT = 7;
   }
+
+  /**
+   * Force initialization of all static classes to prevent halts later on.
+   */
+  public static void init() {
+    DriveTrainMap.backLeftMotor.get();
+    DriveTrainMap.LeftModule.forwardMotor.get();
+    DriveTrainMap.RightModule.forwardMotor.get();
+
+    ShooterMap.shootMotor.get();
+
+    GrabberMap.armMotor.get();
+  }
 }

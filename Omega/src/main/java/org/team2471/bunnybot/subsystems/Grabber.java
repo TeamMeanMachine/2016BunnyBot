@@ -1,8 +1,7 @@
 package org.team2471.bunnybot.subsystems;
 
-import org.team2471.frc.lib.control.RateLimitedPIDOutput;
-
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -13,31 +12,28 @@ import static org.team2471.bunnybot.HardwareMap.GrabberMap.bunnySensor;
 import static org.team2471.bunnybot.HardwareMap.GrabberMap.bunnySucker;
 import static org.team2471.bunnybot.HardwareMap.pdp;
 
-public class Grabber extends Subsystem {
+public class Grabber extends PIDSubsystem {
   private static final double ARM_MAX_CURRENT = 30;
-  private static double armOffset = 0.61;
-  private PIDController grabController = new PIDController(0.02, 0, 0, armEncoder,
-      new RateLimitedPIDOutput(1.5,
-          value -> {
-            SmartDashboard.putNumber("Grabber Voltage", -value);
-            armMotor.set(-value);
-          }));
+  private static double armOffset = 0.58;
 
   public Grabber() {
-    grabController.enable();
-    SmartDashboard.putData("GrabController", grabController);
+    super(0.025, 0, 0);
+    super.enable();
+    SmartDashboard.putData("GrabController", super.getPIDController());
   }
 
   @Override
   protected void initDefaultCommand() {
-//    setDefaultCommand(new GrabberDefaultCommand());
   }
 
-  /**
-   * @return the target angle in degrees
-   */
-  public double getSetpoint() {
-    return grabController.getSetpoint();
+  @Override
+  protected double returnPIDInput() {
+    return getAngle();
+  }
+
+  @Override
+  protected void usePIDOutput(double value) {
+    armMotor.set(-value);
   }
 
   /**
@@ -46,9 +42,7 @@ public class Grabber extends Subsystem {
    * @param angle target angle
    */
   public void setSetpoint(double angle) {
-//    System.out.println("Angle: " + getAngle());
-    System.out.println("angle: " + angle);
-    grabController.setSetpoint(angle);
+    super.setSetpoint(angle);
   }
 
   /**
