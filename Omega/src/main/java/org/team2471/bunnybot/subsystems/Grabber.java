@@ -15,14 +15,13 @@ import static org.team2471.bunnybot.HardwareMap.pdp;
 
 public class Grabber extends Subsystem {
   private static final double ARM_MAX_CURRENT = 30;
+  private static double armOffset = 0.61;
   private PIDController grabController = new PIDController(0.02, 0, 0, armEncoder,
       new RateLimitedPIDOutput(1.5,
-      value -> {
-        SmartDashboard.putNumber("Grabber Voltage", -value);
-        armMotor.set(-value);
-      }));
-
-  private static double armOffset = 0.61;
+          value -> {
+            SmartDashboard.putNumber("Grabber Voltage", -value);
+            armMotor.set(-value);
+          }));
 
   public Grabber() {
     grabController.enable();

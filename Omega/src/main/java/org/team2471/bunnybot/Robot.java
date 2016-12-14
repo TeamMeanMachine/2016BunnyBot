@@ -1,13 +1,11 @@
 package org.team2471.bunnybot;
 
-import org.team2471.bunnybot.commandgroups.IntakeCommandGroup;
 import org.team2471.bunnybot.subsystems.DriveTrain;
 import org.team2471.bunnybot.subsystems.Grabber;
 import org.team2471.bunnybot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -23,12 +21,9 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putNumber("Arm Intake Angle", 205);
 
     System.out.println(new Joystick(0).getButtonCount());
-//    shooter = new Shooter();
+    shooter = new Shooter();
     driveTrain = new DriveTrain();
     grabber = new Grabber();
-
-    // temporary hack must die
-//    new JoystickButton(new Joystick(0), 6).whileHeld(new IntakeCommandGroup());
   }
 
   @Override

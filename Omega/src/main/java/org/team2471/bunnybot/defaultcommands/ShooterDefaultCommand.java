@@ -1,16 +1,15 @@
 package org.team2471.bunnybot.defaultcommands;
 
+import org.team2471.bunnybot.subsystems.Shooter;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 import static org.team2471.bunnybot.IOMap.shootButton;
+import static org.team2471.bunnybot.IOMap.tiltAxis;
 import static org.team2471.bunnybot.IOMap.turretXAxis;
-import static org.team2471.bunnybot.IOMap.turretYAxis;
 import static org.team2471.bunnybot.Robot.shooter;
 
-//import static org.team2471.bunnybot.IOMap.tiltAxis;
-
 public class ShooterDefaultCommand extends Command {
-
   public ShooterDefaultCommand() {
     requires(shooter);
   }
@@ -22,10 +21,13 @@ public class ShooterDefaultCommand extends Command {
 
   @Override
   protected void execute() {
-    double angle = Math.toDegrees(Math.atan2(turretXAxis.get(), turretYAxis.get()));
-    shooter.setAngle(angle);
+    shooter.setPan(turretXAxis.get());
 
-//    shooter.setTilt(tiltAxis.get() * 50);
+    double tiltRange = Shooter.UPPER_TILT_LIMIT - Shooter.LOWER_TILT_LIMIT;
+    double tiltCenterpoint = (Shooter.UPPER_TILT_LIMIT + Shooter.LOWER_TILT_LIMIT) / 2;
+    double tiltAngle = tiltAxis.get() * tiltRange / 2 + tiltCenterpoint;
+
+    shooter.setTilt(tiltAngle);
 
     if (shootButton.get()) {
       shooter.enableShooting();

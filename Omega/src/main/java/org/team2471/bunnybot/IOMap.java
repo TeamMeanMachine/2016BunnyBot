@@ -7,7 +7,6 @@ import org.team2471.frc.lib.control.DriveAxis;
 import org.team2471.frc.lib.control.DriveButton;
 import org.team2471.frc.lib.control.DriveController;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class IOMap {
@@ -43,6 +42,5 @@ public class IOMap {
       .withDeadband(0.1)
       .withInvert();
 
-  public static final DriveButton grabberIntakeButton = coController.getButton(3);
-  public static final DriveButton grabberSpitButton = coController.getButton(4);
+  public static final DriveAxis tiltAxis = coController.getAxis(3);
 }
