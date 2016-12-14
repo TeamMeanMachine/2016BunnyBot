@@ -14,8 +14,12 @@ public class Shooter extends Subsystem {
 
   }
 
+  @Override
+  protected void initDefaultCommand() {
+  }
+
   public void shoot() {
-    shooterMotor.set(.5);
+    shooterMotor.set(-.8);
   }
   public void stop() {
     shooterMotor.set(0);

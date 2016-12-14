@@ -4,6 +4,8 @@ import org.team2471.bunnybot.commands.ArmInCanCommand;
 import org.team2471.bunnybot.commands.ReadyToSpitCommand;
 import org.team2471.bunnybot.commands.SpitCommand;
 import org.team2471.bunnybot.commands.SuckCommand;
+import commands.ShooterCommand;
+
 import org.team2471.frc.lib.control.DriveAxis;
 import org.team2471.frc.lib.control.DriveController;
 
@@ -15,6 +17,12 @@ public class IOMap {
           .withRunCommandOnButtonPressEvent(0, new ArmInCanCommand())
           .withRunCommandWhileButtonHoldEvent(5, new SuckCommand())
           .withRunCommandWhileButtonHoldEvent(4, new SpitCommand());
+  public IOMap() {
+    driverStick = new Joystick(0);
+    fireButton = new JoystickButton(driverStick,6);
+    fireButton.whenPressed(new ShooterCommand());
+  }
+  private static final DriveController mainController = new DriveController(0);
 
   public static final DriveAxis throttleAxis = driveController.getAxis(1)
       .withInvert()

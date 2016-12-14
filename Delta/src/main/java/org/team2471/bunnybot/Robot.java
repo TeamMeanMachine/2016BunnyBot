@@ -22,10 +22,12 @@ public class Robot extends IterativeRobot {
 
 //  PIDController shoulderController;
 //  PIDController elbowController;
+  public static IOMap ioMap;
 
   @Override
   public void robotInit() {
     driveTrain = new DriveTrain();
+    shooter = new Shooter();
     //shooter = new Shooter();
     arm = new Arm();
 
@@ -33,6 +35,8 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void teleopInit() {
+    shooter = new Shooter();
+    ioMap = new IOMap();
   }
 
   @Override
