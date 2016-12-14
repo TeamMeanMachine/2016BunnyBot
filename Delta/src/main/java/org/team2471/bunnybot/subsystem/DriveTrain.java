@@ -32,27 +32,26 @@ public class DriveTrain extends Subsystem {
   }
 
   public void drive(double throttle, double turn) {
-   if (true) { //SmartDashboard.getBoolean("CheesyDrive", true)) {              // left bumper permits quick turn (in place)
-     DriveSignal driveSignal = cheesyDriveHelper.cheesyDrive(throttle, turn, IOMap.mainController.getButton(4).get() );
+    if (true) { //SmartDashboard.getBoolean("CheesyDrive", true)) {              // left bumper permits quick turn (in place)
+      DriveSignal driveSignal = cheesyDriveHelper.cheesyDrive(throttle, turn, IOMap.mainController.getButton(4).get());
 
-     rightMotor1.set(-driveSignal.rightMotor);
-     leftMotor1.set(driveSignal.leftMotor);
-   }
-   else {
-     double left = throttle + turn;
-     double right = throttle - turn;
+      rightMotor1.set(-driveSignal.rightMotor);
+      leftMotor1.set(driveSignal.leftMotor);
+    } else {
+      double left = throttle + turn;
+      double right = throttle - turn;
 
-     rightMotor1.set(-right);
-     leftMotor1.set(left);
-//   }
-    double averageSpeed = (Math.abs(leftMotor1.getSpeed()) + Math.abs(rightMotor1.getSpeed())) / 2;
-    if (averageSpeed > HIGH_SHIFTPOINT) {
-      shiftSolenoid.set(false);
+      rightMotor1.set(-right);
+      leftMotor1.set(left);
+
+      double averageSpeed = (Math.abs(leftMotor1.getSpeed()) + Math.abs(rightMotor1.getSpeed())) / 2;
+      if (averageSpeed > HIGH_SHIFTPOINT) {
+        shiftSolenoid.set(false);
+      } else if (averageSpeed < LOW_SHIFTPOINT) {
+        shiftSolenoid.set(true);
+      }
+      SmartDashboard.putNumber("Speed", averageSpeed);
     }
-    else if(averageSpeed < LOW_SHIFTPOINT) {
-      shiftSolenoid.set(true);
-    }
-    SmartDashboard.putNumber("Speed", averageSpeed);
   }
 
   private double getSpeed() {
