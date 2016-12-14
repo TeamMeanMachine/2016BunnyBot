@@ -1,14 +1,14 @@
 package org.team2471.bunnybot.subsystems;
 
+import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team2471.bunnybot.HardwareMap;
-import org.team2471.bunnybot.util.Magnepot;
-
+import org.team2471.bunnybot.defaultcommands.ArmDefaultCommand;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Arm {
+public class Arm extends Subsystem {
 
   private AnalogInput shoulderEncoder = HardwareMap.Arm.shoulderEncoder;
   private AnalogInput elbowEncoder = HardwareMap.Arm.elbowEncoder;
@@ -22,26 +22,60 @@ public class Arm {
     SmartDashboard.putData("Shoulder PID", shoulderPID);
     SmartDashboard.putData("Elbow PID", elbowPID);
   }
-  /** Sets the shoulder to a specific angle*/
-  public void setShoulderAngle(double angle) {shoulderPID.setSetpoint(angle);}
 
-  /** Sets the elbow to a specific angle */
-  public void setElbowAngle(double angle) {elbowPID.setSetpoint(angle);}
+  @Override
+  protected void initDefaultCommand() {
+    setDefaultCommand(new ArmDefaultCommand());
+  }
 
-  /** Gets the shoulder angle*/
-  public double getShoulderAngle() {return (shoulderEncoder.getVoltage()-2.5)/2.3*180;}
+  /**
+   * Sets the shoulder to a specific angle
+   */
+  public void setShoulderAngle(double angle) {
+    shoulderPID.setSetpoint(angle);
+  }
 
-  /** Gets the elbow angle*/
-  public double getElbowAngle() {return (elbowEncoder.getVoltage()-2.5)/2.3*180;}
+  /**
+   * Sets the elbow to a specific angle
+   */
+  public void setElbowAngle(double angle) {
+    elbowPID.setSetpoint(angle);
+  }
 
-  /** Sucks the bunny in*/
-  public void suckIn() {bunnySucker.set(1);}
+  /**
+   * Gets the shoulder angle
+   */
+  public double getShoulderAngle() {
+    return (shoulderEncoder.getVoltage() - 2.5) / 2.3 * 180;
+  }
 
-  /** Spits the bunny out*/
-  public void spitOut() {bunnySucker.set(-1);}
+  /**
+   * Gets the elbow angle
+   */
+  public double getElbowAngle() {
+    return (elbowEncoder.getVoltage() - 2.5) / 2.3 * 180;
+  }
 
-  /** Stops the intake*/
-  public void stopIntake() {bunnySucker.set(0);}
+  /**
+   * Sucks the bunny in
+   */
+  public void suckIn() {
+    bunnySucker.set(1);
+  }
+
+  /**
+   * Spits the bunny out
+   */
+  public void spitOut() {
+    bunnySucker.set(-1);
+  }
+
+  /**
+   * Stops the intake
+   */
+  public void stopIntake() {
+    bunnySucker.set(0);
+  }
 
 
 }

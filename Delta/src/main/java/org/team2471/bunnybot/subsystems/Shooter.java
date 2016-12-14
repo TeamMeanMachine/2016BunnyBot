@@ -1,8 +1,7 @@
 package org.team2471.bunnybot.subsystems;
 
-import defaultcommands.ShooterDefaultCommand;
+import org.team2471.bunnybot.defaultcommands.ShooterDefaultCommand;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import org.team2471.bunnybot.Robot;
 
 import static org.team2471.bunnybot.HardwareMap.Shooter.*;
 
@@ -12,6 +11,7 @@ import static org.team2471.bunnybot.HardwareMap.Shooter.*;
 public class Shooter extends Subsystem {
 
   public Shooter() {
+
   }
 
   public void shoot() {

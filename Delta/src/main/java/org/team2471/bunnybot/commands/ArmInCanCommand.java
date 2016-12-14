@@ -5,6 +5,7 @@ import javafx.animation.Animation;
 import org.team2471.bunnybot.subsystems.Arm;
 import org.team2471.frc.lib.motion_profiling.*;
 import static org.team2471.bunnybot.HardwareMap.Arm.*;
+import static org.team2471.bunnybot.Robot.arm;
 
 public class ArmInCanCommand extends PlayAnimationCommand {
 
@@ -15,14 +16,15 @@ public class ArmInCanCommand extends PlayAnimationCommand {
   PIDController elbowController;
 
   public ArmInCanCommand() {
-
-    // requires( Arm );
+    requires( arm );
 
     animation = new MotionProfileAnimation();
-    setAnimation( animation );
+    setAnimation(animation);
 
-    shoulderController = new PIDController( 1.0, 0.0, 0.0, shoulderEncoder, shoulderMotor );
-    elbowController = new PIDController( 1.0, 0.0, 0.0, elbowEncoder, elbowMotor );
+    shoulderController = new PIDController( -0.04, -0.0, -0.01, shoulderEncoder, shoulderMotor );
+    elbowController = new PIDController( -0.04, -0.0, -0.01, elbowEncoder, elbowMotor );
+    shoulderController.setAbsoluteTolerance(2.0);
+    elbowController.setAbsoluteTolerance(2.0);
 
     shoulderCurve = new MotionProfileCurve( shoulderController );
     elbowCurve = new MotionProfileCurve( elbowController );
@@ -30,12 +32,12 @@ public class ArmInCanCommand extends PlayAnimationCommand {
     animation.addMotionProfileCurve( shoulderCurve );
     animation.addMotionProfileCurve( elbowCurve );
 
-    shoulderCurve.storeValue( 0.0, 0.0 );
-    shoulderCurve.storeValue( 1.5, 100.0 );
-    shoulderCurve.storeValue( 3.0, 80.0 );
+    shoulderCurve.storeValue( 0.0, 26);
+    shoulderCurve.storeValue( 1.5, -13 );
+    shoulderCurve.storeValue( 3.0, -32 );
 
-    elbowCurve.storeValue( 0.0, 0.0 );
-    elbowCurve.storeValue( 1.5, 60.0 );
-    elbowCurve.storeValue( 3.0, 80.0 );
+    elbowCurve.storeValue( 0.0, -63 );
+    elbowCurve.storeValue( 1.5, -84 );
+    elbowCurve.storeValue( 3.0, -91 );
   }
 }

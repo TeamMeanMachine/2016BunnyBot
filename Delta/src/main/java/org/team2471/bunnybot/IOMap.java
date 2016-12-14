@@ -1,13 +1,19 @@
 package org.team2471.bunnybot;
 
+import org.team2471.bunnybot.commands.ArmInCanCommand;
 import org.team2471.bunnybot.commands.ReadyToSpitCommand;
+import org.team2471.bunnybot.commands.SpitCommand;
+import org.team2471.bunnybot.commands.SuckCommand;
 import org.team2471.frc.lib.control.DriveAxis;
 import org.team2471.frc.lib.control.DriveController;
 
 public class IOMap {
-  private static final DriveController driveController = new DriveController(0)
-          .withRunCommandOnButtonPressEvent(1, new ReadyToSpitCommand());
-  private static final DriveController coPilotController = new DriveController(0);
+  private static final DriveController driveController = new DriveController(0);
+  private static final DriveController coPilotController = new DriveController(0)
+          .withRunCommandOnButtonPressEvent(3, new ReadyToSpitCommand())
+          .withRunCommandOnButtonPressEvent(0, new ArmInCanCommand())
+          .withRunCommandWhileButtonHoldEvent(5, new SuckCommand())
+          .withRunCommandWhileButtonHoldEvent(4, new SpitCommand());
 
   public static final DriveAxis shoulderAxis = coPilotController.getAxis(1);
   public static final DriveAxis elbowAxis = coPilotController.getAxis(5);

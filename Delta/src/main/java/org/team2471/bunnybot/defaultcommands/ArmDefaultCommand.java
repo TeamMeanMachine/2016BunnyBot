@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ArmDefaultCommand extends Command{
 private Arm arm = Robot.arm;
 
+  public ArmDefaultCommand() {
+    requires(arm);
+  }
   @Override
   protected void initialize() {
 

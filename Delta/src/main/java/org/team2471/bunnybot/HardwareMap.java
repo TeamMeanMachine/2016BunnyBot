@@ -11,7 +11,7 @@ public class HardwareMap {
     public static final Magnepot elbowEncoder = new Magnepot(3);
     public static final CANTalon shoulderMotor = new CANTalon(3);
     public static final CANTalon elbowMotor = new CANTalon(9);
-    public static final CANTalon bunnySucker = new CANTalon(5);
+    public static final CANTalon bunnySucker = new CANTalon(4);
   }
 
   public static final class Drivetrain {
