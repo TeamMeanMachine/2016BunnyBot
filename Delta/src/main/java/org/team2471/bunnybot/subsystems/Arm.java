@@ -3,7 +3,6 @@ package org.team2471.bunnybot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team2471.bunnybot.HardwareMap;
 import org.team2471.bunnybot.defaultcommands.ArmDefaultCommand;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

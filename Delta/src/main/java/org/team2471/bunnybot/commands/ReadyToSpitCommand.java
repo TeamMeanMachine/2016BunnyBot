@@ -15,10 +15,15 @@ public class ReadyToSpitCommand extends PlayAnimationCommand{
   MotionProfileCurve shoulderCurve;
   MotionProfileCurve elbowCurve;
 
-  public ReadyToSpitCommand( double speed ) {
+  public ReadyToSpitCommand() {
     requires(arm);
 
-    setSpeed( speed );
+    if (arm.shoulderController.getSetpoint() > 40) {
+      setSpeed(1.0);
+    }
+    else {
+      setSpeed(-1.0);
+    }
     animation = new MotionProfileAnimation();
     setAnimation(animation);
 

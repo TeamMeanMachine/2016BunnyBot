@@ -1,9 +1,6 @@
 package org.team2471.bunnybot;
 
-import org.team2471.bunnybot.commands.ArmInCanCommand;
-import org.team2471.bunnybot.commands.ReadyToSpitCommand;
-import org.team2471.bunnybot.commands.SpitCommand;
-import org.team2471.bunnybot.commands.SuckCommand;
+import org.team2471.bunnybot.commands.*;
 import org.team2471.frc.lib.control.DriveAxis;
 import org.team2471.frc.lib.control.DriveController;
 //import commands.ShooterCommand;

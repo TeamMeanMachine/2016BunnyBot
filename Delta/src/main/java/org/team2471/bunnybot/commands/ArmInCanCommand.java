@@ -13,11 +13,16 @@ public class ArmInCanCommand extends PlayAnimationCommand {
   MotionProfileCurve shoulderCurve;
   MotionProfileCurve elbowCurve;
 
-  public ArmInCanCommand( double speed ) {
+  public ArmInCanCommand() {
 
     requires( arm );
 
-    setSpeed( speed );
+    if (arm.shoulderController.getSetpoint() > 0) {
+      setSpeed(1.0);
+    }
+    else {
+      setSpeed(-1.0);
+    }
     animation = new MotionProfileAnimation();
     setAnimation(animation);
 
