@@ -4,9 +4,6 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import static org.team2471.bunnybot.Robot.arm;
 
-/**
- * Created by Bob on 12/13/2016.
- */
 public class SpitCommand extends Command{
 
   public SpitCommand() {
