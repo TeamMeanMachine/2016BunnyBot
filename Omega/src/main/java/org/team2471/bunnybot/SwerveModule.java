@@ -20,7 +20,7 @@ public class SwerveModule {
     this.driveMotor = driveMotor;
     this.steerEncoder = steerEncoder;
     this.position = position;
-    steerController = new PIDController ( 0.01, 0, 0.01, steerEncoder, steerMotor);
+    steerController = new PIDController ( -0.01, -0, -0.01, steerEncoder, steerMotor);
     steerController.enable();
     steerController.setInputRange(-180, 180);
     steerController.setContinuous();
