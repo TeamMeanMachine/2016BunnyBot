@@ -1,4 +1,5 @@
 package org.team2471.bunnybot;
+import org.team2471.frc.lib.sensors.Magnepot;
 import org.team2471.frc.lib.vector.Vector2;
 
 import edu.wpi.first.wpilibj.*;
@@ -7,37 +8,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SwerveModule {
   private final SpeedController steerMotor;
   private final SpeedController driveMotor;
-  private final AnalogInput steerEncoder;
+  private final PIDSource steerEncoder;
   private final PIDController steerController;
   private final Vector2 position;
 
   private double offset = 0;
   private double power = 0;
 
-  private final PIDSource steerSource = new PIDSource() {
-    @Override
-    public void setPIDSourceType(PIDSourceType pidSource) {
-
-    }
-
-    @Override
-    public PIDSourceType getPIDSourceType() {
-      return PIDSourceType.kDisplacement;
-    }
-
-    @Override
-    public double pidGet() {
-      SmartDashboard.putNumber("steer error", (steerEncoder.getVoltage()-2.6)/2.4*180);
-      return -(steerEncoder.getVoltage()-2.6)/2.4*180;
-    }
-  };
-
-  public SwerveModule(SpeedController driveMotor, SpeedController steerMotor, AnalogInput steerEncoder, Vector2 position) {
+  public SwerveModule(SpeedController driveMotor, SpeedController steerMotor, PIDSource steerEncoder, Vector2 position) {
     this.steerMotor = steerMotor;
     this.driveMotor = driveMotor;
     this.steerEncoder = steerEncoder;
     this.position = position;
-    steerController = new PIDController ( 0.01, 0, 0.01, steerSource, steerMotor);
+    steerController = new PIDController ( 0.01, 0, 0.01, steerEncoder, steerMotor);
     steerController.enable();
     steerController.setInputRange(-180, 180);
     steerController.setContinuous();

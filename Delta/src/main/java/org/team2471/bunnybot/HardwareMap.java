@@ -2,7 +2,7 @@ package org.team2471.bunnybot;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Solenoid;
-import org.team2471.bunnybot.util.Magnepot;
+import org.team2471.frc.lib.sensors.Magnepot;
 
 public class HardwareMap {
 

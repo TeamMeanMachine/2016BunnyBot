@@ -2,11 +2,10 @@ package org.team2471.bunnybot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team2471.bunnybot.HardwareMap;
-import org.team2471.bunnybot.defaultcommands.ArmDefaultCommand;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.team2471.bunnybot.util.Magnepot;
+import org.team2471.frc.lib.sensors.Magnepot;
 
 public class Arm extends Subsystem {
 
@@ -28,7 +27,6 @@ public class Arm extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {
-    setDefaultCommand(new ArmDefaultCommand());
   }
 
   /**
