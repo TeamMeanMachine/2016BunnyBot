@@ -13,16 +13,20 @@ import static org.team2471.bunnybot.IOMap.*;
 
 public class DriveTrain extends Subsystem {
   private CheesyDriveHelper cheesyDriveHelper;
-  private static final double HIGH_SHIFTPOINT = 400.0;
-  private static final double LOW_SHIFTPOINT = 325.0;
+  private static final double HIGH_SHIFTPOINT = 250.0;
+  private static final double LOW_SHIFTPOINT = 150.0;
 
   public DriveTrain() {
 
+    rightMotor1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+    rightMotor1.configEncoderCodesPerRev((int)(250 * Math.PI * 4.0 / 12));
     rightMotor2.changeControlMode(CANTalon.TalonControlMode.Follower);
     rightMotor3.changeControlMode(CANTalon.TalonControlMode.Follower);
     rightMotor2.set(rightMotor1.getDeviceID());
     rightMotor3.set(rightMotor1.getDeviceID());
 
+    leftMotor1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+    leftMotor1.configEncoderCodesPerRev((int)(250 * Math.PI * 4.0 / 12));
     leftMotor2.changeControlMode(CANTalon.TalonControlMode.Follower);
     leftMotor3.changeControlMode(CANTalon.TalonControlMode.Follower);
     leftMotor2.set(leftMotor1.getDeviceID());
@@ -48,9 +52,9 @@ public class DriveTrain extends Subsystem {
 
     double averageSpeed = getSpeed();
     if (averageSpeed > HIGH_SHIFTPOINT) {
-      shiftSolenoid.set(false);
+      shiftSolenoid.set(false);  // high gear
     } else if (averageSpeed < LOW_SHIFTPOINT) {
-      shiftSolenoid.set(true);
+     shiftSolenoid.set(true);
     }
     SmartDashboard.putNumber("Speed", averageSpeed);
   }

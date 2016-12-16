@@ -5,28 +5,34 @@ import org.team2471.bunnybot.HardwareMap;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.team2471.frc.lib.sensors.Magnepot;
+
+import org.team2471.bunnybot.defaultcommands.SpitCommand;
+import org.team2471.bunnybot.sensors.Magnepot;
+//import org.team2471.frc.lib.sensors.Magnepot;
 
 public class Arm extends Subsystem {
 
-  private Magnepot shoulderEncoder = HardwareMap.Arm.shoulderEncoder;
+  public Magnepot shoulderEncoder = HardwareMap.Arm.shoulderEncoder;
   private Magnepot elbowEncoder = HardwareMap.Arm.elbowEncoder;
   private CANTalon shoulderMotor = HardwareMap.Arm.shoulderMotor;
   private CANTalon elbowMotor = HardwareMap.Arm.elbowMotor;
   private CANTalon bunnySucker = HardwareMap.Arm.bunnySucker;
 
-  public PIDController shoulderController = new PIDController( -0.04, -0.0, -0.01, shoulderEncoder, shoulderMotor );
-  public PIDController elbowController = new PIDController( -0.04, -0.0, -0.01, elbowEncoder, elbowMotor );
+  public PIDController shoulderController;
+  public PIDController elbowController;
 
   public Arm() {
+    shoulderController = new PIDController( -0.04, -0.0, -0.01, shoulderEncoder, shoulderMotor );
+    elbowController = new PIDController( -0.04, -0.0, -0.01, elbowEncoder, elbowMotor );
+    shoulderController.setSetpoint(51.0);
+    elbowController.setSetpoint(-70.0);
+    shoulderController.enable();
+    elbowController.enable();
+
     SmartDashboard.putData("Shoulder PID", shoulderController);
     SmartDashboard.putData("Elbow PID", elbowController);
-    shoulderController.setAbsoluteTolerance(2.0);
-    elbowController.setAbsoluteTolerance(2.0);
-  }
-
-  @Override
-  protected void initDefaultCommand() {
+    shoulderController.setAbsoluteTolerance(10.0);
+    elbowController.setAbsoluteTolerance(10.0);
   }
 
   /**
@@ -61,14 +67,14 @@ public class Arm extends Subsystem {
    * Sucks the bunny in
    */
   public void suckIn() {
-    bunnySucker.set(1);
+    bunnySucker.set(-1);
   }
 
   /**
    * Spits the bunny out
    */
-  public void spitOut() {
-    bunnySucker.set(-1);
+  public void spitOut( double power ) {
+    bunnySucker.set( power );
   }
 
   /**
@@ -78,5 +84,8 @@ public class Arm extends Subsystem {
     bunnySucker.set(0);
   }
 
-
+  @Override
+  protected void initDefaultCommand() {
+    setDefaultCommand(new SpitCommand());
+  }
 }

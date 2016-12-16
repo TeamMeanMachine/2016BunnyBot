@@ -1,5 +1,6 @@
 package org.team2471.bunnybot.commands;
 
+import org.team2471.bunnybot.IOMap;
 import org.team2471.frc.lib.motion_profiling.MotionProfileAnimation;
 import org.team2471.frc.lib.motion_profiling.MotionProfileCurve;
 import org.team2471.frc.lib.motion_profiling.PlayAnimationCommand;
@@ -16,10 +17,12 @@ public class IntakeCommand extends PlayAnimationCommand {
   MotionProfileCurve canShoulderCurve;
   MotionProfileCurve canElbowCurve;
 
+  static MotionProfileAnimation previousAnimation;
+
   public IntakeCommand(double speed ) {
     requires(arm);
 
-    // ground pickup groundAnimation
+    // ground pickup Animation
     setSpeed( speed );
     groundAnimation = new MotionProfileAnimation();
     groundShoulderCurve = new MotionProfileCurve( arm.shoulderController );
@@ -28,12 +31,13 @@ public class IntakeCommand extends PlayAnimationCommand {
     groundAnimation.addMotionProfileCurve(groundElbowCurve);
 
     groundShoulderCurve.storeValue( 0.0, 51.0 );
-    groundShoulderCurve.storeValue( 1.0, 51.0 );
+    groundShoulderCurve.storeValue( 0.25, 51.0 );
+    groundShoulderCurve.storeValue( 1.0, -18.0 );
 
     groundElbowCurve.storeValue( 0.0, -113.0 );
-    groundElbowCurve.storeValue( 1.0, -113.0 );
+    groundElbowCurve.storeValue( 0.5, -100.0 );
 
-    // can pickup groundAnimation
+    // can pickup Animation
     canAnimation = new MotionProfileAnimation();
     canShoulderCurve = new MotionProfileCurve( arm.shoulderController );
     canElbowCurve = new MotionProfileCurve( arm.elbowController );
@@ -41,21 +45,29 @@ public class IntakeCommand extends PlayAnimationCommand {
     canAnimation.addMotionProfileCurve(canElbowCurve);
 
     canShoulderCurve.storeValue( 0.0, 26);
-    canShoulderCurve.storeValue( 1.5, -13 );
-    canShoulderCurve.storeValue( 3.0, -32 );
+    canShoulderCurve.storeValue( 0.75, -13 );
+    canShoulderCurve.storeValue( 1.25, -32 );
 
     canElbowCurve.storeValue( 0.0, -63 );
-    canElbowCurve.storeValue( 1.5, -84 );
-    canElbowCurve.storeValue( 3.0, -91 );
+    canElbowCurve.storeValue( 0.75, -84 );
+    canElbowCurve.storeValue( 1.25, -91 );
   }
 
   @Override
   protected void initialize() {
-    if (arm.shoulderController.getSetpoint() > 40) {
-      setAnimation( groundAnimation );
+    if (getSpeed()>0)  // running forward (starting intake)
+    {
+      if (arm.shoulderController.getSetpoint() > 40) {  // in the low position
+        setAnimation( groundAnimation );
+        previousAnimation = groundAnimation;
+      }
+      else {
+        setAnimation( canAnimation );  // in the can position
+        previousAnimation = canAnimation;
+      }
     }
     else {
-      setAnimation( canAnimation );
+      setAnimation( previousAnimation );
     }
 
     super.initialize();
@@ -66,7 +78,12 @@ public class IntakeCommand extends PlayAnimationCommand {
 
   @Override
   protected boolean isFinished() {
-    return false;
+    if (getSpeed() > 0) {  // running Animation forward
+      return false;  // when button is released the scheduler will interrupt us
+    }
+    else {  // on button release, play animation to the end.
+      return super.isFinished();
+    }
   }
 
   @Override

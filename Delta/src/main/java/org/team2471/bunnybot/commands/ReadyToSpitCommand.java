@@ -1,5 +1,6 @@
 package org.team2471.bunnybot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team2471.frc.lib.motion_profiling.MotionProfileAnimation;
 import org.team2471.frc.lib.motion_profiling.MotionProfileCurve;
 import org.team2471.frc.lib.motion_profiling.PlayAnimationCommand;
@@ -18,18 +19,10 @@ public class ReadyToSpitCommand extends PlayAnimationCommand{
   public ReadyToSpitCommand() {
     requires(arm);
 
-    if (arm.shoulderController.getSetpoint() > 40) {
-      setSpeed(1.0);
-    }
-    else {
-      setSpeed(-1.0);
-    }
     animation = new MotionProfileAnimation();
     setAnimation(animation);
-
     shoulderCurve = new MotionProfileCurve( arm.shoulderController );
     elbowCurve = new MotionProfileCurve( arm.elbowController );
-
     animation.addMotionProfileCurve( shoulderCurve );
     animation.addMotionProfileCurve( elbowCurve );
 
@@ -38,5 +31,16 @@ public class ReadyToSpitCommand extends PlayAnimationCommand{
 
     elbowCurve.storeValue( 0.0, -113.0 );
     elbowCurve.storeValue( 1.0, -63.0 );
+  }
+
+  @Override
+  protected void initialize() {
+    if (arm.shoulderEncoder.pidGet() > 40) {
+      setSpeed(1.0);
+    }
+    else {
+      setSpeed(-1.0);
+    }
+    System.out.println("ready to spit initialized");
   }
 }
