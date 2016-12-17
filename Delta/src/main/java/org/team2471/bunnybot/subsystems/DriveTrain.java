@@ -2,13 +2,14 @@ package org.team2471.bunnybot.subsystems;
 
 import com.team254.frc2016.CheesyDriveHelper;
 import com.team254.lib.util.DriveSignal;
-import defaultcommands.DriveTrainDefaultCommand;
+import org.team2471.bunnybot.defaultcommands.DriveTrainDefaultCommand;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team2471.bunnybot.IOMap;
 
 import static org.team2471.bunnybot.HardwareMap.Drivetrain.*;
+import static org.team2471.bunnybot.IOMap.*;
 
 public class DriveTrain extends Subsystem {
   private CheesyDriveHelper cheesyDriveHelper;
@@ -17,7 +18,6 @@ public class DriveTrain extends Subsystem {
 
   public DriveTrain() {
 
-    //rightMotor1.reverseOutput(true);
     rightMotor2.changeControlMode(CANTalon.TalonControlMode.Follower);
     rightMotor3.changeControlMode(CANTalon.TalonControlMode.Follower);
     rightMotor2.set(rightMotor1.getDeviceID());
@@ -31,35 +31,32 @@ public class DriveTrain extends Subsystem {
     cheesyDriveHelper = new CheesyDriveHelper();
   }
 
-  public void drive(double throttle, double turn, boolean cheesyDrive) {
-    if (cheesyDrive) { //SmartDashboard.getBoolean("CheesyDrive", true)) {              // left bumper permits quick turn (in place)
-      DriveSignal driveSignal = cheesyDriveHelper.cheesyDrive(throttle, turn, IOMap.mainController.getButton(4).get());
+  public void drive(double throttle, double turn) {
+    if (SmartDashboard.getBoolean("CheesyDrive", true)) {              // left bumper permits quick turn (in place)
+      DriveSignal driveSignal = cheesyDriveHelper.cheesyDrive(throttle, turn, driveController.getButton(4).get());  // is there a way to declare a button in IO, so that all the constants remain there.
 
       rightMotor1.set(-driveSignal.rightMotor);
       leftMotor1.set(driveSignal.leftMotor);
-    } else {
+    }
+    else {
       double left = throttle + turn;
       double right = throttle - turn;
 
       rightMotor1.set(-right);
       leftMotor1.set(left);
-
-      double averageSpeed = (Math.abs(leftMotor1.getSpeed()) + Math.abs(rightMotor1.getSpeed())) / 2;
-      if (averageSpeed > HIGH_SHIFTPOINT) {
-        shiftSolenoid.set(false);
-      } else if (averageSpeed < LOW_SHIFTPOINT) {
-        shiftSolenoid.set(true);
-      }
-      SmartDashboard.putNumber("Speed", averageSpeed);
     }
-  }
 
-  public void drive(double throttle, double turn) {
-    drive(throttle, turn, false);
+    double averageSpeed = getSpeed();
+    if (averageSpeed > HIGH_SHIFTPOINT) {
+      shiftSolenoid.set(false);
+    } else if (averageSpeed < LOW_SHIFTPOINT) {
+      shiftSolenoid.set(true);
+    }
+    SmartDashboard.putNumber("Speed", averageSpeed);
   }
 
   private double getSpeed() {
-    return ( leftMotor1.getSpeed() + rightMotor1.getSpeed() ) / 2.0;
+    return (Math.abs(leftMotor1.getSpeed()) + Math.abs(rightMotor1.getSpeed())) / 2;
   }
   
   @Override
