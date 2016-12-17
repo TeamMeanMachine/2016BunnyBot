@@ -19,7 +19,7 @@ public class DriveTrainDefaultCommand extends Command {
 
   @Override
   protected void execute() {
-    driveTrain.drive(IOMap.throttleAxis.get(), IOMap.turnAxis.get(), IOMap.noCheesyDriveButton.get());
+    driveTrain.drive(IOMap.throttleAxis.get(), IOMap.turnAxis.get());
   }
 
   @Override

@@ -1,4 +1,4 @@
-package org.team2471.bunnybot.util;
+package org.team2471.bunnybot.sensors;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 

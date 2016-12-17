@@ -1,26 +1,24 @@
-package org.team2471.bunnybot.commands;
+package org.team2471.bunnybot.defaultcommands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.team2471.bunnybot.HardwareMap;
+import org.team2471.bunnybot.IOMap;
 
 import static org.team2471.bunnybot.Robot.arm;
 
-/**
- * Created by Bob on 12/13/2016.
- */
-public class SuckCommand extends Command {
+public class SpitCommand extends Command {
 
-  public SuckCommand() {
+  public SpitCommand() {
     requires(arm);
   }
 
   @Override
   protected void initialize() {
-
   }
 
   @Override
   protected void execute() {
-    arm.suckIn();
+    arm.spitOut( IOMap.coPilotController.getAxis(3).get() * 0.8 );
   }
 
   @Override

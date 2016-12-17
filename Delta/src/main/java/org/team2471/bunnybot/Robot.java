@@ -34,6 +34,10 @@ public class Robot extends IterativeRobot {
   }
 
   @Override
+  public void disabledInit() {
+  }
+
+  @Override
   public void disabledPeriodic() {
     SmartDashboard.putNumber("Elbow Angle", arm.getElbowAngle());
     SmartDashboard.putNumber("Shoulder Angle", arm.getShoulderAngle());
