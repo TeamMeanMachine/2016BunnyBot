@@ -1,14 +1,10 @@
 package org.team2471.bunnybot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team2471.frc.lib.motion_profiling.MotionProfileAnimation;
 import org.team2471.frc.lib.motion_profiling.MotionProfileCurve;
 import org.team2471.frc.lib.motion_profiling.PlayAnimationCommand;
-import static org.team2471.bunnybot.HardwareMap.Arm.*;
-import static org.team2471.bunnybot.Robot.arm;
 
-import org.team2471.frc.lib.motion_profiling.*;
-import edu.wpi.first.wpilibj.PIDController;
+import static org.team2471.bunnybot.Robot.arm;
 
 public class ReadyToSpitCommand extends PlayAnimationCommand{
 

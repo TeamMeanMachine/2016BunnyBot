@@ -1,4 +1,4 @@
-package org.team2471.bunnybot.defaultcommands;
+package org.team2471.bunnybot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.team2471.bunnybot.HardwareMap;

@@ -6,9 +6,8 @@ import org.team2471.bunnybot.defaultcommands.DriveTrainDefaultCommand;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.team2471.bunnybot.IOMap;
 
-import static org.team2471.bunnybot.HardwareMap.Drivetrain.*;
+import static org.team2471.bunnybot.HardwareMap.DriveTrainMap.*;
 import static org.team2471.bunnybot.IOMap.*;
 
 public class DriveTrain extends Subsystem {
@@ -35,8 +34,8 @@ public class DriveTrain extends Subsystem {
     cheesyDriveHelper = new CheesyDriveHelper();
   }
 
-  public void drive(double throttle, double turn) {
-    if (SmartDashboard.getBoolean("CheesyDrive", true)) {              // left bumper permits quick turn (in place)
+  public void drive(double throttle, double turn, boolean cheesy) {
+    if (cheesy) {              // left bumper permits quick turn (in place)
       DriveSignal driveSignal = cheesyDriveHelper.cheesyDrive(throttle, turn, driveController.getButton(4).get());  // is there a way to declare a button in IO, so that all the constants remain there.
 
       rightMotor1.set(-driveSignal.rightMotor);
@@ -57,6 +56,10 @@ public class DriveTrain extends Subsystem {
      shiftSolenoid.set(true);
     }
     SmartDashboard.putNumber("Speed", averageSpeed);
+  }
+
+  public void drive(double throttle, double turn) {
+    drive(throttle, turn, false);
   }
 
   private double getSpeed() {

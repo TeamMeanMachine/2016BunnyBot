@@ -1,18 +1,14 @@
 package org.team2471.bunnybot;
 
 import org.team2471.bunnybot.commands.*;
-import org.team2471.bunnybot.defaultcommands.SpitCommand;
+import org.team2471.bunnybot.commands.SpitCommand;
 import org.team2471.frc.lib.control.DriveAxis;
 import org.team2471.frc.lib.control.DriveButton;
 import org.team2471.frc.lib.control.DriveController;
-//import commands.ShooterCommand;
 
 public class IOMap {
-  public IOMap() {
-  }
-
   public static final DriveController driveController = new DriveController(0)
-          .withRunCommandOnButtonPressEvent( 5, new ShooterCommand());
+          .withRunCommandOnButtonPressEvent(6, new ShooterCommand());
 
   public static final DriveController coPilotController = new DriveController(1)
           .withRunCommandOnButtonPressEvent(3, new ReadyToSpitCommand())
@@ -29,4 +25,10 @@ public class IOMap {
       .withDeadband(.2)
       .map(value -> value * 0.7)
       .withExponentialScaling(2);
+
+  public static final DriveButton noCheesyDriveButton = driveController.getButton(5);
+
+  // Make sure everything is loaded.
+  public static void init() {
+  }
 }

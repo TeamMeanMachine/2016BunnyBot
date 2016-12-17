@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import static org.team2471.bunnybot.Robot.shooter;
 
 public class ShooterCommand extends Command {
-  double startTime;
+  private double startTime;
 
   @Override
   protected void initialize() {

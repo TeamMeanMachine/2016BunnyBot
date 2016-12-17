@@ -6,17 +6,17 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.team2471.bunnybot.defaultcommands.SpitCommand;
+import org.team2471.bunnybot.commands.SpitCommand;
 import org.team2471.bunnybot.sensors.Magnepot;
 //import org.team2471.frc.lib.sensors.Magnepot;
 
 public class Arm extends Subsystem {
 
-  public Magnepot shoulderEncoder = HardwareMap.Arm.shoulderEncoder;
-  private Magnepot elbowEncoder = HardwareMap.Arm.elbowEncoder;
-  private CANTalon shoulderMotor = HardwareMap.Arm.shoulderMotor;
-  private CANTalon elbowMotor = HardwareMap.Arm.elbowMotor;
-  private CANTalon bunnySucker = HardwareMap.Arm.bunnySucker;
+  public Magnepot shoulderEncoder = HardwareMap.ArmMap.shoulderEncoder;
+  private Magnepot elbowEncoder = HardwareMap.ArmMap.elbowEncoder;
+  private CANTalon shoulderMotor = HardwareMap.ArmMap.shoulderMotor;
+  private CANTalon elbowMotor = HardwareMap.ArmMap.elbowMotor;
+  private CANTalon bunnySucker = HardwareMap.ArmMap.bunnySucker;
 
   public PIDController shoulderController;
   public PIDController elbowController;
