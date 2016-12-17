@@ -34,32 +34,37 @@ public class DriveTrain extends Subsystem {
     cheesyDriveHelper = new CheesyDriveHelper();
   }
 
-  public void drive(double throttle, double turn, boolean cheesy) {
-    if (cheesy) {              // left bumper permits quick turn (in place)
-      DriveSignal driveSignal = cheesyDriveHelper.cheesyDrive(throttle, turn, driveController.getButton(4).get());  // is there a way to declare a button in IO, so that all the constants remain there.
+  public void drive( double dThrottle, double dTurn, double cThrottle, double cTurn, boolean cheesy ) {
 
-      rightMotor1.set(-driveSignal.rightMotor);
-      leftMotor1.set(driveSignal.leftMotor);
+    // copilot (never cheesy)
+    double cLeft = cThrottle + cTurn;
+    double cRight = cThrottle - cTurn;
+
+    if (!SmartDashboard.getBoolean("Disable Cheesy Drive")) {              // left bumper permits quick turn (in place)
+      DriveSignal driveSignal = cheesyDriveHelper.cheesyDrive(dThrottle, dTurn, driveController.getButton(4).get());
+
+      rightMotor1.set(-driveSignal.rightMotor - cRight);
+      leftMotor1.set(driveSignal.leftMotor + cLeft);
     }
     else {
-      double left = throttle + turn;
-      double right = throttle - turn;
+      double dLeft = dThrottle + dTurn;
+      double dRight = dThrottle - dTurn;
 
-      rightMotor1.set(-right);
-      leftMotor1.set(left);
+      rightMotor1.set(-dRight - cRight);
+      leftMotor1.set(dLeft + cLeft);
     }
 
     double averageSpeed = getSpeed();
     if (averageSpeed > HIGH_SHIFTPOINT) {
       shiftSolenoid.set(false);  // high gear
     } else if (averageSpeed < LOW_SHIFTPOINT) {
-     shiftSolenoid.set(true);
+      shiftSolenoid.set(true);
     }
     SmartDashboard.putNumber("Speed", averageSpeed);
   }
 
   public void drive(double throttle, double turn) {
-    drive(throttle, turn, false);
+    drive(throttle, turn, 0, 0, false);
   }
 
   private double getSpeed() {

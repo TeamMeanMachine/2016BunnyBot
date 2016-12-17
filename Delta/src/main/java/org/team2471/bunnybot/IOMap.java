@@ -16,15 +16,25 @@ public class IOMap {
           .withRunCommandOnButtonReleaseEvent(5, new IntakeCommand(-1.0))
           .withRunCommandWhileButtonHoldEvent(4, new SpitCommand());
 
-  public static final DriveAxis throttleAxis = driveController.getAxis(1)
+  public static final DriveAxis driverThrottleAxis = driveController.getAxis(1)
       .withInvert()
       .withDeadband(.2)
       .withExponentialScaling(2);
 
-  public static final DriveAxis turnAxis = driveController.getAxis(4)
+  public static final DriveAxis driverTurnAxis = driveController.getAxis(4)
       .withDeadband(.2)
       .map(value -> value * 0.7)
       .withExponentialScaling(2);
+
+  public static final DriveAxis coPilotThrottleAxis = coPilotController.getAxis(1)
+          .withDeadband(.2)
+          .map(value -> value * 0.8)
+          .withExponentialScaling(2);
+
+  public static final DriveAxis coPilotTurnAxis = coPilotController.getAxis(4)
+          .withDeadband(.2)
+          .map(value -> value * 0.7)
+          .withExponentialScaling(2);
 
   public static final DriveButton noCheesyDriveButton = driveController.getButton(5);
 
