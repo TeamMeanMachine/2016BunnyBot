@@ -1,6 +1,7 @@
 package org.team2471.bunnybot;
 
 import org.team2471.frc.lib.control.DriveAxis;
+import org.team2471.frc.lib.control.DriveButton;
 import org.team2471.frc.lib.control.DriveController;
 
 public class IOMap {
@@ -14,4 +15,6 @@ public class IOMap {
       .withDeadband(.2)
       .map(value -> value * 0.7)
       .withExponentialScaling(2);
+
+  public static final DriveButton noCheesyDriveButton = mainController.getButton(4).withInvert();
 }

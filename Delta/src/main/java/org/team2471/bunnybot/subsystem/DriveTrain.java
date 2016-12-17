@@ -31,8 +31,8 @@ public class DriveTrain extends Subsystem {
     cheesyDriveHelper = new CheesyDriveHelper();
   }
 
-  public void drive(double throttle, double turn) {
-    if (true) { //SmartDashboard.getBoolean("CheesyDrive", true)) {              // left bumper permits quick turn (in place)
+  public void drive(double throttle, double turn, boolean cheesyDrive) {
+    if (cheesyDrive) { //SmartDashboard.getBoolean("CheesyDrive", true)) {              // left bumper permits quick turn (in place)
       DriveSignal driveSignal = cheesyDriveHelper.cheesyDrive(throttle, turn, IOMap.mainController.getButton(4).get());
 
       rightMotor1.set(-driveSignal.rightMotor);
@@ -52,6 +52,10 @@ public class DriveTrain extends Subsystem {
       }
       SmartDashboard.putNumber("Speed", averageSpeed);
     }
+  }
+
+  public void drive(double throttle, double turn) {
+    drive(throttle, turn, false);
   }
 
   private double getSpeed() {
