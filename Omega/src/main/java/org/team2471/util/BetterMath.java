@@ -4,7 +4,7 @@ public class BetterMath {
   public static double max(double firstNumber, double... numbers) {
     double max = firstNumber;
     for (double number : numbers) {
-      if(number > max) {
+      if (number > max) {
         max = number;
       }
     }
