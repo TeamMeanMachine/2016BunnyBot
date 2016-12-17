@@ -1,57 +1,33 @@
 package org.team2471.bunnybot.subsystems;
 
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.*;
+import org.team2471.bunnybot.HardwareMap;
 
-import static org.team2471.bunnybot.HardwareMap.GrabberMap.ARM_MOTOR_PDPSLOT;
-import static org.team2471.bunnybot.HardwareMap.GrabberMap.armEncoder;
-import static org.team2471.bunnybot.HardwareMap.GrabberMap.armMotor;
-import static org.team2471.bunnybot.HardwareMap.GrabberMap.bunnySensor;
-import static org.team2471.bunnybot.HardwareMap.GrabberMap.bunnySucker;
-import static org.team2471.bunnybot.HardwareMap.pdp;
+public class Grabber {
+  public AnalogInput armEncoder = HardwareMap.GrabberMap.armEncoder;
+  public DigitalInput bunnySensor = HardwareMap.GrabberMap.bunnySensor;
+  public CANTalon bunnySucker = HardwareMap.GrabberMap.bunnySucker;
+  public CANTalon leftJointMotor = HardwareMap.GrabberMap.leftJointMotor;
+  public CANTalon rightJointMotor = HardwareMap.GrabberMap.rightJointMotor;
+  public PIDController grabController = new PIDController(0.066667,0,0,armEncoder,leftJointMotor);
 
-public class Grabber extends PIDSubsystem {
-  private static final double ARM_MAX_CURRENT = 30;
-  private static double armOffset = 0.58;
-
-  public Grabber() {
-    super(0.025, 0, 0);
-    super.enable();
-    SmartDashboard.putData("GrabController", super.getPIDController());
+  Grabber() {
+    rightJointMotor.changeControlMode(CANTalon.TalonControlMode.Follower);
+    rightJointMotor.set(leftJointMotor.getDeviceID());
   }
-
-  @Override
-  protected void initDefaultCommand() {
-  }
-
-  @Override
-  protected double returnPIDInput() {
-    return getAngle();
-  }
-
-  @Override
-  protected void usePIDOutput(double value) {
-    armMotor.set(-value);
-  }
-
   /**
    * Set the arm angle to the desired position.
    *
    * @param angle target angle
    */
-  public void setSetpoint(double angle) {
-    super.setSetpoint(angle);
+  public void setAngle(double angle) {
+    grabController.setSetpoint(angle);
   }
 
-  /**
-   * @return the current angle of the grabber in degrees.
-   */
+
   public double getAngle() {
-    return (armEncoder.getVoltage() - 0.2) / 4.6 * 360 - (armOffset - 0.2) / 4.6 * 360; // inverted because mechanical
+    return 0;
   }
-
   /**
    * Rotates the intake motors inward.
    */
@@ -63,7 +39,7 @@ public class Grabber extends PIDSubsystem {
    * Rotates the intake moters outward.
    */
   public void spitOut() {
-    bunnySucker.set(-0.8);
+    bunnySucker.set(-1);
   }
 
   /**
@@ -78,19 +54,5 @@ public class Grabber extends PIDSubsystem {
    */
   public boolean hasBunny() {
     return bunnySensor.get();
-  }
-
-  private void set(double power) {
-    if (pdp.getCurrent(ARM_MOTOR_PDPSLOT) > ARM_MAX_CURRENT) {
-      armMotor.set(0);
-    }
-    armMotor.set(power);
-  }
-
-  /**
-   * Zeroes the arm encoder.
-   */
-  public void zero() {
-    armOffset = armEncoder.getVoltage();
   }
 }
