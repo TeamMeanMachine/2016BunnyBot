@@ -28,18 +28,18 @@ public class SwerveModule {
 
     @Override
     public double pidGet() {
-      SmartDashboard.putNumber("steer error", (steerEncoder.getVoltage() - 2.6) / 2.4 * 180);
-      return -(steerEncoder.getVoltage() - 2.6) / 2.4 * 180;
+      return -((steerEncoder.getVoltage() - offset) - 2.5) / 2.3 * 180;
     }
   };
   private double offset = 0;
   private double power = 0;
 
-  public SwerveModule(SpeedController driveMotor, SpeedController steerMotor, AnalogInput steerEncoder, Vector2 position) {
+  public SwerveModule(SpeedController driveMotor, SpeedController steerMotor, AnalogInput steerEncoder, Vector2 position, double offset) {
     this.steerMotor = steerMotor;
     this.driveMotor = driveMotor;
     this.steerEncoder = steerEncoder;
     this.position = position;
+    this.offset = offset;
     steerController = new PIDController(0.01, 0, 0.01, steerSource, steerMotor);
     steerController.enable();
     steerController.setInputRange(-180, 180);

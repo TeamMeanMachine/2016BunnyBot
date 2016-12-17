@@ -2,7 +2,6 @@ package org.team2471.bunnybot.defaultcommands;
 
 import org.team2471.bunnybot.subsystems.Shooter;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 import static org.team2471.bunnybot.IOMap.shootButton;
@@ -17,6 +16,10 @@ public class ShooterDefaultCommand extends Command {
 
   @Override
   protected void initialize() {
+  }
+
+  @Override
+  protected void execute() {
     double axis = turretXAxis.get();
 
     shooter.setPan(axis);
@@ -33,10 +36,6 @@ public class ShooterDefaultCommand extends Command {
     } else {
       shooter.disableShooting();
     }
-  }
-
-  @Override
-  protected void execute() {
   }
 
   @Override

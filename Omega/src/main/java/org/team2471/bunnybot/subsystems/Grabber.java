@@ -63,7 +63,7 @@ public class Grabber extends PIDSubsystem {
    * Rotates the intake moters outward.
    */
   public void spitOut() {
-    bunnySucker.set(-1);
+    bunnySucker.set(-0.8);
   }
 
   /**

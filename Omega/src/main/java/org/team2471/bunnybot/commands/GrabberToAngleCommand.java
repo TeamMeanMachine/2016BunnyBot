@@ -22,8 +22,6 @@ public class GrabberToAngleCommand extends Command {
 
   @Override
   protected void execute() {
-    System.out.println("Delta: " + (grabber.getSetpoint() - grabber.getAngle()) + ". Voltage: " + HardwareMap.GrabberMap.armMotor.get());
-
   }
 
   @Override

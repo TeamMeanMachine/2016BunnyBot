@@ -16,12 +16,12 @@ public class DriveTrain extends Subsystem {
       HardwareMap.DriveTrainMap.LeftModule.forwardMotor,
       HardwareMap.DriveTrainMap.LeftModule.turnMotor,
       HardwareMap.DriveTrainMap.LeftModule.turnEncoder,
-      new Vector2(-14, 19));
+      new Vector2(-14, 19), 0.2);
   private final SwerveModule rightSwerveModule = new SwerveModule(
       HardwareMap.DriveTrainMap.RightModule.forwardMotor,
       HardwareMap.DriveTrainMap.RightModule.turnMotor,
       HardwareMap.DriveTrainMap.RightModule.turnEncoder,
-      new Vector2(14, 19));
+      new Vector2(14, 19), 4.6);
 
   private final SpeedController frontLeftMotor = HardwareMap.DriveTrainMap.frontLeftMotor;
   private final SpeedController frontRightMotor = HardwareMap.DriveTrainMap.frontRightMotor;
@@ -30,29 +30,18 @@ public class DriveTrain extends Subsystem {
 
   private final Vector2 pivot = new Vector2(0, -19);
 
-  public DriveTrain() {
-    rightSwerveModule.setOffset(15);
-    leftSwerveModule.setOffset(5);
-  }
-
   /**
    * Sets the forward speed and the swerve module target angles.
    *
    * @param throttle     speed to be set between -1 and 1 (inclusive)
    * @param steeringRate steering rate between -1 and 1 (inclusive)
+   * @param cheesyDrive  enable or disable cheezy drive
    */
-  public void drive(double throttle, double steeringRate) {
-//    if(throttle==0) {
-//      steeringRate = -steeringRate * 0.5;
-//    }
-//    else {
-//      steeringRate = -steeringRate * Math.abs(throttle);
-//    }
-//    System.out.println(throttle);
-    if (!IOMap.noCheesyDriveButton.get()) {
-      // cheezy drive
+  public void drive(double throttle, double steeringRate, boolean cheesyDrive) {
+    if (cheesyDrive) {
       steeringRate = steeringRate * throttle;
     }
+
     double leftPower = throttle + steeringRate;
     double rightPower = throttle - steeringRate;
     double maxPower = BetterMath.max(leftSwerveModule.getPower(throttle, steeringRate),
@@ -70,6 +59,16 @@ public class DriveTrain extends Subsystem {
 
     frontRightMotor.set(rightPower * factor);
     backRightMotor.set(rightPower * factor);
+  }
+
+  /**
+   * Sets the forward speed and the swerve module target angles.
+   *
+   * @param throttle     speed to be set between -1 and 1 (inclusive)
+   * @param steeringRate steering rate between -1 and 1 (inclusive)
+   */
+  public void drive(double throttle, double steeringRate) {
+    drive(throttle, steeringRate, false);
   }
 
   public Vector2 getPivot() {

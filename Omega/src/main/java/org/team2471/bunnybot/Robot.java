@@ -40,4 +40,10 @@ public class Robot extends IterativeRobot {
   @Override
   public void disabledPeriodic() {
   }
+
+  @Override
+  public void testInit() {
+    System.out.println("Left: " + HardwareMap.DriveTrainMap.LeftModule.turnEncoder.getVoltage());
+    System.out.println("Right: " + HardwareMap.DriveTrainMap.RightModule.turnEncoder.getVoltage());
+  }
 }

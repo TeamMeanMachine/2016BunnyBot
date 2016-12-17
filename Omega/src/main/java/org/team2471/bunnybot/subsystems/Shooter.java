@@ -1,6 +1,5 @@
 package org.team2471.bunnybot.subsystems;
 
-import org.team2471.bunnybot.HardwareMap;
 import org.team2471.bunnybot.defaultcommands.ShooterDefaultCommand;
 import org.team2471.util.DummySubsystem;
 
@@ -11,8 +10,6 @@ import static org.team2471.bunnybot.HardwareMap.ShooterMap.*;
 public class Shooter extends Subsystem {
   public static final double UPPER_TILT_LIMIT = 115;
   public static final double LOWER_TILT_LIMIT = 70;
-
-  public final Subsystem trigger = new DummySubsystem();
 
   public Shooter() {
   }
@@ -60,7 +57,6 @@ public class Shooter extends Subsystem {
   public void setPan(double power) {
 
     boolean atLeftLimit = !leftTurnSensor.get() && power > 0;
-    System.out.println("Left turn sensor");
 
     boolean atRightLimit = !rightTurnSensor.get() && power < 0;
     if (atLeftLimit || atRightLimit) {
@@ -68,7 +64,6 @@ public class Shooter extends Subsystem {
     }
 
     panMotor.set(power);
-    System.out.println("Pan Motor");
   }
 
 
