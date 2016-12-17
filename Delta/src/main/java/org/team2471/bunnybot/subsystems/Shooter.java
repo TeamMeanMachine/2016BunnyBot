@@ -1,6 +1,8 @@
 package org.team2471.bunnybot.subsystems;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
-import static org.team2471.bunnybot.HardwareMap.Shooter.*;
+
+import static org.team2471.bunnybot.HardwareMap.ShooterMap.shooterMotor;
 
 public class Shooter extends Subsystem {
 

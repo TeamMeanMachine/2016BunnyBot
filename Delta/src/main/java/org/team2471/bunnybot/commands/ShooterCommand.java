@@ -2,6 +2,7 @@ package org.team2471.bunnybot.commands;
 
 import edu.wpi.first.wpilibj.Utility;
 import edu.wpi.first.wpilibj.command.Command;
+
 import static org.team2471.bunnybot.Robot.shooter;
 
 public class ShooterCommand extends Command {

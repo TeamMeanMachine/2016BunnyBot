@@ -1,7 +1,6 @@
 package org.team2471.bunnybot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.team2471.bunnybot.subsystems.Arm;
 
 import static org.team2471.bunnybot.Robot.arm;
 
@@ -13,6 +12,7 @@ public class SuckCommand extends Command {
   public SuckCommand() {
     requires(arm);
   }
+
   @Override
   protected void initialize() {
 
@@ -30,7 +30,7 @@ public class SuckCommand extends Command {
 
   @Override
   protected void end() {
-  arm.stopIntake();
+    arm.stopIntake();
   }
 
   @Override

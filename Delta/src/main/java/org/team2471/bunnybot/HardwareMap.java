@@ -1,12 +1,13 @@
 package org.team2471.bunnybot;
 
+import org.team2471.bunnybot.util.Magnepot;
+
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Solenoid;
-import org.team2471.bunnybot.util.Magnepot;
 
 public class HardwareMap {
 
-  public static final class Arm {
+  public static final class ArmMap {
     public static final Magnepot shoulderEncoder = new Magnepot(2);
     public static final Magnepot elbowEncoder = new Magnepot(3);
     public static final CANTalon shoulderMotor = new CANTalon(3);
@@ -14,7 +15,7 @@ public class HardwareMap {
     public static final CANTalon bunnySucker = new CANTalon(4);
   }
 
-  public static final class Drivetrain {
+  public static final class DriveTrainMap {
     public static final CANTalon rightMotor1 = new CANTalon(15);
     public static final CANTalon rightMotor2 = new CANTalon(14);
     public static final CANTalon rightMotor3 = new CANTalon(13);
@@ -24,7 +25,7 @@ public class HardwareMap {
     public static final Solenoid shiftSolenoid = new Solenoid(0);
   }
 
-  public static final class Shooter {
+  public static final class ShooterMap {
     public static final CANTalon shooterMotor = new CANTalon(8);
   }
 }

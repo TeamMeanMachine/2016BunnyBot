@@ -4,11 +4,12 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import static org.team2471.bunnybot.Robot.arm;
 
-public class SpitCommand extends Command{
+public class SpitCommand extends Command {
 
   public SpitCommand() {
     requires(arm);
   }
+
   @Override
   protected void initialize() {
 

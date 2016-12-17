@@ -1,23 +1,23 @@
 package org.team2471.bunnybot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
 import org.team2471.bunnybot.HardwareMap;
 import org.team2471.bunnybot.defaultcommands.ArmDefaultCommand;
+import org.team2471.bunnybot.util.Magnepot;
+
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.team2471.bunnybot.util.Magnepot;
 
 public class Arm extends Subsystem {
 
-  private Magnepot shoulderEncoder = HardwareMap.Arm.shoulderEncoder;
-  private Magnepot elbowEncoder = HardwareMap.Arm.elbowEncoder;
-  private CANTalon shoulderMotor = HardwareMap.Arm.shoulderMotor;
-  private CANTalon elbowMotor = HardwareMap.Arm.elbowMotor;
-  private CANTalon bunnySucker = HardwareMap.Arm.bunnySucker;
-
-  public PIDController shoulderController = new PIDController( -0.04, -0.0, -0.01, shoulderEncoder, shoulderMotor );
-  public PIDController elbowController = new PIDController( -0.04, -0.0, -0.01, elbowEncoder, elbowMotor );
+  private Magnepot shoulderEncoder = HardwareMap.ArmMap.shoulderEncoder;
+  private Magnepot elbowEncoder = HardwareMap.ArmMap.elbowEncoder;
+  private CANTalon shoulderMotor = HardwareMap.ArmMap.shoulderMotor;
+  public PIDController shoulderController = new PIDController(-0.04, -0.0, -0.01, shoulderEncoder, shoulderMotor);
+  private CANTalon elbowMotor = HardwareMap.ArmMap.elbowMotor;
+  public PIDController elbowController = new PIDController(-0.04, -0.0, -0.01, elbowEncoder, elbowMotor);
+  private CANTalon bunnySucker = HardwareMap.ArmMap.bunnySucker;
 
   public Arm() {
     SmartDashboard.putData("Shoulder PID", shoulderController);
@@ -32,20 +32,6 @@ public class Arm extends Subsystem {
   }
 
   /**
-   * Sets the shoulder to a specific angle
-   */
-  public void setShoulderAngle(double angle) {
-    shoulderController.setSetpoint(angle);
-  }
-
-  /**
-   * Sets the elbow to a specific angle
-   */
-  public void setElbowAngle(double angle) {
-    elbowController.setSetpoint(angle);
-  }
-
-  /**
    * Gets the shoulder angle
    */
   public double getShoulderAngle() {
@@ -53,10 +39,24 @@ public class Arm extends Subsystem {
   }
 
   /**
+   * Sets the shoulder to a specific angle
+   */
+  public void setShoulderAngle(double angle) {
+    shoulderController.setSetpoint(angle);
+  }
+
+  /**
    * Gets the elbow angle
    */
   public double getElbowAngle() {
     return elbowEncoder.pidGet();
+  }
+
+  /**
+   * Sets the elbow to a specific angle
+   */
+  public void setElbowAngle(double angle) {
+    elbowController.setSetpoint(angle);
   }
 
   /**

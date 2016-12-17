@@ -5,6 +5,8 @@ package com.team254.lib.util;
  * the brake mode is enabled.
  */
 public class DriveSignal {
+  public static DriveSignal NEUTRAL = new DriveSignal(0, 0);
+  public static DriveSignal BREAK = new DriveSignal(0, 0, true);
   public double leftMotor;
   public double rightMotor;
   public boolean breakMode;
@@ -12,15 +14,11 @@ public class DriveSignal {
   public DriveSignal(double left, double right) {
     this(left, right, false);
   }
-
   public DriveSignal(double left, double right, boolean breakMode) {
     this.leftMotor = left;
     this.rightMotor = right;
     this.breakMode = breakMode;
   }
-
-  public static DriveSignal NEUTRAL = new DriveSignal(0, 0);
-  public static DriveSignal BREAK = new DriveSignal(0, 0, true);
 
   @Override
   public String toString() {
