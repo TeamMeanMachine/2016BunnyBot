@@ -1,22 +1,19 @@
 package org.team2471.bunnybot;
 
 import org.team2471.bunnybot.commands.*;
+import org.team2471.bunnybot.commands.SpitCommand;
 import org.team2471.frc.lib.control.DriveAxis;
+import org.team2471.frc.lib.control.DriveButton;
 import org.team2471.frc.lib.control.DriveController;
-//import commands.ShooterCommand;
 
 public class IOMap {
-  public IOMap() {
-  }
-
   public static final DriveController driveController = new DriveController(0)
-          .withRunCommandOnButtonPressEvent( 5, new ShooterCommand());
+          .withRunCommandOnButtonPressEvent(6, new ShooterCommand());
 
-  private static final DriveController coPilotController = new DriveController(1)
+  public static final DriveController coPilotController = new DriveController(1)
           .withRunCommandOnButtonPressEvent(3, new ReadyToSpitCommand())
-          .withRunCommandOnButtonPressEvent(0, new ArmInCanCommand())
-          .withRunCommandOnButtonPressEvent(2, new IntakePositionCommand())
-          .withRunCommandWhileButtonHoldEvent(5, new SuckCommand())
+          .withRunCommandWhileButtonHoldEvent(5, new IntakeCommand(1.0))
+          .withRunCommandOnButtonReleaseEvent(5, new IntakeCommand(-1.0))
           .withRunCommandWhileButtonHoldEvent(4, new SpitCommand());
 
   public static final DriveAxis throttleAxis = driveController.getAxis(1)
@@ -28,4 +25,10 @@ public class IOMap {
       .withDeadband(.2)
       .map(value -> value * 0.7)
       .withExponentialScaling(2);
+
+  public static final DriveButton noCheesyDriveButton = driveController.getButton(5);
+
+  // Make sure everything is loaded.
+  public static void init() {
+  }
 }

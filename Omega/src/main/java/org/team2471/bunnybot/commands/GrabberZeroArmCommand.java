@@ -1,26 +1,22 @@
 package org.team2471.bunnybot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.team2471.bunnybot.subsystems.Arm;
 
-import static org.team2471.bunnybot.Robot.arm;
+import static org.team2471.bunnybot.Robot.grabber;
 
-/**
- * Created by Bob on 12/13/2016.
- */
-public class SuckCommand extends Command {
+public class GrabberZeroArmCommand extends Command {
 
-  public SuckCommand() {
-    requires(arm);
+  public GrabberZeroArmCommand() {
+    requires(grabber);
   }
+
   @Override
   protected void initialize() {
-
   }
 
   @Override
   protected void execute() {
-    arm.suckIn();
+    grabber.setSetpoint(-15);
   }
 
   @Override
@@ -30,11 +26,10 @@ public class SuckCommand extends Command {
 
   @Override
   protected void end() {
-  arm.stopIntake();
+    grabber.zero();
   }
 
   @Override
   protected void interrupted() {
-    end();
   }
 }

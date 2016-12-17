@@ -1,7 +1,8 @@
 package org.team2471.bunnybot.defaultcommands;
 
-import edu.wpi.first.wpilibj.command.Command;
 import org.team2471.bunnybot.IOMap;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 import static org.team2471.bunnybot.Robot.driveTrain;
 
@@ -18,7 +19,7 @@ public class DriveTrainDefaultCommand extends Command {
 
   @Override
   protected void execute() {
-    driveTrain.drive(IOMap.throttleAxis.get(), IOMap.turnAxis.get());
+    driveTrain.drive(IOMap.throttleAxis.get(), IOMap.turnAxis.get(), !IOMap.noCheesyDriveButton.get());
   }
 
   @Override

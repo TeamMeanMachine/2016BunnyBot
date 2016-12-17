@@ -1,31 +1,32 @@
 package org.team2471.bunnybot.commands;
 
-import edu.wpi.first.wpilibj.Utility;
 import edu.wpi.first.wpilibj.command.Command;
 
-import static org.team2471.bunnybot.Robot.shooter;
+import static org.team2471.bunnybot.Robot.grabber;
 
-public class ShooterCommand extends Command {
-  private double startTime;
+public class GrabberIntakeCommand extends Command {
+  public GrabberIntakeCommand() {
+    requires(grabber);
+  }
 
   @Override
   protected void initialize() {
-    startTime = Utility.getFPGATime();
+    grabber.suckIn();
   }
 
   @Override
   protected void execute() {
-    shooter.shoot();
+
   }
 
   @Override
   protected boolean isFinished() {
-    return (Utility.getFPGATime() - startTime) / 1.0e6 > 0.25;
+    return false;
   }
 
   @Override
   protected void end() {
-    shooter.stop();
+    grabber.stopIntake();
   }
 
   @Override

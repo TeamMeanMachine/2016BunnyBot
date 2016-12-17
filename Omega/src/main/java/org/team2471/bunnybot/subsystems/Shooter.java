@@ -1,79 +1,22 @@
 package org.team2471.bunnybot.subsystems;
 
-import org.team2471.bunnybot.HardwareMap;
 import org.team2471.bunnybot.defaultcommands.ShooterDefaultCommand;
 import org.team2471.util.DummySubsystem;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSourceType;
-import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import static org.team2471.bunnybot.HardwareMap.ShooterMap.*;
 
 public class Shooter extends Subsystem {
-//  private final CANTalon panMotor = HardwareMap.ShooterMap.panMotor;
-//  private final SpeedController shootMotor = HardwareMap.ShooterMap.shootMotor;
-//  private final AnalogGyro shooterGyro = HardwareMap.ShooterMap.shooterGyro;
-//  private final Servo tiltMotor = HardwareMap.ShooterMap.tiltMotor;
-//  private final DigitalInput ammoSensor = HardwareMap.ShooterMap.ammoSensor;
-//  private final Solenoid flashLight = HardwareMap.ShooterMap.flashLight;
-
-  private final Talon panMotor = new Talon(3);
-  private final SpeedController shootMotor = new Talon(5);
-  private final AnalogGyro shooterGyro = new AnalogGyro(0);
-  private final Servo tiltMotor = new Servo(9);
-  private final DigitalInput ammoSensor = new DigitalInput(9);
-  private final Solenoid flashLight = new Solenoid(0);
-
-  public final Subsystem trigger = new DummySubsystem();
-
-  private final PIDController panController = new PIDController(0.01, 0, 0, new PIDSource() {
-    @Override
-    public void setPIDSourceType(PIDSourceType pidSource) {
-    }
-
-    @Override
-    public PIDSourceType getPIDSourceType() {
-      return PIDSourceType.kDisplacement;
-    }
-
-    @Override
-    public double pidGet() {
-      return getAngle();
-    }
-  }, panMotor );
+  public static final double UPPER_TILT_LIMIT = 115;
+  public static final double LOWER_TILT_LIMIT = 70;
 
   public Shooter() {
-    panController.setInputRange(-180, 180);
-    panController.setOutputRange(-1, 1);
-    panController.setContinuous(true);
-    panController.enable();
-    SmartDashboard.putData("PanController", panController);
   }
 
   @Override
   protected void initDefaultCommand() {
     setDefaultCommand(new ShooterDefaultCommand());
-  }
-
-  /**
-   * @return the current angle of the shooter
-   */
-  public double getAngle() {
-    double shooterGyroAngle = shooterGyro.getAngle();
-    System.out.println("Angle: " + shooterGyroAngle + " (" + shooterGyroAngle % 360 + ")");
-//    if (shooterGyroAngle > 0) {
-//      shooterGyroAngle += 360;
-//    }
-    return shooterGyroAngle % 360;
   }
 
 
@@ -84,7 +27,7 @@ public class Shooter extends Subsystem {
    * @return a boolean that check the completion as stated above
    */
   public boolean isReady() {
-    return ammoSensor.get();
+    return true;
   }
 
   /**
@@ -107,16 +50,24 @@ public class Shooter extends Subsystem {
   }
 
   /**
-   * Sets the target angle of the shooter
+   * Sets the power of the shooter
    *
-   * @param angle angle to be set
+   * @param power power to be set
    */
-  public void setAngle(double angle) {
-    panController.setSetpoint(angle);
+  public void setPan(double power) {
+
+    boolean atLeftLimit = !leftTurnSensor.get() && power > 0;
+
+    boolean atRightLimit = !rightTurnSensor.get() && power < 0;
+    if (atLeftLimit || atRightLimit) {
+      power = 0;
+    }
+
+    panMotor.set(power);
   }
 
 
-  public void setTilt(double angle){
+  public void setTilt(double angle) {
     tiltMotor.setAngle(angle);
   }
 
