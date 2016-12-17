@@ -3,6 +3,7 @@ package org.team2471.bunnybot;
 import org.team2471.bunnybot.commands.*;
 import org.team2471.bunnybot.defaultcommands.SpitCommand;
 import org.team2471.frc.lib.control.DriveAxis;
+import org.team2471.frc.lib.control.DriveButton;
 import org.team2471.frc.lib.control.DriveController;
 //import commands.ShooterCommand;
 
@@ -28,14 +29,4 @@ public class IOMap {
       .withDeadband(.2)
       .map(value -> value * 0.7)
       .withExponentialScaling(2);
-
-  public static final DriveAxis throttle2Axis = coPilotController.getAxis(1)
-          .withInvert()
-          .withDeadband(.2)
-          .withExponentialScaling(2);
-
-  public static final DriveAxis turn2Axis = coPilotController.getAxis(4)
-          .withDeadband(.2)
-          .map(value -> value * 0.7)
-          .withExponentialScaling(2);
 }
