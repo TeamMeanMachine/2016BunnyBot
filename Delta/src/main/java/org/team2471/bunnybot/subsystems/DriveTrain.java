@@ -34,14 +34,14 @@ public class DriveTrain extends Subsystem {
     cheesyDriveHelper = new CheesyDriveHelper();
   }
 
-  public void drive( double dThrottle, double dTurn, double cThrottle, double cTurn, boolean cheesy ) {
+  public void drive( double dThrottle, double dTurn, double cThrottle, double cTurn, boolean cheesyDrive, boolean quickTurn ) {
 
     // copilot (never cheesy)
     double cLeft = cThrottle + cTurn;
     double cRight = cThrottle - cTurn;
 
-    if (!SmartDashboard.getBoolean("Disable Cheesy Drive")) {              // left bumper permits quick turn (in place)
-      DriveSignal driveSignal = cheesyDriveHelper.cheesyDrive(dThrottle, dTurn, driveController.getButton(4).get());
+    if (cheesyDrive) {
+      DriveSignal driveSignal = cheesyDriveHelper.cheesyDrive(dThrottle, dTurn, quickTurn);  // left bumper permits quick turn (in place)
 
       rightMotor1.set(-driveSignal.rightMotor - cRight);
       leftMotor1.set(driveSignal.leftMotor + cLeft);
@@ -60,11 +60,14 @@ public class DriveTrain extends Subsystem {
     } else if (averageSpeed < LOW_SHIFTPOINT) {
       shiftSolenoid.set(true);
     }
+
     SmartDashboard.putNumber("Speed", averageSpeed);
+    SmartDashboard.putNumber("Left Distance", leftMotor1.getEncPosition());
+    SmartDashboard.putNumber("Right Distance", rightMotor1.getEncPosition());
   }
 
   public void drive(double throttle, double turn) {
-    drive(throttle, turn, 0, 0, false);
+    drive(throttle, turn, 0, 0, false, false);
   }
 
   private double getSpeed() {

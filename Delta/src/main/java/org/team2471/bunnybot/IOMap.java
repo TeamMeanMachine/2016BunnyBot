@@ -36,7 +36,7 @@ public class IOMap {
           .map(value -> value * 0.7)
           .withExponentialScaling(2);
 
-  public static final DriveButton noCheesyDriveButton = driveController.getButton(5);
+  public static final DriveButton turnInPlaceButton = driveController.getButton(4);
   public static final DriveButton driverRumbleButton = driveController.getButton(8);
   public static final DriveButton coPilotRumbleButton = coPilotController.getButton(6);
 

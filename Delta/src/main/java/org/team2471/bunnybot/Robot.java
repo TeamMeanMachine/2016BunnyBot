@@ -1,5 +1,6 @@
 package org.team2471.bunnybot;
 
+import edu.wpi.first.wpilibj.Preferences;
 import org.team2471.bunnybot.subsystems.Arm;
 import org.team2471.bunnybot.subsystems.DriveTrain;
 import org.team2471.bunnybot.subsystems.Shooter;
@@ -12,7 +13,7 @@ public class Robot extends IterativeRobot {
   public static DriveTrain driveTrain;
   public static Shooter shooter;
   public static Arm arm;
-
+  Preferences prefs = Preferences.getInstance();
 
   @Override
   public void robotInit() {
@@ -20,6 +21,7 @@ public class Robot extends IterativeRobot {
     shooter = new Shooter();
     arm = new Arm();
 
+    SmartDashboard.putBoolean("Cheesy Drive", prefs.getBoolean("Cheesy Drive", true));
     IOMap.init();
   }
 
@@ -34,6 +36,7 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void disabledInit() {
+    prefs.putBoolean("Cheesy Drive", SmartDashboard.getBoolean("Cheesy Drive", true));
   }
 
   @Override
