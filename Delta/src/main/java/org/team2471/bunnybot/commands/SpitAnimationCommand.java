@@ -24,10 +24,8 @@ public class SpitAnimationCommand extends PlayAnimationCommand {
     // floor spit Animation
     setSpeed( speed );
     lowerAnimation = new MotionProfileAnimation();
-    lowerShoulderCurve = new MotionProfileCurve( arm.shoulderController );
-    lowerElbowCurve = new MotionProfileCurve( arm.elbowController );
-    lowerAnimation.addMotionProfileCurve(lowerShoulderCurve);
-    lowerAnimation.addMotionProfileCurve(lowerElbowCurve);
+    lowerShoulderCurve = new MotionProfileCurve( arm.shoulderController, lowerAnimation );
+    lowerElbowCurve = new MotionProfileCurve( arm.elbowController, lowerAnimation );
 
     lowerShoulderCurve.storeValue( 0.0, 51.0 );
     lowerShoulderCurve.storeValue( 0.5, 44.0 );
@@ -41,10 +39,8 @@ public class SpitAnimationCommand extends PlayAnimationCommand {
 
     // spit from praying mantis position
     upperAnimation = new MotionProfileAnimation();
-    upperShoulderCurve = new MotionProfileCurve( arm.shoulderController );
-    upperElbowCurve = new MotionProfileCurve( arm.elbowController );
-    upperAnimation.addMotionProfileCurve(upperShoulderCurve);
-    upperAnimation.addMotionProfileCurve(upperElbowCurve);
+    upperShoulderCurve = new MotionProfileCurve( arm.shoulderController, upperAnimation );
+    upperElbowCurve = new MotionProfileCurve( arm.elbowController, upperAnimation );
 
     upperShoulderCurve.storeValue( 0.0, 28.0);
     upperShoulderCurve.storeValue( 0.5, 0.0 );

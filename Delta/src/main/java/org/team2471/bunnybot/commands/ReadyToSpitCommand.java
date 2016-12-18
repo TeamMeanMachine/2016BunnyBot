@@ -16,11 +16,9 @@ public class ReadyToSpitCommand extends PlayAnimationCommand{
     requires(arm);
 
     animation = new MotionProfileAnimation();
+    shoulderCurve = new MotionProfileCurve( arm.shoulderController, animation );
+    elbowCurve = new MotionProfileCurve( arm.elbowController, animation );
     setAnimation(animation);
-    shoulderCurve = new MotionProfileCurve( arm.shoulderController );
-    elbowCurve = new MotionProfileCurve( arm.elbowController );
-    animation.addMotionProfileCurve( shoulderCurve );
-    animation.addMotionProfileCurve( elbowCurve );
 
     shoulderCurve.storeValue( 0.0, 51.0 );
     shoulderCurve.storeValue( 0.75, 44.0 );

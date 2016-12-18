@@ -25,10 +25,8 @@ public class IntakeCommand extends PlayAnimationCommand {
     // ground pickup Animation
     setSpeed( speed );
     groundAnimation = new MotionProfileAnimation();
-    groundShoulderCurve = new MotionProfileCurve( arm.shoulderController );
-    groundElbowCurve = new MotionProfileCurve( arm.elbowController );
-    groundAnimation.addMotionProfileCurve(groundShoulderCurve);
-    groundAnimation.addMotionProfileCurve(groundElbowCurve);
+    groundShoulderCurve = new MotionProfileCurve( arm.shoulderController, groundAnimation );
+    groundElbowCurve = new MotionProfileCurve( arm.elbowController, groundAnimation );
 
     groundShoulderCurve.storeValue( 0.0, 51.0 );
     groundShoulderCurve.storeValue( 0.25, 51.0 );
@@ -39,10 +37,8 @@ public class IntakeCommand extends PlayAnimationCommand {
 
     // can pickup Animation
     canAnimation = new MotionProfileAnimation();
-    canShoulderCurve = new MotionProfileCurve( arm.shoulderController );
-    canElbowCurve = new MotionProfileCurve( arm.elbowController );
-    canAnimation.addMotionProfileCurve(canShoulderCurve);
-    canAnimation.addMotionProfileCurve(canElbowCurve);
+    canShoulderCurve = new MotionProfileCurve( arm.shoulderController, canAnimation );
+    canElbowCurve = new MotionProfileCurve( arm.elbowController, canAnimation );
 
     canShoulderCurve.storeValue( 0.0, 26);
     canShoulderCurve.storeValue( 0.75, -13 );
