@@ -23,9 +23,11 @@ public class ReadyToSpitCommand extends PlayAnimationCommand{
     animation.addMotionProfileCurve( elbowCurve );
 
     shoulderCurve.storeValue( 0.0, 51.0 );
+    shoulderCurve.storeValue( 0.75, 44.0 );
     shoulderCurve.storeValue( 1.0, 26.0 );
 
     elbowCurve.storeValue( 0.0, -113.0 );
+    elbowCurve.storeValue( 0.75, -70.0 );
     elbowCurve.storeValue( 1.0, -63.0 );
   }
 
@@ -37,6 +39,5 @@ public class ReadyToSpitCommand extends PlayAnimationCommand{
     else {
       setSpeed(-1.0);
     }
-    System.out.println("ready to spit initialized");
   }
 }
