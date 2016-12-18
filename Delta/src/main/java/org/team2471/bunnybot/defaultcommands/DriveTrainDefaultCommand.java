@@ -22,6 +22,9 @@ public class DriveTrainDefaultCommand extends Command {
     driveTrain.drive(IOMap.driverThrottleAxis.get(), IOMap.driverTurnAxis.get(),
             IOMap.coPilotThrottleAxis.get(), IOMap.coPilotTurnAxis.get(),
             !IOMap.noCheesyDriveButton.get());
+    // driver non-verbal communication
+    IOMap.coPilotController.rumbleLeft(IOMap.driverRumbleButton.get() ? 1.0f : 0.0f );
+    IOMap.driveController.rumbleLeft(IOMap.coPilotRumbleButton.get() ? 1.0f : 0.0f );
   }
 
   @Override

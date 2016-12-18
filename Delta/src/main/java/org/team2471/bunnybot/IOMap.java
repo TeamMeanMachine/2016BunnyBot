@@ -37,6 +37,8 @@ public class IOMap {
           .withExponentialScaling(2);
 
   public static final DriveButton noCheesyDriveButton = driveController.getButton(5);
+  public static final DriveButton driverRumbleButton = driveController.getButton(8);
+  public static final DriveButton coPilotRumbleButton = coPilotController.getButton(6);
 
   // Make sure everything is loaded.
   public static void init() {
