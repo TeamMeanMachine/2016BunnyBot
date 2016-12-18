@@ -13,6 +13,19 @@ import edu.wpi.first.wpilibj.Talon;
 public class HardwareMap {
   public static PowerDistributionPanel pdp = new PowerDistributionPanel();
 
+  /**
+   * Force initialization of all static classes to prevent halts later on.
+   */
+  public static void init() {
+    DriveTrainMap.backLeftMotor.get();
+    DriveTrainMap.LeftModule.forwardMotor.get();
+    DriveTrainMap.RightModule.forwardMotor.get();
+
+    ShooterMap.shootMotor.get();
+
+    GrabberMap.armMotor.get();
+  }
+
   public static final class ShooterMap {
     public static final SpeedController panMotor = new Talon(3);
     public static final SpeedController shootMotor = new Talon(5);
@@ -48,18 +61,5 @@ public class HardwareMap {
     public static final CANTalon bunnySucker = new CANTalon(8);
     public static final SpeedController armMotor = new Talon(4);
     public static final int ARM_MOTOR_PDPSLOT = 7;
-  }
-
-  /**
-   * Force initialization of all static classes to prevent halts later on.
-   */
-  public static void init() {
-    DriveTrainMap.backLeftMotor.get();
-    DriveTrainMap.LeftModule.forwardMotor.get();
-    DriveTrainMap.RightModule.forwardMotor.get();
-
-    ShooterMap.shootMotor.get();
-
-    GrabberMap.armMotor.get();
   }
 }

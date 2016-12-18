@@ -38,7 +38,7 @@ public class ShooterDefaultCommand extends Command {
       shooter.disableShooting();
     }
 
-    if(flashlightButton.get()) {
+    if (flashlightButton.get()) {
       shooter.enableFlashlight();
     } else {
       shooter.disableFlashlight();

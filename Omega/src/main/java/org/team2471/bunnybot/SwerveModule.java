@@ -15,6 +15,7 @@ public class SwerveModule {
   private final AnalogInput steerEncoder;
   private final PIDController steerController;
   private final Vector2 position;
+  private double offset = 0;
   private final PIDSource steerSource = new PIDSource() {
     @Override
     public PIDSourceType getPIDSourceType() {
@@ -31,7 +32,6 @@ public class SwerveModule {
       return -((steerEncoder.getVoltage() - offset) - 2.5) / 2.3 * 180;
     }
   };
-  private double offset = 0;
   private double power = 0;
 
   public SwerveModule(SpeedController driveMotor, SpeedController steerMotor, AnalogInput steerEncoder, Vector2 position, double offset) {

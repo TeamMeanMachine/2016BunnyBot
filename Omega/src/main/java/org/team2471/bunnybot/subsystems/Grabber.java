@@ -1,8 +1,6 @@
 package org.team2471.bunnybot.subsystems;
 
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static org.team2471.bunnybot.HardwareMap.GrabberMap.ARM_MOTOR_PDPSLOT;

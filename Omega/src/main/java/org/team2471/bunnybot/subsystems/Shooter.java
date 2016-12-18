@@ -1,11 +1,15 @@
 package org.team2471.bunnybot.subsystems;
 
 import org.team2471.bunnybot.defaultcommands.ShooterDefaultCommand;
-import org.team2471.util.DummySubsystem;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-import static org.team2471.bunnybot.HardwareMap.ShooterMap.*;
+import static org.team2471.bunnybot.HardwareMap.ShooterMap.flashLight;
+import static org.team2471.bunnybot.HardwareMap.ShooterMap.leftTurnSensor;
+import static org.team2471.bunnybot.HardwareMap.ShooterMap.panMotor;
+import static org.team2471.bunnybot.HardwareMap.ShooterMap.rightTurnSensor;
+import static org.team2471.bunnybot.HardwareMap.ShooterMap.shootMotor;
+import static org.team2471.bunnybot.HardwareMap.ShooterMap.tiltMotor;
 
 public class Shooter extends Subsystem {
   public static final double UPPER_TILT_LIMIT = 115;

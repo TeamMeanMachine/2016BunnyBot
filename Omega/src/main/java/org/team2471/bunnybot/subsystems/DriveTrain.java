@@ -1,7 +1,6 @@
 package org.team2471.bunnybot.subsystems;
 
 import org.team2471.bunnybot.HardwareMap;
-import org.team2471.bunnybot.IOMap;
 import org.team2471.bunnybot.SwerveModule;
 import org.team2471.bunnybot.defaultcommands.DriveTrainDefaultCommand;
 import org.team2471.frc.lib.vector.Vector2;
