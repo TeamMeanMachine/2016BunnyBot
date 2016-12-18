@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.team2471.bunnybot.commands.SpitCommand;
+import org.team2471.bunnybot.defaultcommands.ArmDefaultCommand;
 import org.team2471.bunnybot.sensors.Magnepot;
 //import org.team2471.frc.lib.sensors.Magnepot;
 
@@ -66,8 +66,8 @@ public class Arm extends Subsystem {
   /**
    * Sucks the bunny in
    */
-  public void suckIn() {
-    bunnySucker.set(-1);
+  public void suckIn( double power ) {
+    bunnySucker.set(-power);
   }
 
   /**
@@ -86,6 +86,6 @@ public class Arm extends Subsystem {
 
   @Override
   protected void initDefaultCommand() {
-    setDefaultCommand(new SpitCommand());
+    setDefaultCommand(new ArmDefaultCommand());
   }
 }

@@ -71,8 +71,8 @@ public class IntakeCommand extends PlayAnimationCommand {
     }
 
     super.initialize();
-    if (getSpeed() > 0) {  // running groundAnimation forward
-      arm.suckIn();
+    if (getSpeed() > 0) {  // running lowerAnimation forward
+      arm.suckIn(1.0);
     }
   }
 

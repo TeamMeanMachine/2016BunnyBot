@@ -1,7 +1,6 @@
 package org.team2471.bunnybot;
 
 import org.team2471.bunnybot.commands.*;
-import org.team2471.bunnybot.commands.SpitCommand;
 import org.team2471.frc.lib.control.DriveAxis;
 import org.team2471.frc.lib.control.DriveButton;
 import org.team2471.frc.lib.control.DriveController;
@@ -14,7 +13,8 @@ public class IOMap {
           .withRunCommandOnButtonPressEvent(3, new ReadyToSpitCommand())
           .withRunCommandWhileButtonHoldEvent(5, new IntakeCommand(1.0))
           .withRunCommandOnButtonReleaseEvent(5, new IntakeCommand(-1.0))
-          .withRunCommandWhileButtonHoldEvent(4, new SpitCommand());
+          .withRunCommandWhileButtonHoldEvent(4, new SpitAnimationCommand(1.0))
+          .withRunCommandOnButtonReleaseEvent(4, new SpitAnimationCommand(-1.0));
 
   public static final DriveAxis driverThrottleAxis = driveController.getAxis(1)
       .withInvert()
