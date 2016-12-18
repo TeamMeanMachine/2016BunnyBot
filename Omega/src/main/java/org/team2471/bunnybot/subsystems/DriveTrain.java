@@ -16,12 +16,12 @@ public class DriveTrain extends Subsystem {
       HardwareMap.DriveTrainMap.LeftModule.forwardMotor,
       HardwareMap.DriveTrainMap.LeftModule.turnMotor,
       HardwareMap.DriveTrainMap.LeftModule.turnEncoder,
-      new Vector2(-14, 19), 0.2);
+      new Vector2(-14, 19), 0);
   private final SwerveModule rightSwerveModule = new SwerveModule(
       HardwareMap.DriveTrainMap.RightModule.forwardMotor,
       HardwareMap.DriveTrainMap.RightModule.turnMotor,
       HardwareMap.DriveTrainMap.RightModule.turnEncoder,
-      new Vector2(14, 19), 4.6);
+      new Vector2(14, 19), 0);
 
   private final SpeedController frontLeftMotor = HardwareMap.DriveTrainMap.frontLeftMotor;
   private final SpeedController frontRightMotor = HardwareMap.DriveTrainMap.frontRightMotor;

@@ -1,6 +1,9 @@
 package org.team2471.bunnybot.commands;
 
+import org.team2471.bunnybot.IOMap;
+
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static org.team2471.bunnybot.Robot.grabber;
 
@@ -11,11 +14,12 @@ public class GrabberSpitCommand extends Command {
 
   @Override
   protected void initialize() {
+    grabber.setSetpoint(SmartDashboard.getNumber("Arm Burrow Angle"));
   }
 
   @Override
   protected void execute() {
-    grabber.spitOut();
+    grabber.spitOut(IOMap.spitAxis.get());
   }
 
   @Override

@@ -4,6 +4,7 @@ import org.team2471.bunnybot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+import static org.team2471.bunnybot.IOMap.flashlightButton;
 import static org.team2471.bunnybot.IOMap.shootButton;
 import static org.team2471.bunnybot.IOMap.tiltAxis;
 import static org.team2471.bunnybot.IOMap.turretXAxis;
@@ -35,6 +36,12 @@ public class ShooterDefaultCommand extends Command {
       shooter.enableShooting();
     } else {
       shooter.disableShooting();
+    }
+
+    if(flashlightButton.get()) {
+      shooter.enableFlashlight();
+    } else {
+      shooter.disableFlashlight();
     }
   }
 
