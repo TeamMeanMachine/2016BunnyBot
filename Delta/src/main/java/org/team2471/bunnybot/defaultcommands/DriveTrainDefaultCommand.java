@@ -23,11 +23,11 @@ public class DriveTrainDefaultCommand extends Command {
     driveTrain.drive(IOMap.driverThrottleAxis.get(), IOMap.driverTurnAxis.get(),
             IOMap.coPilotThrottleAxis.get(), IOMap.coPilotTurnAxis.get(),
             SmartDashboard.getBoolean("Cheesy Drive", true),
-            IOMap.driverThrottleAxis.get() == 0 || turnInPlaceButton.get());
+            IOMap.driverThrottleAxis.get() < 0.5 || turnInPlaceButton.get());
 
     // driver non-verbal communication
-    IOMap.coPilotController.rumbleLeft(IOMap.driverRumbleButton.get() ? 1.0f : 0.0f );
-    IOMap.driveController.rumbleLeft(IOMap.coPilotRumbleButton.get() ? 1.0f : 0.0f );
+    IOMap.coPilotController.rumbleLeft(IOMap.driverRumbleButton.get() || IOMap.coPilotRumbleButton.get() ? 1.0f : 0.0f );
+    IOMap.driveController.rumbleLeft(IOMap.driverRumbleButton.get() || IOMap.coPilotRumbleButton.get() ? 1.0f : 0.0f );
   }
 
   @Override

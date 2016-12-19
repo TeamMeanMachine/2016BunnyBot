@@ -13,13 +13,14 @@ public class Robot extends IterativeRobot {
   public static DriveTrain driveTrain;
   public static Shooter shooter;
   public static Arm arm;
-  Preferences prefs = Preferences.getInstance();
+  Preferences prefs;
 
   @Override
   public void robotInit() {
     driveTrain = new DriveTrain();
     shooter = new Shooter();
     arm = new Arm();
+    prefs = Preferences.getInstance();
 
     SmartDashboard.putBoolean("Cheesy Drive", prefs.getBoolean("Cheesy Drive", true));
     IOMap.init();

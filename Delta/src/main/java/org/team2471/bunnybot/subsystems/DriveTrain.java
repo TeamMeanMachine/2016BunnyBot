@@ -15,9 +15,15 @@ public class DriveTrain extends Subsystem {
   private static final double HIGH_SHIFTPOINT = 250.0;
   private static final double LOW_SHIFTPOINT = 150.0;
 
+  private int m_leftStartDistance;
+  private int m_rightStartDistance;
+
   public DriveTrain() {
 
     rightMotor1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+    rightMotor1.reverseSensor(true);
+    //rightMotor1.setInverted(true);  // does this work?
+
     rightMotor1.configEncoderCodesPerRev((int)(250 * Math.PI * 4.0 / 12));
     rightMotor2.changeControlMode(CANTalon.TalonControlMode.Follower);
     rightMotor3.changeControlMode(CANTalon.TalonControlMode.Follower);
@@ -30,6 +36,9 @@ public class DriveTrain extends Subsystem {
     leftMotor3.changeControlMode(CANTalon.TalonControlMode.Follower);
     leftMotor2.set(leftMotor1.getDeviceID());
     leftMotor3.set(leftMotor1.getDeviceID());
+
+    m_leftStartDistance = leftMotor1.getEncPosition();
+    m_rightStartDistance = rightMotor1.getEncPosition();
 
     cheesyDriveHelper = new CheesyDriveHelper();
   }
@@ -62,8 +71,16 @@ public class DriveTrain extends Subsystem {
     }
 
     SmartDashboard.putNumber("Speed", averageSpeed);
-    SmartDashboard.putNumber("Left Distance", leftMotor1.getEncPosition());
-    SmartDashboard.putNumber("Right Distance", rightMotor1.getEncPosition());
+    SmartDashboard.putNumber("Left Distance", getLeftDistance());
+    SmartDashboard.putNumber("Right Distance", getRightDistance());
+  }
+
+  public double getLeftDistance() {
+    return ((double)leftMotor1.getEncPosition() - m_leftStartDistance) / 820.0;
+  }
+
+  public double getRightDistance() {
+    return ((double)rightMotor1.getEncPosition() - m_rightStartDistance) / 820.0;
   }
 
   public void drive(double throttle, double turn) {
