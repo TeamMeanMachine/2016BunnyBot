@@ -1,7 +1,5 @@
 package org.team2471.bunnybot.commands;
 
-import org.team2471.bunnybot.HardwareMap;
-
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 

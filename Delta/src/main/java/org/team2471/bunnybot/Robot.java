@@ -17,6 +17,7 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void robotInit() {
+    SmartDashboard.putBoolean("Disable Cheesy Drive", false);
     driveTrain = new DriveTrain();
     shooter = new Shooter();
     arm = new Arm();

@@ -14,30 +14,28 @@ public class IOMap {
       .withRunCommandWhileButtonHoldEvent(6, new IntakeCommandGroup())
       .withRunCommandOnButtonReleaseEvent(6, new GrabberToAngleCommand(SmartDashboard.getNumber("Arm Resting Angle", 0)))
 
-      .withRunCommandOnButtonPressEvent(5, new GrabberToAngleCommand(SmartDashboard.getNumber("Arm Burrow Angle")))
-      .withRunCommandWhileButtonHoldEvent(7, new GrabberSpitCommand())
+      .withRunCommandWhileButtonHoldEvent(5, new GrabberSpitCommand())
       .withRunCommandOnButtonReleaseEvent(5, new GrabberToAngleCommand(SmartDashboard.getNumber("Arm Resting Angle")));
 
-  public static final DriveButton spitoutButton = mainController.getButton(2);
-  public static final DriveButton backupButton = mainController.getButton(8);
   public static final DriveButton noCheesyDriveButton = mainController.getButton(10);
 
+  public static final DriveAxis spitAxis = mainController.getAxis(3);
 
   public static final DriveAxis throttleAxis = mainController.getAxis(1)
       .withDeadband(0.2)
       .withExponentialScaling(2)
       .withInvert();
 
-  public static final DriveAxis turnAxis =
-      mainController.getAxis(4)
-          .withDeadband(0.2)
-          .withExponentialScaling(2); // scale down
+  public static final DriveAxis turnAxis = mainController.getAxis(4)
+      .withDeadband(0.2)
+      .withExponentialScaling(2); // scale down
 
   /* Co Pilot */
 
   private static final DriveController coController = new DriveController(1);
 
   public static final DriveButton shootButton = coController.getButton(1);
+  public static final DriveButton flashlightButton = coController.getButton(2);
 
   public static final DriveAxis turretXAxis = coController.getAxis(0)
       .withDeadband(0.1);
