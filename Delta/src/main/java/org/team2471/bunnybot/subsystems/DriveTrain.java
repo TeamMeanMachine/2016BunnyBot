@@ -16,8 +16,8 @@ import static org.team2471.bunnybot.IOMap.*;
 public class DriveTrain extends Subsystem {
 
   private CheesyDriveHelper cheesyDriveHelper;
-  private static final double HIGH_SHIFTPOINT = 200.0;
-  private static final double LOW_SHIFTPOINT = 150.0;
+  private static final double HIGH_SHIFTPOINT = 2.5;
+  private static final double LOW_SHIFTPOINT = 2.0;
 
   private int m_leftStartDistance;
   private int m_rightStartDistance;
@@ -100,7 +100,12 @@ public class DriveTrain extends Subsystem {
   }
 
   private double getSpeed() {
-    return (Math.abs(leftMotor1.getSpeed()) + Math.abs(rightMotor1.getSpeed())) / 2;
+    return (Math.abs(leftMotor1.getSpeed()/82.0) + Math.abs(rightMotor1.getSpeed()/82.0)) / 2;
+    // encoders return speed as
+    // edges / 100 ms
+    // * 1 foot / 820 edges (see below)
+    // * 1000 ms / 1 sec
+    // yields ft / sec
   }
   
   @Override
@@ -128,6 +133,12 @@ public class DriveTrain extends Subsystem {
     @Override
     public double pidGet() {
       return m_talon.getEncPosition() / 820.0;
+      // returns edge count
+      // 1 tick / 4 edges
+      // 1 rev / 200 ticks
+      // 4 inches * 3.14 / 1 rev
+      // 1 foot / 12 inches
+      // = 1 foot / 837 edges
     }
   }
 }
