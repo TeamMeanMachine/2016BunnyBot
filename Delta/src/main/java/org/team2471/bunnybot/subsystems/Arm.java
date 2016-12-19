@@ -29,8 +29,6 @@ public class Arm extends Subsystem {
     shoulderController.enable();
     elbowController.enable();
 
-    SmartDashboard.putData("Shoulder PID", shoulderController);
-    SmartDashboard.putData("Elbow PID", elbowController);
     shoulderController.setAbsoluteTolerance(10.0);
     elbowController.setAbsoluteTolerance(10.0);
   }

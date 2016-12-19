@@ -18,7 +18,6 @@ public class ReadyToSpitCommand extends PlayAnimationCommand{
     animation = new MotionProfileAnimation();
     shoulderCurve = new MotionProfileCurve( arm.shoulderController, animation );
     elbowCurve = new MotionProfileCurve( arm.elbowController, animation );
-    setAnimation(animation);
 
     shoulderCurve.storeValue( 0.0, 51.0 );
     shoulderCurve.storeValue( 0.75, 44.0 );
@@ -27,6 +26,8 @@ public class ReadyToSpitCommand extends PlayAnimationCommand{
     elbowCurve.storeValue( 0.0, -113.0 );
     elbowCurve.storeValue( 0.75, -70.0 );
     elbowCurve.storeValue( 1.0, -63.0 );
+
+    setAnimation(animation);
   }
 
   @Override

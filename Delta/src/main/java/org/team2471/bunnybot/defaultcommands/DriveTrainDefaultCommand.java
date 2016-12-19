@@ -2,9 +2,7 @@ package org.team2471.bunnybot.defaultcommands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team2471.bunnybot.IOMap;
-
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static org.team2471.bunnybot.IOMap.turnInPlaceButton;
 import static org.team2471.bunnybot.Robot.driveTrain;
