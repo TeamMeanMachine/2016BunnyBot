@@ -16,8 +16,8 @@ import static org.team2471.bunnybot.IOMap.*;
 public class DriveTrain extends Subsystem {
 
   private CheesyDriveHelper cheesyDriveHelper;
-  private static final double HIGH_SHIFTPOINT = 2.5;
-  private static final double LOW_SHIFTPOINT = 2.0;
+  private static final double HIGH_SHIFTPOINT = 5.0;  // 250
+  private static final double LOW_SHIFTPOINT = 2.0;  // 150
 
   private int m_leftStartDistance;
   private int m_rightStartDistance;
