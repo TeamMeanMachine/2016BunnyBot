@@ -63,7 +63,7 @@ public class DriveTrain extends Subsystem {
     m_rightStartDistance = rightMotor1.getEncPosition();
   }
 
-  public void drive( double dThrottle, double dTurn, double cThrottle, double cTurn, boolean cheesyDrive, boolean quickTurn ) {
+  public void drive( double dTurn, double dThrottle, double cTurn, double cThrottle, boolean cheesyDrive, boolean quickTurn ) {
 
     // copilot (never cheesy)
     double cLeft = cThrottle + cTurn;
