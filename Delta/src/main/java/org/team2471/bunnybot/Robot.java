@@ -23,8 +23,9 @@ public class Robot extends IterativeRobot {
     arm = new Arm();
     prefs = Preferences.getInstance();
 
-    SmartDashboard.putBoolean("Cheesy Drive", prefs.getBoolean("Cheesy Drive", true));
-    IOMap.init();
+    //SmartDashboard.putBoolean("Cheesy Drive", prefs.getBoolean("Cheesy Drive", true));
+
+    //IOMap.init();
   }
 
   @Override
@@ -32,8 +33,8 @@ public class Robot extends IterativeRobot {
     // tune the drive position PID's
     SmartDashboard.putData("Left PID", driveTrain.m_leftController);
     SmartDashboard.putData("Right PID", driveTrain.m_rightController);
-    driveTrain.m_leftController.enable();
-    driveTrain.m_rightController.enable();
+//    driveTrain.m_leftController.enable();
+//    driveTrain.m_rightController.enable();
   }
 
   @Override
@@ -41,8 +42,8 @@ public class Robot extends IterativeRobot {
     //Scheduler.getInstance().run();
 
     // tune the drive position PID's
-    driveTrain.m_leftController.setSetpoint( IOMap.driveController.getAxis(1).get() * 4.0);
-    driveTrain.m_rightController.setSetpoint( IOMap.driveController.getAxis(3).get() * 4.0);
+//    driveTrain.m_leftController.setSetpoint( IOMap.driveController.getAxis(1).get() * 4.0);
+//    driveTrain.m_rightController.setSetpoint( IOMap.driveController.getAxis(3).get() * 4.0);
   }
 
   @Override
