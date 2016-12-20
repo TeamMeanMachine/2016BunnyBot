@@ -17,15 +17,14 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void robotInit() {
-    SmartDashboard.putBoolean("Disable Cheesy Drive", false);
     driveTrain = new DriveTrain();
     shooter = new Shooter();
     arm = new Arm();
     prefs = Preferences.getInstance();
 
-    //SmartDashboard.putBoolean("Cheesy Drive", prefs.getBoolean("Cheesy Drive", true));
+    SmartDashboard.putBoolean("Cheesy Drive", prefs.getBoolean("Cheesy Drive", true));
 
-    //IOMap.init();
+    IOMap.init();
   }
 
   @Override
@@ -39,7 +38,7 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void teleopPeriodic() {
-    //Scheduler.getInstance().run();
+    Scheduler.getInstance().run();
 
     // tune the drive position PID's
 //    driveTrain.m_leftController.setSetpoint( IOMap.driveController.getAxis(1).get() * 4.0);
