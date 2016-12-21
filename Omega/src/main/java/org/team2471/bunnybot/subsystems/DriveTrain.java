@@ -38,7 +38,7 @@ public class DriveTrain extends Subsystem {
    */
   public void drive(double throttle, double steeringRate, boolean cheesyDrive) {
     if (cheesyDrive) {
-      steeringRate = steeringRate * throttle;
+      steeringRate *= throttle;
     }
 
     double leftPower = throttle + steeringRate;

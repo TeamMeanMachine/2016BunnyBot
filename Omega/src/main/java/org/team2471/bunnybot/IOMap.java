@@ -10,7 +10,7 @@ import org.team2471.frc.lib.control.DriveController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class IOMap {
-  private static IOMap instance;
+  private static IOMap instance = new IOMap();
 
   private final DriveController mainController = new DriveController(0)
       .withRunCommandWhileButtonHoldEvent(6, new IntakeCommandGroup())
@@ -23,10 +23,6 @@ public class IOMap {
   }
 
   public static IOMap getInstance() {
-    if(instance == null) {
-      instance = new IOMap();
-    }
-
     return instance;
   }
 
@@ -41,7 +37,6 @@ public class IOMap {
 
   public final DriveAxis turnAxis = mainController.getAxis(4)
       .withDeadband(0.2)
-      .withInvert()
       .withExponentialScaling(2); // scale down
 
   /* Co Pilot */
@@ -58,11 +53,4 @@ public class IOMap {
       .withInvert();
 
   public final DriveAxis tiltAxis = coController.getAxis(3);
-
-  /**
-   * Make sure static members are loaded.
-   */
-  public void init() {
-
-  }
 }

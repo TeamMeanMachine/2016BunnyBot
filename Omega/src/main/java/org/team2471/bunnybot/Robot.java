@@ -28,6 +28,7 @@ public class Robot extends IterativeRobot {
     driveTrain = new DriveTrain();
     grabber = new Grabber();
 
+    IOMap.getInstance();
     HardwareMap.init();
   }
 
