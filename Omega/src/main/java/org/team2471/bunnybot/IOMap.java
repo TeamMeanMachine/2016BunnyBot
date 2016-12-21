@@ -12,19 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class IOMap {
   private static IOMap instance = new IOMap();
 
-  private final DriveController mainController = new DriveController(0)
-      .withRunCommandWhileButtonHoldEvent(6, new IntakeCommandGroup())
-      .withRunCommandOnButtonReleaseEvent(6, new GrabberToAngleCommand(SmartDashboard.getNumber("Arm Resting Angle", 0)))
-
-      .withRunCommandWhileButtonHoldEvent(5, new GrabberSpitCommand())
-      .withRunCommandOnButtonReleaseEvent(5, new GrabberToAngleCommand(SmartDashboard.getNumber("Arm Resting Angle")));
-
-  private IOMap() {
-  }
-
-  public static IOMap getInstance() {
-    return instance;
-  }
+  private final DriveController mainController = new DriveController(0);
 
   public final DriveButton noCheesyDriveButton = mainController.getButton(10);
 
@@ -53,4 +41,17 @@ public class IOMap {
       .withInvert();
 
   public final DriveAxis tiltAxis = coController.getAxis(3);
+
+  private IOMap() {
+    mainController
+        .withRunCommandWhileButtonHoldEvent(6, new IntakeCommandGroup())
+        .withRunCommandOnButtonReleaseEvent(6, new GrabberToAngleCommand(SmartDashboard.getNumber("Arm Resting Angle", 0)))
+
+        .withRunCommandWhileButtonHoldEvent(5, new GrabberSpitCommand())
+        .withRunCommandOnButtonReleaseEvent(5, new GrabberToAngleCommand(SmartDashboard.getNumber("Arm Resting Angle")));
+  }
+
+  public static IOMap getInstance() {
+    return instance;
+  }
 }
