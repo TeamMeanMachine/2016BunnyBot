@@ -28,6 +28,7 @@ public class IOMap {
 
   public static final DriveAxis turnAxis = mainController.getAxis(4)
       .withDeadband(0.2)
+      .withInvert()
       .withExponentialScaling(2); // scale down
 
   /* Co Pilot */
