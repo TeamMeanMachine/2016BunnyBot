@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team2471.bunnybot.IOMap;
 import edu.wpi.first.wpilibj.command.Command;
 
-import static org.team2471.bunnybot.IOMap.turnInPlaceButton;
 import static org.team2471.bunnybot.Robot.driveTrain;
 
 public class DriveTrainDefaultCommand extends Command {
+  private final IOMap io = IOMap.getInstance();
 
   public DriveTrainDefaultCommand() {
     requires(driveTrain);
@@ -19,14 +19,14 @@ public class DriveTrainDefaultCommand extends Command {
 
   @Override
   protected void execute() {
-    driveTrain.drive(IOMap.driverThrottleAxis.get(), IOMap.driverTurnAxis.get(),
-            IOMap.coPilotThrottleAxis.get(), IOMap.coPilotTurnAxis.get(),
+    driveTrain.drive(io.driverThrottleAxis.get(), io.driverTurnAxis.get(),
+            io.coPilotThrottleAxis.get(), io.coPilotTurnAxis.get(),
             SmartDashboard.getBoolean("Cheesy Drive", true),                   // this is the cheesy drive setting
-            IOMap.driverThrottleAxis.get() < 0.5 || turnInPlaceButton.get());  // this is quick turn for cheesy drive
+            io.driverThrottleAxis.get() < 0.5 || io.turnInPlaceButton.get());  // this is quick turn for cheesy drive
 
     // driver non-verbal communication
-    IOMap.coPilotController.rumbleLeft(IOMap.driverRumbleButton.get() || IOMap.coPilotRumbleButton.get() ? 1.0f : 0.0f );
-    IOMap.driveController.rumbleLeft(IOMap.driverRumbleButton.get() || IOMap.coPilotRumbleButton.get() ? 1.0f : 0.0f );
+    io.coPilotController.rumbleLeft(io.driverRumbleButton.get() || io.coPilotRumbleButton.get() ? 1.0f : 0.0f );
+    io.driveController.rumbleLeft(io.driverRumbleButton.get() || io.coPilotRumbleButton.get() ? 1.0f : 0.0f );
   }
 
   @Override

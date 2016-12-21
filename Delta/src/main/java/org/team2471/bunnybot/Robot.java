@@ -14,7 +14,7 @@ public class Robot extends IterativeRobot {
   public static DriveTrain driveTrain;
   public static Shooter shooter;
   public static Arm arm;
-  public static Preferences prefs;
+  private static Preferences prefs;
 
   @Override
   public void robotInit() {
@@ -29,7 +29,8 @@ public class Robot extends IterativeRobot {
 
     SmartDashboard.putBoolean("Cheesy Drive", prefs.getBoolean("Cheesy Drive", true));
 
-    IOMap.init();
+    // make sure IOMap is initialized
+    IOMap.getInstance();
   }
 
   @Override

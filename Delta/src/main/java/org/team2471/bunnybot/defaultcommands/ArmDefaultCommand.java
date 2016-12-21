@@ -7,6 +7,7 @@ import org.team2471.bunnybot.IOMap;
 import static org.team2471.bunnybot.Robot.arm;
 
 public class ArmDefaultCommand extends Command {
+  private final IOMap io = IOMap.getInstance();
 
   public ArmDefaultCommand() {
     requires(arm);
@@ -18,12 +19,14 @@ public class ArmDefaultCommand extends Command {
 
   @Override
   protected void execute() {
-    if (IOMap.coPilotController.getAxis(3).get()>0.1)
-      arm.spitOut( IOMap.coPilotController.getAxis(3).get() * 0.8 );
-    else if (IOMap.coPilotController.getAxis(2).get()>0.1)
-      arm.suckIn( IOMap.coPilotController.getAxis(2).get() * 0.8 );
-    else
+    if (io.coPilotController.getAxis(3).get()>0.1) {
+      arm.spitOut( io.coPilotController.getAxis(3).get() * 0.8 );
+    } else if (io.coPilotController.getAxis(2).get()>0.1) {
+      arm.suckIn( io.coPilotController.getAxis(2).get() * 0.8 );
+    }
+    else {
       arm.stopIntake();
+    }
   }
 
   @Override

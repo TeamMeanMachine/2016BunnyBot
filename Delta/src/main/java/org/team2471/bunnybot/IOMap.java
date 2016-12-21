@@ -1,46 +1,57 @@
 package org.team2471.bunnybot;
 
-import org.team2471.bunnybot.commands.*;
+import org.team2471.bunnybot.commands.IntakeCommand;
+import org.team2471.bunnybot.commands.ReadyToSpitCommand;
+import org.team2471.bunnybot.commands.ShooterCommand;
+import org.team2471.bunnybot.commands.SpitAnimationCommand;
 import org.team2471.frc.lib.control.DriveAxis;
 import org.team2471.frc.lib.control.DriveButton;
 import org.team2471.frc.lib.control.DriveController;
 
 public class IOMap {
-  public static final DriveController driveController = new DriveController(0)
-          .withRunCommandOnButtonPressEvent(6, new ShooterCommand());
+  private static IOMap instance = new IOMap();
 
-  public static final DriveController coPilotController = new DriveController(1)
-          .withRunCommandOnButtonPressEvent(3, new ReadyToSpitCommand())
-          .withRunCommandWhileButtonHoldEvent(5, new IntakeCommand(1.0))
-          .withRunCommandOnButtonReleaseEvent(5, new IntakeCommand(-1.0))
-          .withRunCommandWhileButtonHoldEvent(4, new SpitAnimationCommand(1.0))
-          .withRunCommandOnButtonReleaseEvent(4, new SpitAnimationCommand(-1.0));
+  public final DriveController driveController = new DriveController(0);
 
-  public static final DriveAxis driverThrottleAxis = driveController.getAxis(1)
+  public final DriveController coPilotController = new DriveController(1);
+
+  public final DriveAxis driverThrottleAxis = driveController.getAxis(1)
       .withInvert()
       .withDeadband(.2)
       .withExponentialScaling(2);
 
-  public static final DriveAxis driverTurnAxis = driveController.getAxis(4)
+  public final DriveAxis driverTurnAxis = driveController.getAxis(4)
       .withDeadband(.2)
       .map(value -> value * 0.7)
       .withExponentialScaling(2);
 
-  public static final DriveAxis coPilotThrottleAxis = coPilotController.getAxis(1)
-          .withDeadband(.2)
-          .map(value -> value * 0.8)
-          .withExponentialScaling(2);
+  public final DriveAxis coPilotThrottleAxis = coPilotController.getAxis(1)
+      .withDeadband(.2)
+      .map(value -> value * 0.8)
+      .withExponentialScaling(2);
 
-  public static final DriveAxis coPilotTurnAxis = coPilotController.getAxis(4)
-          .withDeadband(.2)
-          .map(value -> value * 0.7)
-          .withExponentialScaling(2);
+  public final DriveAxis coPilotTurnAxis = coPilotController.getAxis(4)
+      .withDeadband(.2)
+      .map(value -> value * 0.7)
+      .withExponentialScaling(2);
 
-  public static final DriveButton turnInPlaceButton = driveController.getButton(4);
-  public static final DriveButton driverRumbleButton = driveController.getButton(8);
-  public static final DriveButton coPilotRumbleButton = coPilotController.getButton(6);
+  public final DriveButton turnInPlaceButton = driveController.getButton(4);
+  public final DriveButton driverRumbleButton = driveController.getButton(8);
+  public final DriveButton coPilotRumbleButton = coPilotController.getButton(6);
 
-  // Make sure everything is loaded.
-  public static void init() {
+  private IOMap() {
+    driveController
+        .withRunCommandOnButtonPressEvent(6, new ShooterCommand());
+
+    coPilotController
+        .withRunCommandOnButtonPressEvent(3, new ReadyToSpitCommand())
+        .withRunCommandWhileButtonHoldEvent(5, new IntakeCommand(1.0))
+        .withRunCommandOnButtonReleaseEvent(5, new IntakeCommand(-1.0))
+        .withRunCommandWhileButtonHoldEvent(4, new SpitAnimationCommand(1.0))
+        .withRunCommandOnButtonReleaseEvent(4, new SpitAnimationCommand(-1.0));
+  }
+
+  public static IOMap getInstance() {
+    return instance;
   }
 }
