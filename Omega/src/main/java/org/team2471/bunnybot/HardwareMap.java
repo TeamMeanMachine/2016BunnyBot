@@ -45,13 +45,13 @@ public class HardwareMap {
     public static final SpeedController backRightMotor = new Talon(1);
 
     public static final class LeftModule {
-      public static final Magnepot turnEncoder = new Magnepot(1);
+      public static final Magnepot turnEncoder = new Magnepot(1,true);
       public static final CANTalon turnMotor = new CANTalon(15);
       public static final SpeedController forwardMotor = new Talon(8);
     }
 
     public static final class RightModule {
-      public static final Magnepot turnEncoder = new Magnepot(2);
+      public static final Magnepot turnEncoder = new Magnepot(2,true);
       public static final CANTalon turnMotor = new CANTalon(0);
       public static final SpeedController forwardMotor = new Talon(0);
     }
