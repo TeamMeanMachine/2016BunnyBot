@@ -6,6 +6,7 @@ import org.team2471.bunnybot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.communication.FRCNetworkCommunicationsLibrary;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
@@ -16,6 +17,9 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void robotInit() {
+    // Ensure we get logs when we crash here
+    FRCNetworkCommunicationsLibrary.FRCNetworkCommunicationObserveUserProgramStarting();
+
     SmartDashboard.putNumber("Arm Resting Angle", 0);
     SmartDashboard.putNumber("Arm Burrow Angle", 100);
     SmartDashboard.putNumber("Arm Intake Angle", 212);

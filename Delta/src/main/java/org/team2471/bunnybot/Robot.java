@@ -7,16 +7,20 @@ import org.team2471.bunnybot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.communication.FRCNetworkCommunicationsLibrary;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
   public static DriveTrain driveTrain;
   public static Shooter shooter;
   public static Arm arm;
-  Preferences prefs;
+  public static Preferences prefs;
 
   @Override
   public void robotInit() {
+    // Ensure we get logs when we crash here
+    FRCNetworkCommunicationsLibrary.FRCNetworkCommunicationObserveUserProgramStarting();
+
     SmartDashboard.putBoolean("Disable Cheesy Drive", false);
     driveTrain = new DriveTrain();
     shooter = new Shooter();
