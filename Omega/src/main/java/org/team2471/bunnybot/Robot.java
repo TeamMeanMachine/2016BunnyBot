@@ -42,11 +42,13 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void disabledPeriodic() {
+    SmartDashboard.putNumber("Left Steer", HardwareMap.DriveTrainMap.LeftModule.turnEncoder.pidGet());
+    SmartDashboard.putNumber("Right Steer", HardwareMap.DriveTrainMap.RightModule.turnEncoder.pidGet());
   }
 
   @Override
   public void testInit() {
-    System.out.println("Left: " + HardwareMap.DriveTrainMap.LeftModule.turnEncoder.getVoltage());
-    System.out.println("Right: " + HardwareMap.DriveTrainMap.RightModule.turnEncoder.getVoltage());
+    System.out.println("Left: " + HardwareMap.DriveTrainMap.LeftModule.turnEncoder.pidGet());
+    System.out.println("Right: " + HardwareMap.DriveTrainMap.RightModule.turnEncoder.pidGet());
   }
 }

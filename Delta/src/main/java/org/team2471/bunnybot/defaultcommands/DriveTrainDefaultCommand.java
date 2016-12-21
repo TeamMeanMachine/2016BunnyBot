@@ -2,9 +2,7 @@ package org.team2471.bunnybot.defaultcommands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team2471.bunnybot.IOMap;
-
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import static org.team2471.bunnybot.IOMap.turnInPlaceButton;
 import static org.team2471.bunnybot.Robot.driveTrain;
@@ -23,8 +21,8 @@ public class DriveTrainDefaultCommand extends Command {
   protected void execute() {
     driveTrain.drive(IOMap.driverThrottleAxis.get(), IOMap.driverTurnAxis.get(),
             IOMap.coPilotThrottleAxis.get(), IOMap.coPilotTurnAxis.get(),
-            SmartDashboard.getBoolean("Cheesy Drive", true),
-            IOMap.driverThrottleAxis.get() < 0.5 || turnInPlaceButton.get());
+            SmartDashboard.getBoolean("Cheesy Drive", true),                   // this is the cheesy drive setting
+            IOMap.driverThrottleAxis.get() < 0.5 || turnInPlaceButton.get());  // this is quick turn for cheesy drive
 
     // driver non-verbal communication
     IOMap.coPilotController.rumbleLeft(IOMap.driverRumbleButton.get() || IOMap.coPilotRumbleButton.get() ? 1.0f : 0.0f );
