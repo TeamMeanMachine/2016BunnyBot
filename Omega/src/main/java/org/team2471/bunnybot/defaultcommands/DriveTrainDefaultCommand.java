@@ -6,6 +6,8 @@ import org.team2471.bunnybot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveTrainDefaultCommand extends Command {
+  private final IOMap ioMap = IOMap.getInstance();
+
   public DriveTrainDefaultCommand() {
     requires(Robot.driveTrain);
   }
@@ -17,9 +19,9 @@ public class DriveTrainDefaultCommand extends Command {
 
   @Override
   protected void execute() {
-    double throttle = IOMap.throttleAxis.get();
-    double turn = IOMap.turnAxis.get();
-    Robot.driveTrain.drive(throttle, turn, !IOMap.noCheesyDriveButton.get());
+    double throttle = ioMap.throttleAxis.get();
+    double turn = ioMap.turnAxis.get();
+    Robot.driveTrain.drive(throttle, turn, !ioMap.noCheesyDriveButton.get());
   }
 
   @Override

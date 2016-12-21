@@ -25,9 +25,6 @@ public class GrabberToAngleCommand extends Command {
   @Override
   protected boolean isFinished() {
     double delta = Math.abs(targetAngle - grabber.getAngle());
-    SmartDashboard.putNumber("Grabber Delta", delta);
-    SmartDashboard.putNumber("Grabber Angle", grabber.getAngle());
-    SmartDashboard.putNumber("Grabber Setpoint", grabber.getSetpoint());
     return delta < 1;
   }
 

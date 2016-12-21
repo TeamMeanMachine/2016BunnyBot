@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import static org.team2471.bunnybot.Robot.grabber;
 
 public class GrabberSpitCommand extends Command {
+  private final IOMap ioMap = IOMap.getInstance();
+
   public GrabberSpitCommand() {
     requires(grabber);
   }
@@ -19,7 +21,7 @@ public class GrabberSpitCommand extends Command {
 
   @Override
   protected void execute() {
-    grabber.spitOut(IOMap.spitAxis.get());
+    grabber.spitOut(ioMap.spitAxis.get());
   }
 
   @Override
