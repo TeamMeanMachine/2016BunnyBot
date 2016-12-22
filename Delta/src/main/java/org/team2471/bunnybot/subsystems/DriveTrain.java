@@ -50,8 +50,8 @@ public class DriveTrain extends Subsystem {
     m_leftPIDSource = new CANTalonQuadPIDSource(leftMotor1);
     m_rightPIDSource = new CANTalonQuadPIDSource(rightMotor1);
 
-    m_leftController = new PIDController( 0.01, 0.0, 0.0, m_leftPIDSource, leftMotor1 );
-    m_rightController = new PIDController( 0.01, 0.0, 0.0, m_rightPIDSource, rightMotor1 );
+    m_leftController = new PIDController( 1, 0.0, 0.0, m_leftPIDSource, leftMotor1 );
+    m_rightController = new PIDController( 1, 0.0, 0.0, m_rightPIDSource, rightMotor1 );
 
     resetEncoders();
 
@@ -65,6 +65,7 @@ public class DriveTrain extends Subsystem {
 
   public void drive( double dTurn, double dThrottle, double cTurn, double cThrottle, boolean cheesyDrive, boolean quickTurn ) {
 
+/*
     // copilot (never cheesy)
     double cLeft = cThrottle + cTurn;
     double cRight = cThrottle - cTurn;
@@ -91,6 +92,8 @@ public class DriveTrain extends Subsystem {
     }
 
     SmartDashboard.putNumber("Speed", averageSpeed);
+*/
+
     SmartDashboard.putNumber("Left Distance", m_leftPIDSource.pidGet());
     SmartDashboard.putNumber("Right Distance", m_rightPIDSource.pidGet());
   }
