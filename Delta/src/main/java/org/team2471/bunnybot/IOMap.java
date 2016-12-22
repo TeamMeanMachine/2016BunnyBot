@@ -9,7 +9,7 @@ import org.team2471.frc.lib.control.DriveButton;
 import org.team2471.frc.lib.control.DriveController;
 
 public class IOMap {
-  private static IOMap instance = new IOMap();
+  private static IOMap instance = null;
 
   public final DriveController driveController = new DriveController(0);
 
@@ -40,18 +40,22 @@ public class IOMap {
   public final DriveButton coPilotRumbleButton = coPilotController.getButton(6);
 
   private IOMap() {
-    driveController
-        .withRunCommandOnButtonPressEvent(6, new ShooterCommand());
-
-    coPilotController
-        .withRunCommandOnButtonPressEvent(3, new ReadyToSpitCommand())
-        .withRunCommandWhileButtonHoldEvent(5, new IntakeCommand(1.0))
-        .withRunCommandOnButtonReleaseEvent(5, new IntakeCommand(-1.0))
-        .withRunCommandWhileButtonHoldEvent(4, new SpitAnimationCommand(1.0))
-        .withRunCommandOnButtonReleaseEvent(4, new SpitAnimationCommand(-1.0));
+//    driveController
+//        .withRunCommandOnButtonPressEvent(6, new ShooterCommand());
+//
+//    coPilotController
+//        .withRunCommandOnButtonPressEvent(3, new ReadyToSpitCommand())
+//        .withRunCommandWhileButtonHoldEvent(5, new IntakeCommand(1.0))
+//        .withRunCommandOnButtonReleaseEvent(5, new IntakeCommand(-1.0))
+//        .withRunCommandWhileButtonHoldEvent(4, new SpitAnimationCommand(1.0))
+//        .withRunCommandOnButtonReleaseEvent(4, new SpitAnimationCommand(-1.0));
   }
 
   public static IOMap getInstance() {
+    if(instance == null) {
+      instance = new IOMap();
+    }
+
     return instance;
   }
 }
