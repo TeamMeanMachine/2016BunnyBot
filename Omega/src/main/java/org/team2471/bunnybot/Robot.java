@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
 
   @Override
   public void testInit() {
-      new CallibrationCommand().start();
+    new CallibrationCommand().start();
     System.out.println("Left: " + HardwareMap.DriveTrainMap.LeftModule.turnEncoder.pidGet());
     System.out.println("Right: " + HardwareMap.DriveTrainMap.RightModule.turnEncoder.pidGet());
   }
