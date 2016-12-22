@@ -23,7 +23,7 @@ public class SwerveModule {
     this.steerEncoder = steerEncoder;
     this.position = position;
     this.offset = offset;
-    steerController = new PIDController(-0.02, -0, -0.01, steerEncoder, steerMotor);
+    steerController = new PIDController(0.02, 0, 0.01, steerEncoder, steerMotor);
     steerController.enable();
     steerController.setInputRange(-180, 180);
     steerController.setContinuous();
@@ -40,7 +40,7 @@ public class SwerveModule {
     Vector2 delta = Vector2.subtract(position, Robot.driveTrain.getPivot());
     Vector2 turnVector = Vector2.normalize(Vector2.perpendicular(delta));
 
-    turnVector = Vector2.multiply(turnVector, -steering);
+    turnVector = Vector2.multiply(turnVector, steering);
     Vector2 sumVector = Vector2.add(forwardVector, turnVector);
     m_power = Vector2.length(sumVector);
 
