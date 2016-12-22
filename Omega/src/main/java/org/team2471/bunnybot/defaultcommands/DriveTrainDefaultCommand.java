@@ -1,39 +1,41 @@
 package org.team2471.bunnybot.defaultcommands;
 
-import edu.wpi.first.wpilibj.command.Command;
 import org.team2471.bunnybot.IOMap;
 import org.team2471.bunnybot.Robot;
-import org.team2471.bunnybot.subsystems.DriveTrain;
 
-import static org.team2471.bunnybot.Robot.driveTrain;
+import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveTrainDefaultCommand extends Command {
-    public DriveTrainDefaultCommand() {
-        requires(driveTrain);
-    }
+  private final IOMap ioMap = IOMap.getInstance();
 
-    @Override
-    protected void initialize() {
+  public DriveTrainDefaultCommand() {
+    requires(Robot.driveTrain);
+  }
 
-    }
+  @Override
+  protected void initialize() {
 
-    @Override
-    protected void execute() {
-        driveTrain.drive(IOMap.throttleAxis.get(), IOMap.turnAxis.get());
-    }
+  }
 
-    @Override
-    protected boolean isFinished() {
-        return false;
-    }
+  @Override
+  protected void execute() {
+    double throttle = ioMap.throttleAxis.get();
+    double turn = ioMap.turnAxis.get();
+    Robot.driveTrain.drive(throttle, turn, !ioMap.noCheesyDriveButton.get());
+  }
 
-    @Override
-    protected void end() {
+  @Override
+  protected boolean isFinished() {
+    return false;
+  }
 
-    }
+  @Override
+  protected void end() {
 
-    @Override
-    protected void interrupted() {
-        end();
-    }
+  }
+
+  @Override
+  protected void interrupted() {
+    end();
+  }
 }

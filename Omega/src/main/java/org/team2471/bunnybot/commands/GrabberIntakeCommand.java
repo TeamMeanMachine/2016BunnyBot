@@ -1,24 +1,22 @@
-package defaultcommands;
+package org.team2471.bunnybot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.team2471.bunnybot.IOMap;
 
-import static org.team2471.bunnybot.Robot.driveTrain;
+import static org.team2471.bunnybot.Robot.grabber;
 
-public class DriveTrainDefaultCommand extends Command {
-
-  public DriveTrainDefaultCommand() {
-    requires(driveTrain);
+public class GrabberIntakeCommand extends Command {
+  public GrabberIntakeCommand() {
+    requires(grabber);
   }
 
   @Override
   protected void initialize() {
-
+    grabber.suckIn();
   }
 
   @Override
   protected void execute() {
-    driveTrain.drive(IOMap.throttleAxis.get(), IOMap.turnAxis.get());
+
   }
 
   @Override
@@ -28,7 +26,7 @@ public class DriveTrainDefaultCommand extends Command {
 
   @Override
   protected void end() {
-    //explode
+    grabber.stopIntake();
   }
 
   @Override

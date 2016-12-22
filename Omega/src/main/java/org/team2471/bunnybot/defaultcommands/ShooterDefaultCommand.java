@@ -1,14 +1,14 @@
 package org.team2471.bunnybot.defaultcommands;
 
+import org.team2471.bunnybot.IOMap;
+import org.team2471.bunnybot.subsystems.Shooter;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-import static org.team2471.bunnybot.IOMap.tiltAxis;
-import static org.team2471.bunnybot.IOMap.turretXAxis;
-import static org.team2471.bunnybot.IOMap.turretYAxis;
 import static org.team2471.bunnybot.Robot.shooter;
-import static org.team2471.bunnybot.IOMap.shootButton;
 
 public class ShooterDefaultCommand extends Command {
+  private final IOMap ioMap = IOMap.getInstance();
 
   public ShooterDefaultCommand() {
     requires(shooter);
@@ -16,20 +16,31 @@ public class ShooterDefaultCommand extends Command {
 
   @Override
   protected void initialize() {
-
   }
 
   @Override
   protected void execute() {
-    double angle = Math.toDegrees(Math.atan2(turretXAxis.get(), turretYAxis.get()));
-    shooter.setAngle(angle);
+    double axis = ioMap.turretXAxis.get();
 
-    shooter.setTilt(tiltAxis.get() * 50);
+    shooter.setPan(axis);
 
-    if (shootButton.get()){
+    double tiltRange = Shooter.UPPER_TILT_LIMIT - Shooter.LOWER_TILT_LIMIT;
+    double tiltCenterpoint = (Shooter.UPPER_TILT_LIMIT + Shooter.LOWER_TILT_LIMIT) / 2;
+
+    double tiltAngle = ioMap.tiltAxis.get() * tiltRange / 2 + tiltCenterpoint;
+
+    shooter.setTilt(tiltAngle);
+
+    if (ioMap.shootButton.get()) {
       shooter.enableShooting();
     } else {
       shooter.disableShooting();
+    }
+
+    if (ioMap.flashlightButton.get()) {
+      shooter.enableFlashlight();
+    } else {
+      shooter.disableFlashlight();
     }
   }
 

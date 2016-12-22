@@ -1,51 +1,36 @@
 package org.team2471.bunnybot;
+
+import org.team2471.bunnybot.sensors.Magnepot;
 import org.team2471.frc.lib.vector.Vector2;
 
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import org.team2471.frc.lib.sensors.Magnepot;
 
 public class SwerveModule {
   private final SpeedController steerMotor;
   private final SpeedController driveMotor;
-  private final AnalogInput steerEncoder;
+  private final Magnepot steerEncoder;
   private final PIDController steerController;
   private final Vector2 position;
-
   private double offset = 0;
-  private double power = 0;
+  private double m_power = 0;
 
-  private final PIDSource steerSource = new PIDSource() {
-    @Override
-    public void setPIDSourceType(PIDSourceType pidSource) {
-
-    }
-
-    @Override
-    public PIDSourceType getPIDSourceType() {
-      return PIDSourceType.kDisplacement;
-    }
-
-    @Override
-    public double pidGet() {
-      SmartDashboard.putNumber("steer error", (steerEncoder.getVoltage()-2.6)/2.4*180);
-      return -(steerEncoder.getVoltage()-2.6)/2.4*180;
-    }
-  };
-
-  public SwerveModule(SpeedController driveMotor, SpeedController steerMotor, AnalogInput steerEncoder, Vector2 position) {
+  public SwerveModule(SpeedController driveMotor, SpeedController steerMotor, Magnepot steerEncoder, Vector2 position, double offset) {
     this.steerMotor = steerMotor;
     this.driveMotor = driveMotor;
     this.steerEncoder = steerEncoder;
     this.position = position;
-    steerController = new PIDController ( 0.01, 0, 0.01, steerSource, steerMotor);
+    this.offset = offset;
+    steerController = new PIDController(0.02, 0, 0.01, steerEncoder, steerMotor);
     steerController.enable();
     steerController.setInputRange(-180, 180);
     steerController.setContinuous();
     SmartDashboard.putData("Steer Controller", steerController);
   }
 
-  public void drive(double drivePower, double steerAngle){
-
+  public void drive(double drivePower, double steerAngle) {
     setAngle(steerAngle);
     driveMotor.set(drivePower);
   }
@@ -57,20 +42,19 @@ public class SwerveModule {
 
     turnVector = Vector2.multiply(turnVector, steering);
     Vector2 sumVector = Vector2.add(forwardVector, turnVector);
-    power = Vector2.length(sumVector);
-    double angle = Math.toDegrees(Vector2.angle(sumVector));
-    if(Math.abs(angle) > 90) {
-      sumVector = Vector2.multiply(sumVector, -1);
-      angle = Math.toDegrees(Vector2.angle(sumVector));
-      power = -power;
-    }
+    m_power = Vector2.length(sumVector);
 
-    setAngle(angle);
-    return power;
+    double currentAngle = steerEncoder.pidGet();
+    double desiredAngle = Math.toDegrees(Vector2.angle(sumVector));
+
+    desiredAngle = refineAngle(desiredAngle, currentAngle);
+
+    setAngle(desiredAngle);
+    return m_power;
   }
 
   public void setFactor(double factor) {
-    driveMotor.set(-power * factor);
+    driveMotor.set(-m_power * factor);
   }
 
   public double getOffset() {
@@ -83,5 +67,27 @@ public class SwerveModule {
 
   private void setAngle(double angle) {
     steerController.setSetpoint(angle + offset);
+  }
+
+  double refineAngle(double desiredAngle, double currentAngle) {
+    double delta = desiredAngle - currentAngle;
+    if (delta > 180) {
+      delta = delta - 360;
+    } else if (delta < -180) {
+      delta = delta + 360;
+    }
+
+    if (delta > 90) {
+      delta = delta - 180;
+      desiredAngle = currentAngle + delta;
+      m_power = -m_power;
+    } else if (delta < -90) {
+      delta = delta + 180;
+      desiredAngle = currentAngle + delta;
+      m_power = -m_power;
+    } else
+      desiredAngle = currentAngle + delta;
+
+    return desiredAngle;
   }
 }
