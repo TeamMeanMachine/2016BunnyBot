@@ -15,11 +15,6 @@ public class IOMap {
   private final DriveController mainController = new DriveController(0)
       .withRunCommandWhileButtonHoldEvent(6, new IntakeCommandGroup())
       .withRunCommandOnButtonReleaseEvent(6, new GrabberToAngleCommand(SmartDashboard.getNumber("Arm Resting Angle", 0)))
-  public static final DriveAxis callibrationAxis = mainController.getAxis(3);
-  public static final DriveButton callibrationButton = mainController.getButton(1);
-
-
-
       .withRunCommandWhileButtonHoldEvent(5, new GrabberSpitCommand())
       .withRunCommandOnButtonReleaseEvent(5, new GrabberToAngleCommand(SmartDashboard.getNumber("Arm Resting Angle")));
 
@@ -57,4 +52,7 @@ public class IOMap {
       .withInvert();
 
   public final DriveAxis tiltAxis = coController.getAxis(3);
+
+  public final DriveAxis callibrationAxis = coController.getAxis(3);
+  public final DriveButton callibrationButton = coController.getButton(1);
 }

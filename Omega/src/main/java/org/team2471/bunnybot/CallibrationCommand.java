@@ -17,19 +17,20 @@ public class CallibrationCommand extends Command {
 
   @Override
   protected void execute() {
+    IOMap ioMap = IOMap.getInstance();
 
-    if (IOMap.callibrationButton.get() && !hasBeenPressed) {
+    if (ioMap.callibrationButton.get() && !hasBeenPressed) {
       hasBeenPressed = true;
       motorNumber++;
-    } else if (hasBeenPressed && IOMap.callibrationButton.get()) {
+    } else if (hasBeenPressed && ioMap.callibrationButton.get()) {
       hasBeenPressed = false;
       motorNumber++;
     }
     if (motorNumber == 1) {
-      HardwareMap.DriveTrainMap.LeftModule.turnMotor.set(IOMap.callibrationAxis.get());
+      HardwareMap.DriveTrainMap.LeftModule.turnMotor.set(ioMap.callibrationAxis.get());
     }
     if (motorNumber == 2) {
-      HardwareMap.DriveTrainMap.RightModule.turnMotor.set(IOMap.callibrationAxis.get());
+      HardwareMap.DriveTrainMap.RightModule.turnMotor.set(ioMap.callibrationAxis.get());
     }
   }
 
