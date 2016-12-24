@@ -2,6 +2,11 @@ package org.team2471.bunnybot;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import org.team2471.bunnybot.autonomouscommands.DoNothingAuto;
+import org.team2471.bunnybot.autonomouscommands.DriveSixFeet;
+import org.team2471.bunnybot.autonomouscommands.FigureEightCommand;
 import org.team2471.bunnybot.subsystems.Arm;
 import org.team2471.bunnybot.subsystems.DriveTrain;
 import org.team2471.bunnybot.subsystems.Shooter;
@@ -19,9 +24,8 @@ public class Robot extends IterativeRobot {
   public static Shooter shooter;
   public static Arm arm;
   private static Preferences prefs;
-
-  double startLeft;
-  double startRight;
+  public static SendableChooser autoChooser;
+  Command autonomousCommand;
 
   @Override
   public void robotInit() {
@@ -38,68 +42,25 @@ public class Robot extends IterativeRobot {
 
     // make sure IOMap is initialized
     IOMap.getInstance();
+
+    autoChooser = new SendableChooser();
+    autoChooser.addDefault("Forward Six Feet", new DriveSixFeet(1.0));
+    autoChooser.addObject("Don't Move", new DoNothingAuto());
+    autoChooser.addObject("Figure Eight", new FigureEightCommand(1.0));
+    SmartDashboard.putData("AutoChooser", autoChooser);
   }
 
   @Override
   public void teleopInit() {
     // tune the drive position PID's
-    SmartDashboard.putData("Left PID", driveTrain.m_leftController);
-    SmartDashboard.putData("Right PID", driveTrain.m_rightController);
-//    driveTrain.m_leftController.enable();
-//    driveTrain.m_rightController.enable();
+    SmartDashboard.putData("Left PID", leftMotor1);
+    SmartDashboard.putData("Right PID", rightMotor1);
 
-    leftMotor1.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
-    leftMotor1.reverseSensor(false);
-    leftMotor1.configEncoderCodesPerRev(820*4);
-    leftMotor1.changeControlMode(CANTalon.TalonControlMode.Position);
-    leftMotor1.setProfile(0);
-    leftMotor1.setF(0);
-    leftMotor1.setP(0.1);
-    leftMotor1.setI(0);
-    leftMotor1.setD(0);
-
-    rightMotor1.setFeedbackDevice(CANTalon.FeedbackDevice.CtreMagEncoder_Relative);
-    rightMotor1.reverseSensor(true);
-    rightMotor1.reverseOutput(true);
-    rightMotor1.configEncoderCodesPerRev(820*4);
-    rightMotor1.changeControlMode(CANTalon.TalonControlMode.Position);
-    rightMotor1.setProfile(0);
-    rightMotor1.setF(0);
-    rightMotor1.setP(0.1);
-    rightMotor1.setI(0);
-    rightMotor1.setD(0);
-
-    startLeft = leftMotor1.getEncPosition();
-    startRight = rightMotor1.getEncPosition();
   }
 
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-
-    // tune the drive position PID's
-    double leftStick = IOMap.getInstance().coPilotController.getAxis(1).get();
-    double rightStick = IOMap.getInstance().coPilotController.getAxis(5).get();
-    if (Math.abs(leftStick)<0.1)
-      leftStick = 0.0;
-    if (Math.abs(rightStick)<0.1)
-      rightStick = 0.0;
-
-//    driveTrain.m_leftController.setSetpoint( leftStick * 4.0);
-//    driveTrain.m_rightController.setSetpoint( rightStick * 4.0);
-
-//    leftMotor1.set( leftStick );
-//    rightMotor1.set( rightStick );
-
-    leftMotor1.set( leftStick );
-    rightMotor1.set( rightStick );
-
-    SmartDashboard.putNumber( "Left Power", leftMotor1.get() );
-    SmartDashboard.putNumber( "Right Power", rightMotor1.get() );
-
-//    SmartDashboard.putNumber( "Left Error", driveTrain.m_leftController.getError() );
-//    SmartDashboard.putNumber( "Right Error", driveTrain.m_rightController.getError() );
-
   }
 
   @Override
@@ -108,8 +69,25 @@ public class Robot extends IterativeRobot {
   }
 
   @Override
+  public void autonomousInit() {
+    if (autoChooser != null) {
+      autonomousCommand = (Command) autoChooser.getSelected();
+      if (autonomousCommand != null) {
+        autonomousCommand.start();
+      }
+    }
+  }
+
+  @Override
+  public void autonomousPeriodic() {
+    Scheduler.getInstance().run();
+  }
+
+  @Override
   public void disabledPeriodic() {
     SmartDashboard.putNumber("Elbow Angle", arm.getElbowAngle());
     SmartDashboard.putNumber("Shoulder Angle", arm.getShoulderAngle());
+    SmartDashboard.putNumber("Left Distance", leftMotor1.getEncPosition() / 820.0);  // works regardless of control mode
+    SmartDashboard.putNumber("Right Distance", rightMotor1.getEncPosition() / 820.0);
   }
 }

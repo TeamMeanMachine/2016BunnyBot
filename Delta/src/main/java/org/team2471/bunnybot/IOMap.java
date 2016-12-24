@@ -40,15 +40,15 @@ public class IOMap {
   public final DriveButton coPilotRumbleButton = coPilotController.getButton(6);
 
   private IOMap() {
-//    driveController
-//        .withRunCommandOnButtonPressEvent(6, new ShooterCommand());
-//
-//    coPilotController
-//        .withRunCommandOnButtonPressEvent(3, new ReadyToSpitCommand())
-//        .withRunCommandWhileButtonHoldEvent(5, new IntakeCommand(1.0))
-//        .withRunCommandOnButtonReleaseEvent(5, new IntakeCommand(-1.0))
-//        .withRunCommandWhileButtonHoldEvent(4, new SpitAnimationCommand(1.0))
-//        .withRunCommandOnButtonReleaseEvent(4, new SpitAnimationCommand(-1.0));
+    driveController
+        .withRunCommandOnButtonPressEvent(6, new ShooterCommand());
+
+    coPilotController
+        .withRunCommandOnButtonPressEvent(3, new ReadyToSpitCommand())
+        .withRunCommandWhileButtonHoldEvent(5, new IntakeCommand(1.0))
+        .withRunCommandOnButtonReleaseEvent(5, new IntakeCommand(-1.0))
+        .withRunCommandWhileButtonHoldEvent(4, new SpitAnimationCommand(1.0))
+        .withRunCommandOnButtonReleaseEvent(4, new SpitAnimationCommand(-1.0));
   }
 
   public static IOMap getInstance() {

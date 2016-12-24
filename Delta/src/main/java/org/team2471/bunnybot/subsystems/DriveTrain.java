@@ -16,17 +16,11 @@ import static org.team2471.bunnybot.IOMap.*;
 public class DriveTrain extends Subsystem {
 
   private CheesyDriveHelper cheesyDriveHelper;
-  private static final double HIGH_SHIFTPOINT = 5.0;  // 250
-  private static final double LOW_SHIFTPOINT = 2.0;  // 150
+  public static final double HIGH_SHIFTPOINT = 5.0;  // 250
+  public static final double LOW_SHIFTPOINT = 2.0;  // 150
 
   private int m_leftStartDistance;
   private int m_rightStartDistance;
-
-  public PIDController m_leftController;
-  public PIDController m_rightController;
-
-  private CANTalonQuadPIDSource m_leftPIDSource;
-  private CANTalonQuadPIDSource m_rightPIDSource;
 
   public DriveTrain() {
 
@@ -37,21 +31,34 @@ public class DriveTrain extends Subsystem {
     leftMotor3.set(leftMotor1.getDeviceID());
 
     rightMotor1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-    rightMotor1.setInverted(true);    // does this work? supposed to be for PercentVBus
+    rightMotor1.setInverted(true);    // this one is for PercentVBus
     rightMotor2.changeControlMode(CANTalon.TalonControlMode.Follower);
     rightMotor3.changeControlMode(CANTalon.TalonControlMode.Follower);
     rightMotor2.set(rightMotor1.getDeviceID());
     rightMotor3.set(rightMotor1.getDeviceID());
 
-    //rightMotor1.configEncoderCodesPerRev( 200 );  // closed loop only
-    //rightMotor1.reverseOutput(true);  // I've tried this before, it is only for closed loop on the talon
-    //rightMotor1.reverseSensor(true);  // closed loop only
+    leftMotor1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+    leftMotor1.reverseSensor(false);
+    leftMotor1.reverseOutput(false);
+    leftMotor1.configEncoderCodesPerRev(820 / 4);
+    leftMotor1.setProfile(1);
+    leftMotor1.setF(0);
+    leftMotor1.setPID(1.5, 0, 4.0);
+    leftMotor1.setProfile(0);
+    leftMotor1.setF(0);
+    leftMotor1.setPID(2.0, 0, 2.0);
 
-    m_leftPIDSource = new CANTalonQuadPIDSource(leftMotor1);
-    m_rightPIDSource = new CANTalonQuadPIDSource(rightMotor1);
+    rightMotor1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+    rightMotor1.reverseSensor(true);
+    rightMotor1.reverseOutput(true);
+    rightMotor1.configEncoderCodesPerRev(820 / 4);
+    rightMotor1.setProfile(1);
+    rightMotor1.setF(0);
+    rightMotor1.setPID(1.5, 0, 4.0);
+    rightMotor1.setProfile(0);
+    rightMotor1.setF(0);
+    rightMotor1.setPID(2.0, 0, 2.0);
 
-    m_leftController = new PIDController( 1, 0.0, 0.0, m_leftPIDSource, leftMotor1 );
-    m_rightController = new PIDController( 1, 0.0, 0.0, m_rightPIDSource, rightMotor1 );
 
     resetEncoders();
 
@@ -65,7 +72,6 @@ public class DriveTrain extends Subsystem {
 
   public void drive( double dTurn, double dThrottle, double cTurn, double cThrottle, boolean cheesyDrive, boolean quickTurn ) {
 
-/*
     // copilot (never cheesy)
     double cLeft = cThrottle + cTurn;
     double cRight = cThrottle - cTurn;
@@ -87,22 +93,24 @@ public class DriveTrain extends Subsystem {
     double averageSpeed = getSpeed();
     if (averageSpeed > HIGH_SHIFTPOINT) {
       shiftSolenoid.set(false);  // high gear
+      //leftMotor1.setProfile(1);
     } else if (averageSpeed < LOW_SHIFTPOINT) {
       shiftSolenoid.set(true);
+      //rightMotor1.setProfile(0);
     }
 
     SmartDashboard.putNumber("Speed", averageSpeed);
-*/
 
-    SmartDashboard.putNumber("Left Distance", m_leftPIDSource.pidGet());
-    SmartDashboard.putNumber("Right Distance", m_rightPIDSource.pidGet());
+
+    SmartDashboard.putNumber("Left Distance", leftMotor1.getEncPosition() / 820.0);  // works regardless of control mode
+    SmartDashboard.putNumber("Right Distance", rightMotor1.getEncPosition() / 820.0);
   }
 
   public void drive(double throttle, double turn) {
     drive(throttle, turn, 0, 0, false, false);
   }
 
-  private double getSpeed() {
+  public double getSpeed() {
     return (Math.abs(leftMotor1.getSpeed()/82.0) + Math.abs(rightMotor1.getSpeed()/82.0)) / 2;
     // encoders return speed as
     // edges / 100 ms
@@ -116,6 +124,7 @@ public class DriveTrain extends Subsystem {
     setDefaultCommand(new DriveTrainDefaultCommand());
   }
 
+/*
   class CANTalonQuadPIDSource implements PIDSource {
 
     CANTalon m_talon;
@@ -144,4 +153,5 @@ public class DriveTrain extends Subsystem {
       // = 1 foot / 837 edges
     }
   }
+*/
 }
