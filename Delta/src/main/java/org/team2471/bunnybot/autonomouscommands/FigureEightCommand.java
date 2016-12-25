@@ -39,15 +39,15 @@ public class FigureEightCommand extends FollowPathTankDriveCommand {
     m_path = new Path2D();
 
     //              seconds   x     y
-    m_path.AddPoint(  0.0,   0.0,  0.0 );
-    m_path.AddPoint(  0.5,   -0.16,  0.5 );
-    m_path.AddPoint(  3.0,  -4.0,  4.0 );
+    m_path.addPoint(  0.0,   0.0,  0.0 );
+    m_path.addPoint(  0.5,   -0.16,  0.5 );
+    m_path.addPoint(  3.0,  -4.0,  4.0 );
 
-    m_path.AddPoint( 5.0, -34.0, -4.0 );
-    m_path.AddPoint( 6.0, -38.0,  0.0 );
-    m_path.AddPoint( 7.0, -34.0,  4.0 );
-    m_path.AddPoint( 11.0,  -4.0, -4.0 );
-    m_path.AddPoint( 12.0,   0.0,  0.0 );
+    m_path.addPoint( 5.0, -34.0, -4.0 );
+    m_path.addPoint( 6.0, -38.0,  0.0 );
+    m_path.addPoint( 7.0, -34.0,  4.0 );
+    m_path.addPoint( 11.0,  -4.0, -4.0 );
+    m_path.addPoint( 12.0,   0.0,  0.0 );
 
     setPath( m_path );
   }
