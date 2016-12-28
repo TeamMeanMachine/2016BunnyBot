@@ -38,16 +38,16 @@ public class FigureEightCommand extends FollowPathTankDriveCommand {
 
     m_path = new Path2D();
 
-    //              seconds   x     y
-    m_path.addPoint(  0.0,   0.0,  0.0 );
-    m_path.addPoint(  0.5,   -0.16,  0.5 );
-    m_path.addPoint(  3.0,  -4.0,  4.0 );
+    m_path.addPointAndTangent( 0.0,  0.0, 0.0, 6.0 );
+    m_path.addPoint(  -4.0,  4.0 );
+    m_path.addPoint( -34.0, -4.0 );
+    m_path.addPoint( -38.0,  0.0 );
+    m_path.addPoint( -34.0,  4.0 );
+    m_path.addPoint(  -4.0, -4.0 );
+    m_path.addPointAndTangent( 0.0,  0.0, 6.0, 0.0 );
 
-    m_path.addPoint( 5.0, -34.0, -4.0 );
-    m_path.addPoint( 6.0, -38.0,  0.0 );
-    m_path.addPoint( 7.0, -34.0,  4.0 );
-    m_path.addPoint( 11.0,  -4.0, -4.0 );
-    m_path.addPoint( 12.0,   0.0,  0.0 );
+    m_path.addEasePoint(    0,   0 );
+    m_path.addEasePoint( 20.0, 1.0 );
 
     setPath( m_path );
   }

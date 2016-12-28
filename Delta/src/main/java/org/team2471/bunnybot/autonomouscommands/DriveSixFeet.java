@@ -22,9 +22,11 @@ public class DriveSixFeet extends FollowPathTankDriveCommand {
 
     m_path = new Path2D();
 
-    //              seconds   x     y
-    m_path.addPoint(  0.0,   0.0,  0.0 );
-    m_path.addPoint(  2.0,   0.0,  6.0 );
+    m_path.addPoint(0.0,0.0 );
+    m_path.addPoint(0.0,6.0 );
+
+    m_path.addEasePoint( 0.0, 0.0 );
+    m_path.addEasePoint( 2.0, 1.0 );
 
     setPath( m_path );
   }
