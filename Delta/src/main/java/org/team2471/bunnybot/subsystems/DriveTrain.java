@@ -93,10 +93,8 @@ public class DriveTrain extends Subsystem {
     double averageSpeed = getSpeed();
     if (averageSpeed > HIGH_SHIFTPOINT) {
       shiftSolenoid.set(false);  // high gear
-      //leftMotor1.setProfile(1);
     } else if (averageSpeed < LOW_SHIFTPOINT) {
       shiftSolenoid.set(true);
-      //rightMotor1.setProfile(0);
     }
 
     SmartDashboard.putNumber("Speed", averageSpeed);
@@ -111,7 +109,7 @@ public class DriveTrain extends Subsystem {
   }
 
   public double getSpeed() {
-    return (Math.abs(leftMotor1.getSpeed()/82.0) + Math.abs(rightMotor1.getSpeed()/82.0)) / 2;
+    return (Math.abs(leftMotor1.getEncVelocity()/82.0) + Math.abs(rightMotor1.getEncVelocity()/82.0)) / 2;
     // encoders return speed as
     // edges / 100 ms
     // * 1 foot / 820 edges (see below)

@@ -19,6 +19,7 @@ public class FigureEightCommand extends FollowPathTankDriveCommand {
   protected void execute() {
     super.execute();
 
+/*
     double averageSpeed = driveTrain.getSpeed();
     if (averageSpeed > HIGH_SHIFTPOINT) {
       shiftSolenoid.set(false);  // high gear
@@ -27,16 +28,18 @@ public class FigureEightCommand extends FollowPathTankDriveCommand {
       shiftSolenoid.set(true);
       HardwareMap.DriveTrainMap.rightMotor1.setProfile(0);
     }
+*/
   }
 
-  public FigureEightCommand(double speed ) {
+  public FigureEightCommand( double speed ) {
     requires(driveTrain);
 
-    setSpeed( speed );
+    setSpeed( speed * 0.25 );
     setLeftController(HardwareMap.DriveTrainMap.leftMotor1);
     setRightController(HardwareMap.DriveTrainMap.rightMotor1);
 
     m_path = new Path2D();
+//    m_path.setRobotWidth( 26.0 / 12.0 );
 
     m_path.addPointAndTangent( 0.0,  0.0, 0.0, 1.0 );
     m_path.addPoint(  -4.0,  4.0 );
@@ -46,10 +49,10 @@ public class FigureEightCommand extends FollowPathTankDriveCommand {
     m_path.addPoint(  -4.0, -4.0 );
     m_path.addPointAndTangent( 0.0,  0.0, 0.0, 1.0 );
 
-    m_path.addEasePoint(    0,   0 );
-    m_path.addEasePoint(  7.0,0.40 );
-    m_path.addEasePoint( 13.0,0.60 );
-    m_path.addEasePoint( 20.0, 1.0 );
+    m_path.addEasePoint(    0,    0 );
+//    m_path.addEasePoint(  7.0, 0.40 );
+//    m_path.addEasePoint( 13.0, 0.60 );
+    m_path.addEasePoint( 10.0,  1.0 );
 
     setPath( m_path );
   }

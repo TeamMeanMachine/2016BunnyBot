@@ -4,9 +4,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import org.team2471.bunnybot.autonomouscommands.DoNothingAuto;
-import org.team2471.bunnybot.autonomouscommands.DriveSixFeet;
-import org.team2471.bunnybot.autonomouscommands.FigureEightCommand;
+import org.team2471.bunnybot.autonomouscommands.*;
 import org.team2471.bunnybot.subsystems.Arm;
 import org.team2471.bunnybot.subsystems.DriveTrain;
 import org.team2471.bunnybot.subsystems.Shooter;
@@ -47,6 +45,7 @@ public class Robot extends IterativeRobot {
     autoChooser.addDefault("Forward Six Feet", new DriveSixFeet(1.0));
     autoChooser.addObject("Don't Move", new DoNothingAuto());
     autoChooser.addObject("Figure Eight", new FigureEightCommand(1.0));
+    autoChooser.addObject("Bunnies", new BunniesAuto());
     SmartDashboard.putData("AutoChooser", autoChooser);
   }
 
@@ -56,6 +55,10 @@ public class Robot extends IterativeRobot {
     SmartDashboard.putData("Left PID", leftMotor1);
     SmartDashboard.putData("Right PID", rightMotor1);
 
+    HardwareMap.DriveTrainMap.leftMotor1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    HardwareMap.DriveTrainMap.rightMotor1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    HardwareMap.DriveTrainMap.leftMotor1.set(0);
+    HardwareMap.DriveTrainMap.rightMotor1.set(0);
   }
 
   @Override
