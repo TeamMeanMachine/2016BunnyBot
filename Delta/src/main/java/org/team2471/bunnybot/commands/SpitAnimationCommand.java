@@ -29,13 +29,13 @@ public class SpitAnimationCommand extends PlayAnimationCommand {
 
     lowerShoulderCurve.storeValue( 0.0, 51.0 );
     lowerShoulderCurve.storeValue( 0.5, 44.0 );
-    lowerShoulderCurve.storeValue( 1.0, 6.0 );
-    lowerShoulderCurve.storeValue( 1.25, -3.0 );
+    lowerShoulderCurve.storeValue( 1.0, 28.0 );
+    lowerShoulderCurve.storeValue( 1.5, -8.0 );
 
-    lowerElbowCurve.storeValue( 0.0, -115.0 );
+    lowerElbowCurve.storeValue( 0.0, -110.0 );
     lowerElbowCurve.storeValue( 0.5, -70.0 );
-    lowerElbowCurve.storeValue( 1.0, -58.0 );
-    lowerElbowCurve.storeValue( 1.25, -72.0 );
+    lowerElbowCurve.storeValue( 1.0, -50.0 );
+    lowerElbowCurve.storeValue( 1.5, -65.0 );
 
     // spit from praying mantis position
     upperAnimation = new MotionProfileAnimation();
@@ -45,8 +45,8 @@ public class SpitAnimationCommand extends PlayAnimationCommand {
     upperShoulderCurve.storeValue( 0.0, 28.0);
     upperShoulderCurve.storeValue( 0.5, 0.0 );
 
-    upperElbowCurve.storeValue( 0.0, -65.0 );
-    upperElbowCurve.storeValue( 0.5, -75.0 );
+    upperElbowCurve.storeValue( 0.0, -55.0 );
+    upperElbowCurve.storeValue( 0.5, -65.0 );
   }
 
   @Override

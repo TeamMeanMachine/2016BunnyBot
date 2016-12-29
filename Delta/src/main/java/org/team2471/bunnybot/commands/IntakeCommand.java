@@ -30,10 +30,10 @@ public class IntakeCommand extends PlayAnimationCommand {
 
     groundShoulderCurve.storeValue( 0.0, 51.0 );
     groundShoulderCurve.storeValue( 0.25, 51.0 );
-    groundShoulderCurve.storeValue( 1.0, -18.0 );
+    groundShoulderCurve.storeValue( 1.0, -22.0 );
 
-    groundElbowCurve.storeValue( 0.0, -113.0 );
-    groundElbowCurve.storeValue( 0.5, -100.0 );
+    groundElbowCurve.storeValue( 0.0, -110.0 );
+    groundElbowCurve.storeValue( 0.5, -90.0 );
 
     // can pickup Animation
     canAnimation = new MotionProfileAnimation();
@@ -42,11 +42,11 @@ public class IntakeCommand extends PlayAnimationCommand {
 
     canShoulderCurve.storeValue( 0.0, 26);
     canShoulderCurve.storeValue( 0.75, -13 );
-    canShoulderCurve.storeValue( 1.25, -32 );
+    canShoulderCurve.storeValue( 1.25, -27 );
 
-    canElbowCurve.storeValue( 0.0, -63 );
-    canElbowCurve.storeValue( 0.75, -84 );
-    canElbowCurve.storeValue( 1.25, -91 );
+    canElbowCurve.storeValue( 0.0, -55 );
+    canElbowCurve.storeValue( 0.75, -76 );
+    canElbowCurve.storeValue( 1.25, -83 );
   }
 
   @Override
@@ -75,7 +75,7 @@ public class IntakeCommand extends PlayAnimationCommand {
   @Override
   protected boolean isFinished() {
     if (getSpeed() > 0) {  // running Animation forward
-      return false;  // when button is released the scheduler will interrupt us
+      return isTimedOut();  // when button is released the scheduler will interrupt us
     }
     else {  // on button release, play animation to the end.
       return super.isFinished();

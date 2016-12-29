@@ -20,23 +20,24 @@ public class ReadyToSpitCommand extends PlayAnimationCommand{
     elbowCurve = new MotionProfileCurve( arm.elbowController, animation );
 
     shoulderCurve.storeValue( 0.0, 51.0 );
-    shoulderCurve.storeValue( 0.75, 44.0 );
-    shoulderCurve.storeValue( 1.0, 26.0 );
+    shoulderCurve.storeValue( 0.5, 44.0 );
+    shoulderCurve.storeValue( 0.75, 26.0 );
 
-    elbowCurve.storeValue( 0.0, -113.0 );
-    elbowCurve.storeValue( 0.75, -70.0 );
-    elbowCurve.storeValue( 1.0, -63.0 );
+    elbowCurve.storeValue( 0.0, -110.0 );
+    elbowCurve.storeValue( 0.5, -70.0 );
+    elbowCurve.storeValue( 0.75, -55.0 );
 
     setAnimation(animation);
   }
 
   @Override
   protected void initialize() {
+    super.initialize();
     if (arm.shoulderEncoder.pidGet() > 40) {
       setSpeed(1.0);
     }
     else {
-      setSpeed(-1.0);
+      setSpeed(-0.75);
     }
   }
 }
