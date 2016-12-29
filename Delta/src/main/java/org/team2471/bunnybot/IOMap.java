@@ -9,7 +9,7 @@ import org.team2471.frc.lib.control.DriveButton;
 import org.team2471.frc.lib.control.DriveController;
 
 public class IOMap {
-  private static IOMap instance = new IOMap();
+  private static IOMap instance = null;
 
   public final DriveController driveController = new DriveController(0);
 
@@ -52,6 +52,10 @@ public class IOMap {
   }
 
   public static IOMap getInstance() {
+    if(instance == null) {
+      instance = new IOMap();
+    }
+
     return instance;
   }
 }

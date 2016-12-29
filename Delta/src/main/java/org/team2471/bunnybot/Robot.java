@@ -1,6 +1,10 @@
 package org.team2471.bunnybot;
 
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import org.team2471.bunnybot.autonomouscommands.*;
 import org.team2471.bunnybot.subsystems.Arm;
 import org.team2471.bunnybot.subsystems.DriveTrain;
 import org.team2471.bunnybot.subsystems.Shooter;
@@ -10,11 +14,16 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.communication.FRCNetworkCommunicationsLibrary;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import static org.team2471.bunnybot.HardwareMap.DriveTrainMap.leftMotor1;
+import static org.team2471.bunnybot.HardwareMap.DriveTrainMap.rightMotor1;
+
 public class Robot extends IterativeRobot {
   public static DriveTrain driveTrain;
   public static Shooter shooter;
   public static Arm arm;
   private static Preferences prefs;
+  public static SendableChooser autoChooser;
+  Command autonomousCommand;
 
   @Override
   public void robotInit() {
@@ -31,24 +40,30 @@ public class Robot extends IterativeRobot {
 
     // make sure IOMap is initialized
     IOMap.getInstance();
+
+    autoChooser = new SendableChooser();
+    autoChooser.addDefault("Forward Six Feet", new DriveSixFeet(1.0));
+    autoChooser.addObject("Don't Move", new DoNothingAuto());
+    autoChooser.addObject("Figure Eight", new FigureEightCommand(1.0));
+    autoChooser.addObject("Bunnies", new BunniesAuto());
+    SmartDashboard.putData("AutoChooser", autoChooser);
   }
 
   @Override
   public void teleopInit() {
     // tune the drive position PID's
-    SmartDashboard.putData("Left PID", driveTrain.m_leftController);
-    SmartDashboard.putData("Right PID", driveTrain.m_rightController);
-//    driveTrain.m_leftController.enable();
-//    driveTrain.m_rightController.enable();
+    SmartDashboard.putData("Left PID", leftMotor1);
+    SmartDashboard.putData("Right PID", rightMotor1);
+
+    HardwareMap.DriveTrainMap.leftMotor1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    HardwareMap.DriveTrainMap.rightMotor1.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    HardwareMap.DriveTrainMap.leftMotor1.set(0);
+    HardwareMap.DriveTrainMap.rightMotor1.set(0);
   }
 
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-
-    // tune the drive position PID's
-//    driveTrain.m_leftController.setSetpoint( IOMap.driveController.getAxis(1).get() * 4.0);
-//    driveTrain.m_rightController.setSetpoint( IOMap.driveController.getAxis(3).get() * 4.0);
   }
 
   @Override
@@ -57,8 +72,25 @@ public class Robot extends IterativeRobot {
   }
 
   @Override
+  public void autonomousInit() {
+    if (autoChooser != null) {
+      autonomousCommand = (Command) autoChooser.getSelected();
+      if (autonomousCommand != null) {
+        autonomousCommand.start();
+      }
+    }
+  }
+
+  @Override
+  public void autonomousPeriodic() {
+    Scheduler.getInstance().run();
+  }
+
+  @Override
   public void disabledPeriodic() {
     SmartDashboard.putNumber("Elbow Angle", arm.getElbowAngle());
     SmartDashboard.putNumber("Shoulder Angle", arm.getShoulderAngle());
+    SmartDashboard.putNumber("Left Distance", leftMotor1.getEncPosition() / 820.0);  // works regardless of control mode
+    SmartDashboard.putNumber("Right Distance", rightMotor1.getEncPosition() / 820.0);
   }
 }
