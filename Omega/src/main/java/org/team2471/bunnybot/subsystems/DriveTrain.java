@@ -8,6 +8,7 @@ import org.team2471.util.BetterMath;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class DriveTrain extends Subsystem {
@@ -15,12 +16,12 @@ public class DriveTrain extends Subsystem {
       HardwareMap.DriveTrainMap.LeftModule.forwardMotor,
       HardwareMap.DriveTrainMap.LeftModule.turnMotor,
       HardwareMap.DriveTrainMap.LeftModule.turnEncoder,
-      new Vector2(-14, 19), 12);  // positive adjusts to the right
+      new Vector2(-14, 19), 0);  // positive adjusts to the right
   private final SwerveModule rightSwerveModule = new SwerveModule(
       HardwareMap.DriveTrainMap.RightModule.forwardMotor,
       HardwareMap.DriveTrainMap.RightModule.turnMotor,
       HardwareMap.DriveTrainMap.RightModule.turnEncoder,
-      new Vector2(14, 19), 2);
+      new Vector2(14, 19), 0);
 
   private final SpeedController frontLeftMotor = HardwareMap.DriveTrainMap.frontLeftMotor;
   private final SpeedController frontRightMotor = HardwareMap.DriveTrainMap.frontRightMotor;
@@ -28,6 +29,15 @@ public class DriveTrain extends Subsystem {
   private final SpeedController backRightMotor = HardwareMap.DriveTrainMap.backRightMotor;
 
   private final Vector2 pivot = new Vector2(0, -19);
+
+  public DriveTrain() {
+
+//    HardwareMap.DriveTrainMap.LeftModule.turnMotor.configEncoderCodesPerRev(820);
+//    HardwareMap.DriveTrainMap.LeftModule.turnMotor.configEncoderCodesPerRev(820);
+
+    SmartDashboard.putData("Left Steer PID", leftSwerveModule.getSteerController());
+    SmartDashboard.putData("Right Steer PID", rightSwerveModule.getSteerController());
+  }
 
   /**
    * Sets the forward speed and the swerve module target angles.
@@ -43,6 +53,7 @@ public class DriveTrain extends Subsystem {
 
     double leftPower = throttle + steeringRate;
     double rightPower = throttle - steeringRate;
+
     double maxPower = BetterMath.max(leftSwerveModule.getPower(throttle, steeringRate),
         rightSwerveModule.getPower(throttle, steeringRate), leftPower, rightPower);
     double factor = 1;
@@ -58,6 +69,14 @@ public class DriveTrain extends Subsystem {
 
     frontRightMotor.set(rightPower * factor);
     backRightMotor.set(rightPower * factor);
+
+    SmartDashboard.putNumber("Left Steer", HardwareMap.DriveTrainMap.LeftModule.turnEncoder.pidGet());
+    SmartDashboard.putNumber("Right Steer", HardwareMap.DriveTrainMap.LeftModule.turnEncoder.pidGet());
+
+    SmartDashboard.putNumber("Distance", getDistance());
+
+    leftSwerveModule.setOffset(SmartDashboard.getNumber("Left Offset", 0));
+    rightSwerveModule.setOffset(SmartDashboard.getNumber("Right Offset", 0));
   }
 
   /**
@@ -87,5 +106,12 @@ public class DriveTrain extends Subsystem {
 
   public SwerveModule getRightSwerveModule() {
     return rightSwerveModule;
+  }
+
+  public double getDistance() {
+    return (Math.abs(HardwareMap.DriveTrainMap.LeftModule.turnMotor.getEncPosition()/1500) +
+        Math.abs(HardwareMap.DriveTrainMap.RightModule.turnMotor.getEncPosition()/1500)) / 2.0;
+//    return (Math.abs(HardwareMap.DriveTrainMap.LeftModule.turnMotor.getPosition()) +
+//        Math.abs(HardwareMap.DriveTrainMap.RightModule.turnMotor.getPosition())) / 2.0;
   }
 }
