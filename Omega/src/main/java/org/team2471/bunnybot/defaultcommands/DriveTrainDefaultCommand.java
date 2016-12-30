@@ -21,7 +21,7 @@ public class DriveTrainDefaultCommand extends Command {
   protected void execute() {
     double throttle = ioMap.throttleAxis.get();
     double turn = ioMap.turnAxis.get();
-    Robot.driveTrain.drive(throttle, turn, !ioMap.noCheesyDriveButton.get());
+    Robot.driveTrain.drive(throttle, turn, !ioMap.intakeButton.get() && !ioMap.noCheesyDriveButton.get());
   }
 
   @Override

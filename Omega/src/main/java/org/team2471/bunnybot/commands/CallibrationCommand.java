@@ -1,5 +1,10 @@
-package org.team2471.bunnybot;
+package org.team2471.bunnybot.commands;
 
+
+import org.team2471.bunnybot.HardwareMap;
+import org.team2471.bunnybot.IOMap;
+import org.team2471.bunnybot.Robot;
+import org.team2471.bunnybot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -27,10 +32,10 @@ public class CallibrationCommand extends Command {
       motorNumber++;
     }
     if (motorNumber == 1) {
-      HardwareMap.DriveTrainMap.LeftModule.turnMotor.set(ioMap.callibrationAxis.get());
+      Robot.driveTrain.getLeftSwerveModule().setOffset(ioMap.callibrationAxis.get());
     }
     if (motorNumber == 2) {
-      HardwareMap.DriveTrainMap.RightModule.turnMotor.set(ioMap.callibrationAxis.get());
+      Robot.driveTrain.getRightSwerveModule().setOffset(ioMap.callibrationAxis.get());
     }
   }
 

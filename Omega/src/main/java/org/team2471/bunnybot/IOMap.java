@@ -45,6 +45,8 @@ public class IOMap {
   public final DriveAxis callibrationAxis = coController.getAxis(3);
   public final DriveButton callibrationButton = coController.getButton(1);
 
+  public final DriveButton intakeButton = mainController.getButton(6);
+
   private IOMap() {
     mainController
         .withRunCommandWhileButtonHoldEvent(6, new IntakeCommandGroup())
