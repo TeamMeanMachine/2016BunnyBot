@@ -22,10 +22,10 @@ public class DriveAgainstWall extends FollowPathTankDriveCommand {
     m_path.setTravelDirection(-1.0);
 
     m_path.addPointAndTangent( 0.0, 0.0, 0.0, 10.0);
-    m_path.addPoint( 0.0, 25.0);
+    m_path.addPoint( 0.0, 30.0);
 
     m_path.addEasePoint( 0.0, 0.0 );
-    m_path.addEasePoint( 3.0, 1.0 );
+    m_path.addEasePoint( 3.5, 1.0 );
 
     setPath( m_path );
   }
