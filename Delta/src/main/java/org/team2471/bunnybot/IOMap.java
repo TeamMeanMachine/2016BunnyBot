@@ -1,6 +1,6 @@
 package org.team2471.bunnybot;
 
-import org.team2471.bunnybot.commands.IntakeCommand;
+import org.team2471.bunnybot.commands.IntakeAnimationCommand;
 import org.team2471.bunnybot.commands.ReadyToSpitCommand;
 import org.team2471.bunnybot.commands.ShooterCommand;
 import org.team2471.bunnybot.commands.SpitAnimationCommand;
@@ -45,8 +45,8 @@ public class IOMap {
 
     coPilotController
         .withRunCommandOnButtonPressEvent(3, new ReadyToSpitCommand())
-        .withRunCommandWhileButtonHoldEvent(5, new IntakeCommand(1.0))
-        .withRunCommandOnButtonReleaseEvent(5, new IntakeCommand(-1.0))
+        .withRunCommandWhileButtonHoldEvent(5, new IntakeAnimationCommand(1.0))
+        .withRunCommandOnButtonReleaseEvent(5, new IntakeAnimationCommand(-1.0))
         .withRunCommandWhileButtonHoldEvent(4, new SpitAnimationCommand(1.0))
         .withRunCommandOnButtonReleaseEvent(4, new SpitAnimationCommand(-1.0));
   }

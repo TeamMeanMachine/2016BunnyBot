@@ -11,7 +11,7 @@ public class DriveToCan extends FollowPathTankDriveCommand {
 
   Path2D m_path;
 
-  public DriveToCan(double speed ) {
+  public DriveToCan(double speed) {
     requires(driveTrain);
 
     setSpeed( speed );
@@ -22,10 +22,10 @@ public class DriveToCan extends FollowPathTankDriveCommand {
     m_path.setTravelDirection(-1.0);
 
     m_path.addPointAndTangent( 0.0, 0.0, 0.0, 10.0);
-    m_path.addPoint( 0.0, 3.0);
+    m_path.addPoint( 0.0, 5.0);
 
     m_path.addEasePoint( 0.0, 0.0 );
-    m_path.addEasePoint( 4.0, 1.0 );
+    m_path.addEasePoint( 3.0, 1.0 );
 
     setPath( m_path );
   }

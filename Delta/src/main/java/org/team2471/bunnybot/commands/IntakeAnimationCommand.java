@@ -7,7 +7,7 @@ import org.team2471.frc.lib.motion_profiling.PlayAnimationCommand;
 
 import static org.team2471.bunnybot.Robot.arm;
 
-public class IntakeCommand extends PlayAnimationCommand {
+public class IntakeAnimationCommand extends PlayAnimationCommand {
 
   MotionProfileAnimation groundAnimation;
   MotionProfileCurve groundShoulderCurve;
@@ -19,7 +19,7 @@ public class IntakeCommand extends PlayAnimationCommand {
 
   static MotionProfileAnimation previousAnimation;
 
-  public IntakeCommand(double speed ) {
+  public IntakeAnimationCommand(double speed ) {
     requires(arm);
 
     // ground pickup Animation

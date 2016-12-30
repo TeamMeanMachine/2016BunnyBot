@@ -81,7 +81,7 @@ public class SpitAnimationCommand extends PlayAnimationCommand {
   @Override
   protected boolean isFinished() {
     if (getSpeed() > 0) {  // running Animation forward
-      return false;  // when button is released the scheduler will interrupt us
+      return isTimedOut();  // when button is released the scheduler will interrupt us
     }
     else {  // on button release, play animation to the end.
       return super.isFinished();

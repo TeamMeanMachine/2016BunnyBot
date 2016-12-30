@@ -46,6 +46,9 @@ public class Robot extends IterativeRobot {
     autoChooser.addObject("Don't Move", new DoNothingAuto());
     autoChooser.addObject("Figure Eight", new FigureEightCommand(1.0));
     autoChooser.addObject("Bunnies", new BunniesAuto());
+    autoChooser.addObject("Bunny", new BunnyAuto());
+    autoChooser.addObject("U Shape Left", new DriveArroundCanLeft(1.0));
+    autoChooser.addObject("U Shape Right", new DriveArroundCanRight(1.0));
     SmartDashboard.putData("AutoChooser", autoChooser);
   }
 
