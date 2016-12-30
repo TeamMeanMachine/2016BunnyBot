@@ -49,6 +49,7 @@ public class Robot extends IterativeRobot {
     autoChooser.addObject("Bunny", new BunnyAuto());
     autoChooser.addObject("U Shape Left", new DriveArroundCanLeft(1.0));
     autoChooser.addObject("U Shape Right", new DriveArroundCanRight(1.0));
+    autoChooser.addObject("Intake 3 Auto", new Intake3Auto());
     SmartDashboard.putData("AutoChooser", autoChooser);
   }
 
