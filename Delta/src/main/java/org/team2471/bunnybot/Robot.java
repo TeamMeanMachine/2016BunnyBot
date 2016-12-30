@@ -51,6 +51,9 @@ public class Robot extends IterativeRobot {
     autoChooser.addObject("U Shape Right", new DriveArroundCanRight(1.0));
     autoChooser.addObject("Intake 3 Auto", new Intake3Auto());
     SmartDashboard.putData("AutoChooser", autoChooser);
+
+    SmartDashboard.putNumber("Shoulder Offset", prefs.getDouble("Shoulder Offset", 0.0));
+    SmartDashboard.putNumber("Elbow Offset", prefs.getDouble("Elbow Offset", 0.0));
   }
 
   @Override
@@ -73,6 +76,9 @@ public class Robot extends IterativeRobot {
   @Override
   public void disabledInit() {
     prefs.putBoolean("Cheesy Drive", SmartDashboard.getBoolean("Cheesy Drive", true));
+
+    prefs.putDouble("Shoulder Offset", SmartDashboard.getNumber("Shoulder Offset", 0.0));
+    prefs.putDouble("Elbow Offset", SmartDashboard.getNumber("Elbow Offset", 0.0));
   }
 
   @Override

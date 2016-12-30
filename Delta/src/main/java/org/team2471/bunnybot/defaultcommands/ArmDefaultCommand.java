@@ -28,7 +28,11 @@ public class ArmDefaultCommand extends Command {
     else {
       arm.stopIntake();
     }
+
+    HardwareMap.ArmMap.shoulderEncoder.setDoubleOffset(SmartDashboard.getNumber("Shoulder Offset", 0.0));
+    HardwareMap.ArmMap.elbowEncoder.setDoubleOffset(SmartDashboard.getNumber("Elbow Offset", 0.0));
   }
+
 
   @Override
   protected boolean isFinished() {
