@@ -33,20 +33,8 @@ public class DriveSixFeet extends FollowPathTankDriveCommand {
 
   @Override
   protected void initialize() {
-    driveTrain.resetEncoders();
     super.initialize();
-    System.out.println("Got To Drive Six Feet Initialize");
+    //System.out.println("Got To Drive Six Feet Initialize");
     shiftSolenoid.set(true);
-  }
-
-  @Override
-  protected void end() {
-    super.end();
-  }
-
-  @Override
-  protected void interrupted() {
-    super.interrupted();
-    end();
   }
 }

@@ -59,7 +59,6 @@ public class FigureEightCommand extends FollowPathTankDriveCommand {
 
   @Override
   protected void initialize() {
-    driveTrain.resetEncoders();
     super.initialize();
     shiftSolenoid.set(true);
   }

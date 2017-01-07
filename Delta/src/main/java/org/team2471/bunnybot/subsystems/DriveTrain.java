@@ -19,9 +19,6 @@ public class DriveTrain extends Subsystem {
   public static final double HIGH_SHIFTPOINT = 5.0;  // 250
   public static final double LOW_SHIFTPOINT = 2.0;  // 150
 
-  private int m_leftStartDistance;
-  private int m_rightStartDistance;
-
   public DriveTrain() {
 
     leftMotor1.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
@@ -59,15 +56,7 @@ public class DriveTrain extends Subsystem {
     rightMotor1.setF(0);
     rightMotor1.setPID(2.0, 0, 2.0);
 
-
-    resetEncoders();
-
     cheesyDriveHelper = new CheesyDriveHelper();
-  }
-
-  public void resetEncoders() {
-    m_leftStartDistance = leftMotor1.getEncPosition();
-    m_rightStartDistance = rightMotor1.getEncPosition();
   }
 
   public void drive( double dTurn, double dThrottle, double cTurn, double cThrottle, boolean cheesyDrive, boolean quickTurn ) {
@@ -121,35 +110,4 @@ public class DriveTrain extends Subsystem {
   protected void initDefaultCommand() {
     setDefaultCommand(new DriveTrainDefaultCommand());
   }
-
-/*
-  class CANTalonQuadPIDSource implements PIDSource {
-
-    CANTalon m_talon;
-
-    CANTalonQuadPIDSource( CANTalon talon ) {
-      m_talon = talon;
-    }
-
-    @Override
-    public void setPIDSourceType(PIDSourceType pidSource) {
-    }
-
-    @Override
-    public PIDSourceType getPIDSourceType() {
-      return null;
-    }
-
-    @Override
-    public double pidGet() {
-      return m_talon.getEncPosition() / 820.0;
-      // returns edge count
-      // 1 tick / 4 edges
-      // 1 rev / 200 ticks
-      // 4 inches * 3.14 / 1 rev
-      // 1 foot / 12 inches
-      // = 1 foot / 837 edges
-    }
-  }
-*/
 }
