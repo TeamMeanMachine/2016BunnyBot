@@ -4,6 +4,7 @@ import org.team2471.bunnybot.HardwareMap;
 import org.team2471.frc.lib.motion_profiling.FollowPathTankDriveCommand;
 import org.team2471.frc.lib.motion_profiling.Path2D;
 
+import static org.team2471.bunnybot.HardwareMap.DriveTrainMap.shiftSolenoid;
 import static org.team2471.bunnybot.Robot.driveTrain;
 //this autonomous works only if robot is right in front of the lift(in a straight line)
 public class DriveToLift extends FollowPathTankDriveCommand{
@@ -30,5 +31,9 @@ public class DriveToLift extends FollowPathTankDriveCommand{
 
         setPath( m_path );
     }
-
+    @Override
+    protected void initialize() {
+        super.initialize();
+        shiftSolenoid.set(true);
+    }
 }

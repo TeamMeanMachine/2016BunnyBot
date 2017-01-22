@@ -4,6 +4,7 @@ import org.team2471.bunnybot.HardwareMap;
 import org.team2471.frc.lib.motion_profiling.FollowPathTankDriveCommand;
 import org.team2471.frc.lib.motion_profiling.Path2D;
 
+import static org.team2471.bunnybot.HardwareMap.DriveTrainMap.shiftSolenoid;
 import static org.team2471.bunnybot.Robot.driveTrain;
 
 public class DriveToHopperFromRightLift extends FollowPathTankDriveCommand {
@@ -25,5 +26,10 @@ public class DriveToHopperFromRightLift extends FollowPathTankDriveCommand {
     m_path.addEasePoint(3.0, 0.0);
 
     setPath(m_path);
+  }
+  @Override
+  protected void initialize() {
+    super.initialize();
+    shiftSolenoid.set(true);
   }
 }

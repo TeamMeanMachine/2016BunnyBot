@@ -4,6 +4,7 @@ import org.team2471.bunnybot.HardwareMap;
 import org.team2471.frc.lib.motion_profiling.FollowPathTankDriveCommand;
 import org.team2471.frc.lib.motion_profiling.Path2D;
 
+import static org.team2471.bunnybot.HardwareMap.DriveTrainMap.shiftSolenoid;
 import static org.team2471.bunnybot.Robot.driveTrain;
 //This auto only works for the blue alliance
 public class DriveBackwardsFromLeftLift extends FollowPathTankDriveCommand {
@@ -28,6 +29,11 @@ public class DriveBackwardsFromLeftLift extends FollowPathTankDriveCommand {
 
 setPath(m_path);
 
+  }
+  @Override
+  protected void initialize() {
+    super.initialize();
+    shiftSolenoid.set(true);
   }
 }
 
