@@ -50,6 +50,8 @@ public class Robot extends IterativeRobot {
     autoChooser.addObject("U Shape Left", new DriveArroundCanLeft(1.0));
     autoChooser.addObject("U Shape Right", new DriveArroundCanRight(1.0));
     autoChooser.addObject("Intake 3 Auto", new Intake3Auto());
+    autoChooser.addObject("Drive to Hopper", new DriveToHopperAuto(1.0));
+    autoChooser.addObject("Drive Eight Feet", new DriveToHopperAuto(1.0));
     SmartDashboard.putData("AutoChooser", autoChooser);
 
     SmartDashboard.putNumber("Shoulder Offset", prefs.getDouble("Shoulder Offset", 0.0));
