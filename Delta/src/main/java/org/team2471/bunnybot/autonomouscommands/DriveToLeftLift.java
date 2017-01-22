@@ -29,7 +29,7 @@ public class DriveToLeftLift extends FollowPathTankDriveCommand {
 
 
         setPath( m_path );
-    }
+}
 
 }
 
