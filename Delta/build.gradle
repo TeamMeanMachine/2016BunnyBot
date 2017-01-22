@@ -18,6 +18,7 @@ apply plugin: 'GradleRIO'                                 //Apply the GradleRIO 
 
 gradlerio.robotClass = "org.team2471.bunnybot.Robot"
 gradlerio.team = "2471"
+gradlerio.rioIP = "10.24.71.45"
 
 repositories {
   flatDir {
