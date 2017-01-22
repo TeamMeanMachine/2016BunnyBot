@@ -21,10 +21,11 @@ public class DriveToHopperAuto extends FollowPathTankDriveCommand {
     m_path = new Path2D();
 
     m_path.addPointAndTangent(0.0,0.0, 0.0, 3.0 );
-    m_path.addPointAndTangent(8.0,8.0, 3.0, 0.0 );
+    m_path.addPointAndTangent(7.0,8.0, 3.0, 0.0 );
+    m_path.addPoint(8.0,8.0);
 
     m_path.addEasePoint( 0.0, 0.0 );
-    m_path.addEasePoint( 8.0, 1.0 );
+    m_path.addEasePoint( 4.0, 1.0 );
 
     setPath( m_path );
   }
