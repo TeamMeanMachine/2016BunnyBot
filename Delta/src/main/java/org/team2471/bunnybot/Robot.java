@@ -3,6 +3,7 @@ package org.team2471.bunnybot;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.PrintCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import org.team2471.bunnybot.autonomouscommands.*;
 import org.team2471.bunnybot.subsystems.Arm;
@@ -55,12 +56,8 @@ public class Robot extends IterativeRobot {
     autoChooser.addObject("Drive to left Lift", new DriveToLeftLift(1.0));
     autoChooser.addObject("Drive to right Lift", new DriveToRightLift(1.0));
     autoChooser.addObject("Drive to middle lift", new DriveToLift(1.0));
-    autoChooser.addObject("Drive to hopper from left Lift", new DriveBackwardsFromLeftLift(1.0));
-    autoChooser.addObject("Drive to hopper from right Lift", new DriveBackwardsFromRightLift(1.0));
-    autoChooser.addObject("Drive backwards from left Lift", new DriveToHopperFromLeftLift(1.0));
-    autoChooser.addObject("Drive backwards from right Lift", new DriveToHopperFromRightLift(1.0));
-    autoChooser.addObject("One Hundred point Auto Blue Alliance", new OneHundredPointAutoBlueAlliance());
-    autoChooser.addObject("One Hundred point Auto Red Alliance", new OneHundredPointAutoRedAlliance());
+    autoChooser.addObject("Bunny Auto without Arm", new BunnyAutoAsMyOwn());
+    autoChooser.addObject("One Hundred point Auto", new OneHundredPointAuto());
     SmartDashboard.putData("AutoChooser", autoChooser);
 
     SmartDashboard.putNumber("Shoulder Offset", prefs.getDouble("Shoulder Offset", 0.0));
