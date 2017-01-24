@@ -1,7 +1,6 @@
 package org.team2471.bunnybot.autonomouscommands;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.PrintCommand;
 
@@ -17,14 +16,14 @@ public class OneHundredPointAuto extends CommandGroup {
     if (alliance == Alliance.Blue) {
       addSequential(new DriveToLeftLift(1.0));
       addSequential(new PrintCommand("Finished first drive"));
-      addSequential(new DriveBackwardsFromLeftLift(1.0));
+      addSequential(new DriveBackwardsFromLLToHopper(1.0));
       addSequential(new PrintCommand("Finished driving backwards"));
       addSequential(new DriveToHopperFromLeftLift(1.0));
       addSequential(new PrintCommand("Done!"));
     } else if (alliance == Alliance.Red) {
       addSequential(new DriveToRightLift(1.0));
       addSequential(new PrintCommand("Finished First drive"));
-      addSequential(new DriveBackwardsFromRightLift(1.0));
+      addSequential(new DriveBackwardsFromRLToHopper(1.0));
       addSequential(new PrintCommand("Finished driving backwards"));
       addSequential(new DriveToHopperFromRightLift(1.0));
       addSequential(new PrintCommand("Done!"));

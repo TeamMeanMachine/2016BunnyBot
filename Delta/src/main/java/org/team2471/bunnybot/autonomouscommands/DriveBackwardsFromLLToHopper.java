@@ -6,11 +6,11 @@ import org.team2471.frc.lib.motion_profiling.Path2D;
 
 import static org.team2471.bunnybot.HardwareMap.DriveTrainMap.shiftSolenoid;
 import static org.team2471.bunnybot.Robot.driveTrain;
-
-public class DriveBackwardsFromRightLift extends FollowPathTankDriveCommand {
+//This auto only works for the blue alliance
+public class DriveBackwardsFromLLToHopper extends FollowPathTankDriveCommand {
   Path2D m_path;
-//This auto works only on the red alliance
-  public DriveBackwardsFromRightLift(double speed) {
+
+  public DriveBackwardsFromLLToHopper(double speed) {
 
     requires(driveTrain);
 
@@ -19,11 +19,10 @@ public class DriveBackwardsFromRightLift extends FollowPathTankDriveCommand {
     setRightController(HardwareMap.DriveTrainMap.rightMotor1);
 
     m_path = new Path2D();
-    //m_path.setTravelDirection(-1.0);
+    m_path.setTravelDirection(-1.0);
 
-    m_path.addPointAndTangent(-6.0, 8.6, -1.75, 1.0);
-    m_path.addPointAndTangent(-5.0, 7.0, 2.0, 1.0);
-
+    m_path.addPointAndTangent(6.0, 8.6, 1.75, 1.0);
+    m_path.addPointAndTangent(4.0, 6.0, -2.0, 1.0);
 
     m_path.addEasePoint(0.0, 0.0);
     m_path.addEasePoint(2.0, 1.0);

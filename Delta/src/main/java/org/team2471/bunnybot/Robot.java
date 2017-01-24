@@ -43,21 +43,14 @@ public class Robot extends IterativeRobot {
     IOMap.getInstance();
 
     autoChooser = new SendableChooser();
-    autoChooser.addDefault("Forward Six Feet", new DriveSixFeet(1.0));
     autoChooser.addObject("Don't Move", new DoNothingAuto());
-    autoChooser.addObject("Figure Eight", new FigureEightCommand(1.0));
-    autoChooser.addObject("Bunnies", new BunniesAuto());
-    autoChooser.addObject("Bunny", new BunnyAuto());
-    autoChooser.addObject("U Shape Left", new DriveArroundCanLeft(1.0));
-    autoChooser.addObject("U Shape Right", new DriveArroundCanRight(1.0));
-    autoChooser.addObject("Intake 3 Auto", new Intake3Auto());
     autoChooser.addObject("Drive to Hopper", new DriveToHopperAuto(1.0));
     autoChooser.addObject("Drive Eight Feet", new DriveToHopperAuto(1.0));
     autoChooser.addObject("Drive to left Lift", new DriveToLeftLift(1.0));
     autoChooser.addObject("Drive to right Lift", new DriveToRightLift(1.0));
     autoChooser.addObject("Drive to middle lift", new DriveToLift(1.0));
-    autoChooser.addObject("Bunny Auto without Arm", new BunnyAutoAsMyOwn());
     autoChooser.addObject("One Hundred point Auto", new OneHundredPointAuto());
+    autoChooser.addObject("Drop off gear and go to far Hopper", new GearPlusFarHopper());
     SmartDashboard.putData("AutoChooser", autoChooser);
 
     SmartDashboard.putNumber("Shoulder Offset", prefs.getDouble("Shoulder Offset", 0.0));
