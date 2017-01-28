@@ -27,7 +27,7 @@ repositories {
 }
 
 dependencies {
-  compile name: 'meanlib-0.1.0'
+  compile name: 'meanlib-1.0.0'
 }
 
 def robotManifest = {

@@ -51,6 +51,7 @@ public class Robot extends IterativeRobot {
     autoChooser.addObject("Drive to middle lift", new DriveToLift(1.0));
     autoChooser.addObject("One Hundred point Auto", new OneHundredPointAuto());
     autoChooser.addObject("Drop off gear and go to far Hopper", new GearPlusFarHopper());
+    autoChooser.addObject("Drive backwards,red alliance", new DriveBackwardsFromRLToFarHopper(1.0));
     SmartDashboard.putData("AutoChooser", autoChooser);
 
     SmartDashboard.putNumber("Shoulder Offset", prefs.getDouble("Shoulder Offset", 0.0));

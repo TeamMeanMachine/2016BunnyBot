@@ -22,7 +22,7 @@ public class DriveBackwardsFromRLToFarHopper extends FollowPathTankDriveCommand 
     m_path.setTravelDirection(-1.0);
 
     m_path.addPointAndTangent(-6.0, 8.6, -1.75, 1.0);
-    m_path.addPointAndTangent(-5.0, 7.0, 0.25, 1.0);
+    m_path.addPointAndTangent(-6.0, 5.0, 4.0, 1.0);
 
 
     m_path.addEasePoint(0.0, 0.0);
