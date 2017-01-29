@@ -23,7 +23,8 @@ public class DriveToLift extends FollowPathTankDriveCommand{
         m_path.setTravelDirection(1.0);
 
         m_path.addPoint( 0.0, 0.0);
-        m_path.addPoint( 0.0, 7.1);
+        m_path.addPoint( 0.0, 6.0);
+        //Change to farther lengths for actual robot since we are testing on Thunder, For all Autonomi
 
         m_path.addEasePoint( 0.0, 0.0 );
         m_path.addEasePoint( 3.0, 1.0 );
