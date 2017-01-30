@@ -7,10 +7,10 @@ import org.team2471.frc.lib.motion_profiling.Path2D;
 import static org.team2471.bunnybot.HardwareMap.DriveTrainMap.shiftSolenoid;
 import static org.team2471.bunnybot.Robot.driveTrain;
 
-public class DriveToFarHopperFromRightLift extends FollowPathTankDriveCommand {
+public class DriveToFarHopperBlueAlliance extends FollowPathTankDriveCommand {
   Path2D m_path;
 
-  public DriveToFarHopperFromRightLift(double speed) {
+  public DriveToFarHopperBlueAlliance(double speed) {
     requires(driveTrain);
 
     setSpeed(speed);
@@ -20,7 +20,7 @@ public class DriveToFarHopperFromRightLift extends FollowPathTankDriveCommand {
     m_path = new Path2D();
     m_path.setTravelDirection(1.0);
 
-    m_path.addPointAndTangent(-5.0, 7.0, 1.5, 1.0);
+    m_path.addPointAndTangent(0.0, 0.0, 0.0, 10.0);
     m_path.addPointAndTangent(7.0, 16.0, 10.0, 0.0);
 
     m_path.addEasePoint(0.0, 0.0);

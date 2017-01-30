@@ -3,7 +3,6 @@ package org.team2471.bunnybot;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.PrintCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import org.team2471.bunnybot.autonomouscommands.*;
 import org.team2471.bunnybot.subsystems.Arm;
@@ -44,8 +43,8 @@ public class Robot extends IterativeRobot {
 
     autoChooser = new SendableChooser();
     autoChooser.addObject("Don't Move", new DoNothingAuto());
-    autoChooser.addObject("Drive to Hopper", new DriveToHopperAuto(1.0));
-    autoChooser.addObject("Drive Eight Feet", new DriveToHopperAuto(1.0));
+    autoChooser.addObject("Drive to Hopper", new DriveToHopper());
+    autoChooser.addObject("Drive Eight Feet", new DriveEightFeet(1.0));
     autoChooser.addObject("Drive to left Lift", new DriveToLeftLift(1.0));
     autoChooser.addObject("Drive to right Lift", new DriveToRightLift(1.0));
     autoChooser.addObject("Drive to middle lift", new DriveToLift(1.0));
@@ -53,6 +52,9 @@ public class Robot extends IterativeRobot {
     autoChooser.addObject("Drop off gear and go to far Hopper", new GearPlusFarHopper());
     autoChooser.addObject("Drive backwards,red alliance", new DriveBackwardsFromRLToFarHopper(1.0));
     autoChooser.addObject("Circle Test", new CircleTestAutonomous(1.0));
+    autoChooser.addObject("Drive to far Hopper", new DriveToFarHopper());
+    autoChooser.addObject("Drive Co-op with other good team", new CoOpHopper());
+
     SmartDashboard.putData("AutoChooser", autoChooser);
 
     SmartDashboard.putNumber("Shoulder Offset", prefs.getDouble("Shoulder Offset", 0.0));

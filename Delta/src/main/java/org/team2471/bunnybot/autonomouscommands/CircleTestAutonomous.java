@@ -22,17 +22,17 @@ public class CircleTestAutonomous extends FollowPathTankDriveCommand {
     m_path.setTravelDirection(1.0);
     m_path.setRobotWidth(30.0 / 12);
 
-//    m_path.addPointAndTangent(0.0, 0.0, 0.0, 3.0);
-    m_path.addPointAndTangent(4.0, 4.0, 3.0, 0.0);
-    m_path.addPointAndTangent(0.0, 8.0, 0.0, -3.0);
-/*    m_path.addPointAndTangent(-4.0, 4.0, -3.0, 0.0);
-    m_path.addPointAndTangent(0.0, 0.0, 0.0, 3.0);
-    m_path.addPointAndTangent(4.0, 4.0, 3.0, 0.0);
-    m_path.addPointAndTangent(0.0, 8.0, 0.0, -3.0);
-    m_path.addPointAndTangent(-4.0, 4.0, -3.0, 0.0);
-*/
+    m_path.addPointAndTangent(0.0, 0.0, 0.0, 4.5);
+    m_path.addPointAndTangent(4.0, 4.0, 4.5, 0.0);
+    m_path.addPointAndTangent(8.0, 0.0, 0.0, -4.5);
+    m_path.addPointAndTangent(4.0, -4.0, -4.5, 0.0);
+    m_path.addPointAndTangent(0.0, 0.0, 0.0, 4.5);
+//    m_path.addPointAndTangent(4.0, 4.0, 4.5, 0.0);
+//    m_path.addPointAndTangent(8.0, 0.0, 0.0, -4.5);
+//    m_path.addPointAndTangent(4.0, -4.0, -4.5, 0.0);
+
     m_path.addEasePoint(0.0, 0.0);
-    m_path.addEasePoint(8.0, 1.0);
+    m_path.addEasePoint(16.0, 1.0);
 
     setPath(m_path);
   }

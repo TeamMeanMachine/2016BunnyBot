@@ -23,8 +23,8 @@ public class DriveToRightLift extends FollowPathTankDriveCommand {
         m_path.setTravelDirection(1.0);
         m_path.setRobotWidth(30.0/12);
 
-        m_path.addPointAndTangent(0.0, 0.0, 0.0, 4.0);
-        m_path.addPointAndTangent(-6.0, 7.6, -3.0, 0.0);
+        m_path.addPointAndTangent(0.0, 0.0, 0.0, 6.0);
+        m_path.addPointAndTangent(-4.8, 6.0, -6.0, 3.0);
 
         m_path.addEasePoint( 0.0, 0.0 );
         m_path.addEasePoint( 4.0, 1.0 );
