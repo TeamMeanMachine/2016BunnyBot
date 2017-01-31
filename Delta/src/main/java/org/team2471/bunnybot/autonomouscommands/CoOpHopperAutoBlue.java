@@ -10,10 +10,11 @@ import static org.team2471.bunnybot.Robot.driveTrain;
 public class CoOpHopperAutoBlue extends FollowPathTankDriveCommand {
   Path2D m_path;
 
-  public CoOpHopperAutoBlue(double speed ) {
+  public CoOpHopperAutoBlue(double speed, boolean mirror ) {
     requires(driveTrain);
 
     setSpeed( speed );
+    setMirrorPath(mirror);
     setLeftController(HardwareMap.DriveTrainMap.leftMotor1);
     setRightController(HardwareMap.DriveTrainMap.rightMotor1);
 

@@ -10,10 +10,12 @@ import static org.team2471.bunnybot.Robot.driveTrain;
 public class DriveToFarHopperBlueAlliance extends FollowPathTankDriveCommand {
   Path2D m_path;
 
-  public DriveToFarHopperBlueAlliance(double speed) {
+  public DriveToFarHopperBlueAlliance(double speed, boolean mirror) {
+
     requires(driveTrain);
 
     setSpeed(speed);
+    setMirrorPath(mirror);
     setLeftController(HardwareMap.DriveTrainMap.leftMotor1);
     setRightController(HardwareMap.DriveTrainMap.rightMotor1);
 
@@ -24,7 +26,7 @@ public class DriveToFarHopperBlueAlliance extends FollowPathTankDriveCommand {
     m_path.addPointAndTangent(7.0, 16.0, 10.0, 0.0);
 
     m_path.addEasePoint(0.0, 0.0);
-    m_path.addEasePoint(3.0, 1.0);
+    m_path.addEasePoint(5.0, 1.0);
 
     setPath(m_path);
   }

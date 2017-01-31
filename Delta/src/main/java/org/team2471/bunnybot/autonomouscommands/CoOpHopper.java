@@ -11,10 +11,10 @@ public class CoOpHopper extends CommandGroup {
   int location = driverStation.getLocation();
 
     if (alliance == DriverStation.Alliance.Blue) {
-      addSequential(new CoOpHopperAutoBlue(1.0));
+      addSequential(new CoOpHopperAutoBlue(1.0, false));
     }
     else if (alliance == DriverStation.Alliance.Red){
-      addSequential(new CoOpHopperAutoRed(1.0));
+      addSequential(new CoOpHopperAutoBlue(1.0, true));
     }
   }
 }

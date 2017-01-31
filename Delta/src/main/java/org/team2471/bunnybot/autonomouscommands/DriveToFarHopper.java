@@ -11,10 +11,10 @@ public class DriveToFarHopper extends CommandGroup {
     int location = driverStation.getLocation();
 
     if (alliance == DriverStation.Alliance.Blue){
-      addSequential(new DriveToFarHopperBlueAlliance(1.0));
+      addSequential(new DriveToFarHopperBlueAlliance(1.0, false));
     }
-    else if (alliance == DriverStation.Alliance.Red);
-    addSequential(new DriveToFarHopperRedAlliance(1.0));
-
+    else if (alliance == DriverStation.Alliance.Red) {
+      addSequential(new DriveToFarHopperBlueAlliance(1.0, true));
+    }
   }
 }

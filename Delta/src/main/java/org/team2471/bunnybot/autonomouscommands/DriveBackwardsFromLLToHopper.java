@@ -10,11 +10,12 @@ import static org.team2471.bunnybot.Robot.driveTrain;
 public class DriveBackwardsFromLLToHopper extends FollowPathTankDriveCommand {
   Path2D m_path;
 
-  public DriveBackwardsFromLLToHopper(double speed) {
+  public DriveBackwardsFromLLToHopper(double speed, boolean mirror) {
 
     requires(driveTrain);
 
     setSpeed(speed);
+    setMirrorPath(mirror);
     setLeftController(HardwareMap.DriveTrainMap.leftMotor1);
     setRightController(HardwareMap.DriveTrainMap.rightMotor1);
 
