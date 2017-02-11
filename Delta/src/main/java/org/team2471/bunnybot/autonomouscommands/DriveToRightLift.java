@@ -11,11 +11,12 @@ public class DriveToRightLift extends FollowPathTankDriveCommand {
 
     Path2D m_path;
 
-    public DriveToRightLift(double speed){
+    public DriveToRightLift(double speed, boolean mirror){
 
         requires(driveTrain);
 
         setSpeed( speed );
+        setMirrorPath(mirror);
         setLeftController(HardwareMap.DriveTrainMap.leftMotor1);
         setRightController(HardwareMap.DriveTrainMap.rightMotor1);
 

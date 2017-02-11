@@ -50,7 +50,6 @@ public class Robot extends IterativeRobot {
     autoChooser.addObject("Drive to middle lift", new DriveToLift(1.0));
     autoChooser.addObject("One Hundred point Auto", new OneHundredPointAuto());
     autoChooser.addObject("Drop off gear and go to far Hopper", new GearPlusFarHopper());
-    autoChooser.addObject("Drive backwards,red alliance", new DriveBackwardsFromRLToFarHopper(1.0));
     autoChooser.addObject("Circle Test", new CircleTestAutonomous(1.0));
     autoChooser.addObject("Drive to far Hopper", new DriveToFarHopper());
     autoChooser.addObject("Drive Co-op with other good team", new CoOpHopper());

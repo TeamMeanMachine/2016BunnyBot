@@ -11,14 +11,14 @@ public class GearPlusFarHopper extends CommandGroup {
     int location = driverStation.getLocation();
 
     if (alliance == alliance.Blue){
-      addSequential(new DriveToRightLift(1.0));
-      addSequential(new DriveBackwardsFromRLToFarHopper(1.0));
-      addSequential(new DriveToFarHopperFromRightLift(1.0));
+      addSequential(new DriveToRightLift(1.0, false));
+      addSequential(new DriveBackwardsFromRLToFarHopper(1.0, false));
+      addSequential(new DriveToFarHopperFromRightLift(1.0, false));
     }
     else if (alliance == alliance.Red){
-      addSequential(new DriveToLeftLift(1.0));
-      addSequential(new DriveBackwardsFromLLToFarHopper(1.0));
-      addSequential(new DriveToFarHopperFromLeftLift(1.0));
+      addSequential(new DriveToRightLift(1.0, true));
+      addSequential(new DriveBackwardsFromRLToFarHopper(1.0, true));
+      addSequential(new DriveToFarHopperFromRightLift(1.0, true));
     }
 
   }

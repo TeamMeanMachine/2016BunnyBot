@@ -10,11 +10,12 @@ import static org.team2471.bunnybot.Robot.driveTrain;
 public class DriveBackwardsFromRLToFarHopper extends FollowPathTankDriveCommand {
   Path2D m_path;
 //This auto works only on the red alliance
-  public DriveBackwardsFromRLToFarHopper(double speed) {
+  public DriveBackwardsFromRLToFarHopper(double speed, boolean mirror) {
 
     requires(driveTrain);
 
     setSpeed(speed);
+    setMirrorPath(mirror);
     setLeftController(HardwareMap.DriveTrainMap.leftMotor1);
     setRightController(HardwareMap.DriveTrainMap.rightMotor1);
 
@@ -22,11 +23,11 @@ public class DriveBackwardsFromRLToFarHopper extends FollowPathTankDriveCommand 
     m_path.setTravelDirection(-1.0);
 
     m_path.addPointAndTangent(-4.2, 7.5, -2.0, 1.0);
-    m_path.addPointAndTangent(-4.2, 3.0, -1.5, -1.0);
+    m_path.addPointAndTangent(-0.0, 0.0, -0.0, -6.0);
 
 
     m_path.addEasePoint(0.0, 0.0);
-    m_path.addEasePoint(2.0, 1.0);
+    m_path.addEasePoint(4.0, 1.0);
 
 setPath(m_path);
 
